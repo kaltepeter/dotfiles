@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+# homebrew/brew.sh
+set -o nounset
+set -o errexit
+set -o pipefail
+[[ ${DEBUG:-false} == true ]] && set -o xtrace
+
 # modified from: https://github.com/mathiasbynens/dotfiles/blob/master/brew.sh
 
 # Install command-line tools using Homebrew.
