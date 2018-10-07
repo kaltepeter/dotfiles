@@ -16,3 +16,6 @@ then
   info "[INSTALL] .. installing macosx specific stuff..."
   # source "${__dir}/bootstrap.sh"
 fi
+
+echo ''
+exit 0

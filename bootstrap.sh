@@ -10,6 +10,8 @@ set -o errexit
 set -o pipefail
 [[ ${DEBUG:-false} == true ]] && set -o xtrace
 
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 error () {
     echo "Error: $1"
     usage
@@ -62,6 +64,9 @@ export email
 
 # find the installers and run them iteratively
 find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+
+sh -c "${__dir}/system/bootstrap.sh"
+sh -c "${__dir}/git/bootstrap.sh"
 
 echo ''
 echo '  All installed!'
