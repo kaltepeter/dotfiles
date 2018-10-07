@@ -1,9 +1,11 @@
-#!/usr/bin/env bash
-# homebrew/brew.sh
-set -o nounset
-set -o errexit
-set -o pipefail
-[[ ${DEBUG:-false} == true ]] && set -o xtrace
+# #!/usr/bin/env bash
+# # homebrew/brew.sh
+# set -o nounset
+# set -o errexit
+# set -o pipefail
+# [[ ${DEBUG:-false} == true ]] && set -o xtrace
+
+echo 'homebrew/brew.sh | ...'
 
 # modified from: https://github.com/mathiasbynens/dotfiles/blob/master/brew.sh
 
@@ -52,3 +54,6 @@ brew install openssl
 
 # Remove outdated versions from the cellar.
 brew cleanup
+
+echo ''
+exit 0

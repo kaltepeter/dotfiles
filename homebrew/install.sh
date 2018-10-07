@@ -1,4 +1,6 @@
 #!/bin/sh
+# homebrew/install
+
 set -o nounset
 set -o errexit
 set -o pipefail
@@ -6,7 +8,7 @@ set -o pipefail
 
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# homebrew/install
+echo 'homdebrew/install.sh | ...'
 
 # from: https://github.com/holman/dotfiles/blob/master/homebrew/install.sh
 #
@@ -32,6 +34,8 @@ else
     echo "[SKIP] ... brew already installed."
     brew --version
 fi
+
+echo ''
 
 sh -c "${__dir}/brew.sh"
 
