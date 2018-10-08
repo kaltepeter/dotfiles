@@ -69,6 +69,6 @@ sh -c "${__dir}/system/bootstrap.sh"
 sh -c "${__dir}/git/bootstrap.sh"
 
 echo ''
-echo '  All installed!'
+echo '***** All installed! **** check for [FAIL] to fix any issues and re-run.'
 
 exit 0

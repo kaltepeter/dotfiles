@@ -1,6 +1,13 @@
 # dotfiles
 my dotfiles :)
 
+## Pre-requisite
+
+modify .env.example and save as .env
+
+
+## bootstrap
+
 ```bash
 ./bootstrap.sh
 ```
