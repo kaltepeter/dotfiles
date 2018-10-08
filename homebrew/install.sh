@@ -7,8 +7,9 @@ set -o pipefail
 [[ ${DEBUG:-false} == true ]] && set -o xtrace
 
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+__file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
 
-echo 'homdebrew/install.sh | ...'
+echo "${__file} | ..."
 
 # from: https://github.com/holman/dotfiles/blob/master/homebrew/install.sh
 #
