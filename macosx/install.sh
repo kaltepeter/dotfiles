@@ -11,9 +11,8 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 echo 'macosx/install.sh | ...'
 
 # If we're on a Mac, let's install and setup homebrew.
-if [ "$(uname -s)" == "Darwin" ]
-then
-  info "[INSTALL] .. installing macosx specific stuff..."
+if [[ $(uname -s) == "Darwin" ]]; then
+  echo "[INSTALL] .. installing macosx specific stuff..."
   # source "${__dir}/bootstrap.sh"
 fi
 

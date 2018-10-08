@@ -37,6 +37,6 @@ fi
 
 echo ''
 
-sh -c "${__dir}/brew.sh"
+# sh -c "${__dir}/brew.sh"
 
 exit 0
