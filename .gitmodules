@@ -1,0 +1,3 @@
+[submodule "materialshell"]
+	path = materialshell
+	url = https://github.com/carloscuesta/materialshell.git
