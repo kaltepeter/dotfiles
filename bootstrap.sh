@@ -15,7 +15,7 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 error () {
     echo "Error: $1"
     usage
-    exit $2
+    exit "${2}"
 } >&2
 
 usage() {
@@ -55,7 +55,7 @@ echo 'bootstrap.sh | Bootstrapping...'
 echo "setting up $(hostname) for ${email}..."
 
 declare data_dir="${HOME}/data"
-[[ -d "${data_dir}" ]] && echo "[SKIP] ... ${data_dir} exists." || (echo "[CREATE] ... ${data_dir}..."; mkdir "${data_dir}")
+([[ -d "${data_dir}" ]] && echo "[SKIP] ... ${data_dir} exists.") || (echo "[CREATE] ... ${data_dir}..."; mkdir "${data_dir}")
 
 echo ''
 
@@ -63,7 +63,7 @@ echo ''
 export email
 
 # find the installers and run them iteratively
-find . -name install.sh | while read installer ; do sh -c "${installer}" ; done
+find . -name install.sh | while read -r installer ; do sh -c "${installer}" ; done
 
 sh -c "${__dir}/system/bootstrap.sh"
 sh -c "${__dir}/git/bootstrap.sh"
