@@ -4,11 +4,6 @@ set -o pipefail
 set -o nounset
 [[ ${DEBUG:-} == true ]] && set -o xtrace
 
-readonly __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# shellcheck disable=SC1090
-[[ "${k_custom_lib_loaded:-}" == true ]] || source "${__dir}/../shell/lib.sh"
-
 usage() {
 	cat <<END
 usage: set-hostname.sh <new hostname>
@@ -22,6 +17,11 @@ Configures:
 END
 	exit 1
 }
+
+readonly __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+[[ "${k_custom_lib_loaded:-}" == true ]] || source "${__dir}/../shell/lib.sh"
 
 [[ ${1:-} ]] || error "<new hostname> is empty" 1
 [[ ${2:-} ]] || error "<old hostname> is empty" 1

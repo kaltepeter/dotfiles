@@ -10,4 +10,11 @@ error () {
     exit "${2}"
 } >&2
 
+usage() {
+	cat <<END
+Overwrite usage function in shell script to provide help.
+END
+	exit 1
+}
+
 export declare k_custom_lib_loaded=true
