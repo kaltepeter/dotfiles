@@ -42,6 +42,13 @@ if [[ $(uname -s) == "Linux" ]]; then
   echo "[CONFIG] ... hostname"
   sh -c "${__dir}/set-hostname.sh ${hostname} raspberrypi"
 
+  echo "[CONFIG] ... disable auto login"
+  lightdm_conf='/etc/lightdm/lightdm.conf'
+  if grep -q 'autologin-user= ' ${lightdm_conf}; then
+    echo "[SKIP] ... autologin is already disabled."
+  else
+    sudo sed -i.old -e 's:autologin-user=.*:autologin-user= :g' ${lightdm_conf}
+  fi
 	# source "${__dir}/bootstrap.sh"
 fi
 
