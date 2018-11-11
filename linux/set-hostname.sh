@@ -25,8 +25,7 @@ while getopts "h" opt; do
 done
 
 shift $((OPTIND - 1))
-# old=$(hostname)
-declare old="${2}"
+old=$(hostname)
 declare new="${1}"
 
 if [[ "${new}" == "${old}" ]]; then
