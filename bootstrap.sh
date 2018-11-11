@@ -10,13 +10,10 @@ set -o errexit
 set -o pipefail
 [[ ${DEBUG:-false} == true ]] && set -o xtrace
 
-__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck disable=SC1090
+[[ "${k_custom_lib_loaded:-}" == true ]] || source "${__dir}/shell/lib.sh"
 
-error () {
-    echo "Error: $1"
-    usage
-    exit "${2}"
-} >&2
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 usage() {
     cat <<END
@@ -24,9 +21,9 @@ usage: bootstrap.sh <email>
 
 Setup MacOSX with my defaults.
 Configures:
-    
+
     email: primary email address for the machine. Used for: ssh key comment, associate to github.com
-    
+
     -h: show this help message
 END
 }
@@ -67,6 +64,9 @@ find . -name install.sh | while read -r installer ; do sh -c "${installer}" ; do
 
 sh -c "${__dir}/system/bootstrap.sh"
 sh -c "${__dir}/git/bootstrap.sh"
+
+echo "[CLEANUP] ... removing env vars"
+unset email
 
 echo ''
 echo '***** All installed! **** check for [FAIL] to fix any issues and re-run.'
