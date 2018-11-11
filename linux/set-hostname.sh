@@ -40,7 +40,6 @@ else
 		/etc/hosts \
 		/etc/ssh/ssh_host_rsa_key.pub \
 		/etc/ssh/ssh_host_dsa_key.pub \
-		/etc/motd \
 		/etc/ssmtp/ssmtp.conf; do
 		if [[ -f ${file} ]]; then
 		  echo "[CONFIG] ... replacing ${old} with ${new} in ${file}"
