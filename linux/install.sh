@@ -58,7 +58,7 @@ if [[ $(uname -s) == "Linux" ]]; then
   find /etc/sudoers.d/ -maxdepth 1 -type f ! -name 'README' ! -name '.*~' -exec sudo mv '{}' '{}~' \;
 
   echo "[CONFIG] ... disable graphical startup. run startx to start gui."
-  systemctl set-default multi-user.target
+  sudo systemctl set-default multi-user.target
 	# source "${__dir}/bootstrap.sh"
 fi
 
