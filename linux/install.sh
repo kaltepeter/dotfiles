@@ -36,8 +36,8 @@ if [[ $(uname -s) == "Linux" ]]; then
 	# sudo apt-get update
 	# sudo apt-get upgrade
 
-  echo "[CONFIG] ... hostname"
-  sh -c "${__dir}/set-hostname.sh ${hostname} raspberrypi"
+	echo "[CONFIG] ... hostname"
+	sh -c "${__dir}/set-hostname.sh ${hostname} raspberrypi"
 
 	echo "[CONFIG] ... set locale/time/password/etc..."
 	if env | grep -q 'LANG=en_US.UTF-8'; then
@@ -56,9 +56,9 @@ if [[ $(uname -s) == "Linux" ]]; then
 		echo "[SKIP] ... keyboard already set to us"
 	else
 		sudo localectl set-keymap us
-    # TODO: find a better way to determine password setting and restart
+		# TODO: find a better way to determine password setting and restart
 		passwd
-    shutdown -r now
+		shutdown -r now
 	fi
 
 	echo "[CONFIG] ... default editor"
@@ -82,7 +82,14 @@ if [[ $(uname -s) == "Linux" ]]; then
 
 	echo "[CONFIG] ... disable graphical startup. run startx to start gui."
 	sudo systemctl set-default multi-user.target
-  sudo ln -fs /etc/systemd/system/getty@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
+	sudo ln -fs /etc/systemd/system/getty@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
+
+	echo "[CONFIG] ... disable pi bg"
+	if grep -q '#default-user-image=' /etc/lightdm/pi-greeter.conf; then
+		echo "[SKIP] ... pi bg already disabled"
+	else
+		sudo sed -i.old -e 's:default-user-image=:#default-user-image=:g' /etc/lightdm/pi-greeter.conf
+	fi
 
 	# source "${__dir}/bootstrap.sh"
 fi
