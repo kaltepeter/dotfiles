@@ -36,19 +36,28 @@ if [[ $(uname -s) == "Linux" ]]; then
 	# sudo apt-get update
 	# sudo apt-get upgrade
 
-  echo "[CONFIG] ... hostname"
-  sh -c "${__dir}/set-hostname.sh ${hostname} raspberrypi"
+	echo "[CONFIG] ... hostname"
+	sh -c "${__dir}/set-hostname.sh ${hostname} raspberrypi"
 
 	echo "[CONFIG] ... set locale/time/password/etc..."
 	if env | grep -q 'LANG=en_US.UTF-8'; then
-		echo "[SKIP] ... locale, time, passwords set."
+		echo "[SKIP] ... locale, language set"
 	else
-		export LANG=en_US.UTF-8
-		sudo dpkg-reconfigure locales
+		update-locale "LANG=en_US.UTF-8"
+		locale-gen --purge "en_US.UTF-8"
+		dpkg-reconfigure --frontend noninteractive locales
+	fi
+	if grep -q 'US/Central' /etc/timezone; then
+		echo "[SKIP] ... timezone already set to US/Central"
+	else
 		sudo dpkg-reconfigure tzdata
-		sudo dpkg-reconfigure keyboard-configuration
+	fi
+	if grep -q 'XKBLAYOUT="US"' /etc/default/keyboard; then
+		echo "[SKIP] ... keyboard already set to US"
+	else
+		setxkbmap us
 		passwd
-    shutdown -r now
+		shutdown -r now
 	fi
 
 	echo "[CONFIG] ... default editor"
