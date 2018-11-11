@@ -44,9 +44,9 @@ if [[ $(uname -s) == "Linux" ]]; then
 		echo "[SKIP] ... locale, time, passwords set."
 	else
 		export LANG=en_US.UTF-8
-		dpkg-reconfigure locales
-		dpkg-reconfigure tzdata
-		dpkg-reconfigure keyboard-configuration
+		sudo dpkg-reconfigure locales
+		sudo dpkg-reconfigure tzdata
+		sudo dpkg-reconfigure keyboard-configuration
 		passwd
     shutdown -r now
 	fi
