@@ -42,8 +42,10 @@ else
 		/etc/ssh/ssh_host_dsa_key.pub \
 		/etc/motd \
 		/etc/ssmtp/ssmtp.conf; do
-    echo "[CONFIG] ... replacing ${old} with ${new} in ${file}"
-		[ -f ${file} ] && sed -i.old -e "s:${old}:${new}:g" ${file}
+		if [[ -f ${file} ]]; then
+		  echo "[CONFIG] ... replacing ${old} with ${new} in ${file}"
+			sudo sed -i.old -e "s:${old}:${new}:g" ${file}
+		fi
 	done
 fi
 
