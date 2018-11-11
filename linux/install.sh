@@ -82,6 +82,7 @@ if [[ $(uname -s) == "Linux" ]]; then
 
 	echo "[CONFIG] ... disable graphical startup. run startx to start gui."
 	sudo systemctl set-default multi-user.target
+  sudo ln -fs /etc/systemd/system/autologin@.service /etc/systemd/system/getty.target.wants/getty@tty1.service
 
 	# source "${__dir}/bootstrap.sh"
 fi
