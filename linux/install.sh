@@ -32,6 +32,10 @@ echo 'macosx/install.sh | ...'
 if [[ $(uname -s) == "Linux" ]]; then
 	echo "[INSTALL] .. installing linux specific stuff..."
 
+  # echo "[CONFIG] ... check for latest updates..."
+  # sudo apt-get update
+  # sudo apt-get upgrade
+
   echo "[CONFIG] ... default editor"
 	if update-alternatives --get-selections | grep -q '^editor.*vim'; then
 		echo "[SKIP] ... vim is already the default editor."
