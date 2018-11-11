@@ -1,8 +1,23 @@
 #!/usr/bin/env bash
+# linux/install
 set -o errexit
 set -o pipefail
 set -o nounset
 [[ ${DEBUG:-} == true ]] && set -o xtrace
+
+usage() {
+	cat <<END
+usage: linux/install.sh <new hostname>
+
+Set/change hostname on a system
+Configures:
+
+    new hostname: the desired hostname
+
+    -h: show this help message
+END
+	exit 1
+}
 
 readonly __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
