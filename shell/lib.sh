@@ -13,6 +13,7 @@ error () {
 usage() {
 	cat <<END
 Overwrite usage function in shell script to provide help.
+Make sure you put the function after the library load.
 END
 	exit 1
 }

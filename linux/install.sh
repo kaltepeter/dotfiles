@@ -5,6 +5,11 @@ set -o pipefail
 set -o nounset
 [[ ${DEBUG:-} == true ]] && set -o xtrace
 
+readonly __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# shellcheck disable=SC1090
+[[ "${k_custom_lib_loaded:-}" == true ]] || source "${__dir}/../shell/lib.sh"
+
 usage() {
 	cat <<END
 usage: linux/install.sh <new hostname>
@@ -18,11 +23,6 @@ Configures:
 END
 	exit 1
 }
-
-readonly __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# shellcheck disable=SC1090
-[[ "${k_custom_lib_loaded:-}" == true ]] || source "${__dir}/../shell/lib.sh"
 
 [[ -z "${hostname:-}" ]] && error "env var hostname is required." 1
 
