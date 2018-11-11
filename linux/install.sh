@@ -36,8 +36,8 @@ if [[ $(uname -s) == "Linux" ]]; then
 	# sudo apt-get update
 	# sudo apt-get upgrade
 
-	echo "[CONFIG] ... hostname"
-	sh -c "${__dir}/set-hostname.sh ${hostname} raspberrypi"
+  echo "[CONFIG] ... hostname"
+  sh -c "${__dir}/set-hostname.sh ${hostname} raspberrypi"
 
 	echo "[CONFIG] ... set locale/time/password/etc..."
 	if env | grep -q 'LANG=en_US.UTF-8'; then
@@ -57,7 +57,7 @@ if [[ $(uname -s) == "Linux" ]]; then
 	else
 		setxkbmap us
 		passwd
-		shutdown -r now
+    shutdown -r now
 	fi
 
 	echo "[CONFIG] ... default editor"
