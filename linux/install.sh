@@ -49,6 +49,9 @@ if [[ $(uname -s) == "Linux" ]]; then
   else
     sudo sed -i.old -e 's:autologin-user=.*:autologin-user= :g' ${lightdm_conf}
   fi
+
+  echo "[CONFIG] ... remove no password for sudo overrides"
+  find /etc/sudoers.d/ -maxdepth 1 -type f ! -name 'README' ! -name '.*~' -exec sudo mv '{} {}~' \;
 	# source "${__dir}/bootstrap.sh"
 fi
 
