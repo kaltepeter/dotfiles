@@ -36,6 +36,9 @@ if [[ $(uname -s) == "Linux" ]]; then
 	# sudo apt-get update
 	# sudo apt-get upgrade
 
+  echo "[CONFIG] ... hostname"
+  sh -c "${__dir}/set-hostname.sh ${hostname} raspberrypi"
+
 	echo "[CONFIG] ... set locale/time/password/etc..."
 	if env | grep -q 'LANG=en_US.UTF-8'; then
 		echo "[SKIP] ... locale, time, passwords set."
@@ -55,9 +58,6 @@ if [[ $(uname -s) == "Linux" ]]; then
 		sudo update-alternatives --set editor /usr/bin/vim.tiny
 	fi
 
-	echo "[CONFIG] ... hostname"
-	sh -c "${__dir}/set-hostname.sh ${hostname} raspberrypi"
-
 	echo "[CONFIG] ... disable auto login"
 	lightdm_conf='/etc/lightdm/lightdm.conf'
 	if grep -q 'autologin-user= ' ${lightdm_conf}; then
@@ -65,7 +65,7 @@ if [[ $(uname -s) == "Linux" ]]; then
 	else
 		sudo sed -i.old -e 's:autologin-user=.*:autologin-user= :g' ${lightdm_conf}
 	fi
-	sudo systemctl disable serial-getty@ttyAMA0.service
+	# sudo systemctl disable serial-getty@ttyAMA0.service
 
 	echo "[CONFIG] ... remove no password for sudo overrides"
 	find /etc/sudoers.d/ -maxdepth 1 -type f ! -name 'README' ! -name '.*~' -exec sudo mv '{}' '{}~' \;
