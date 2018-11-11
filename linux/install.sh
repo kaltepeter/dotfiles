@@ -52,10 +52,11 @@ if [[ $(uname -s) == "Linux" ]]; then
 	else
 		sudo dpkg-reconfigure tzdata
 	fi
-	if grep -q 'XKBLAYOUT="us"' /etc/default/keyboard; then
+	if grep -q 'XKBLAYOUT=us' /etc/default/keyboard; then
 		echo "[SKIP] ... keyboard already set to us"
 	else
 		sudo localectl set-keymap us
+    # TODO: find a better way to determine password setting and restart
 		passwd
     shutdown -r now
 	fi
