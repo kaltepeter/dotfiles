@@ -12,12 +12,13 @@ readonly __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 usage() {
 	cat <<END
-usage: linux/install.sh <new hostname>
+usage: hostname=<new_hostname> machineuser=<machine_user> linux/install.sh
 
-Set/change hostname on a system
+Intall linux defaults.
 Configures:
 
-    new hostname: the desired hostname
+    new_hostname: the desired hostname
+    machine_user: the desired user login name
 
     -h: show this help message
 END
@@ -25,6 +26,7 @@ END
 }
 
 [[ -z "${hostname:-}" ]] && error "env var hostname is required." 1
+[[ -z "${machineuser:-}" ]] && error "env var machineuser is required." 1
 
 echo 'linux/install.sh | ...'
 
@@ -32,12 +34,16 @@ echo 'linux/install.sh | ...'
 if [[ $(uname -s) == "Linux" ]]; then
 	echo "[INSTALL] .. installing linux specific stuff..."
 
-	# echo "[CONFIG] ... check for latest updates..."
-	# sudo apt-get update
-	# sudo apt-get upgrade
+	echo "[CONFIG] ... check for latest updates..."
+	sudo apt-get update
+	sudo apt-get upgrade
 
 	echo "[CONFIG] ... hostname: ${hostname}"
 	sh -c "${__dir}/set-hostname.sh \"${hostname}\""
+
+  echo "[CONFIG] ... reconfigure ssh"
+  sudo rm /etc/ssh/ssh_host*
+  sudo dpkg-reconfigure openssh-server
 
 	echo "[CONFIG] ... set locale/time/password/etc..."
 	if env | grep -q 'LANG=en_US.UTF-8'; then
@@ -106,6 +112,19 @@ if [[ $(uname -s) == "Linux" ]]; then
   else
     sudo sh -c "cat ${__dir}/config.txt >> ${custom_config_file}"
   fi
+
+  # echo "[CREATE] ... new user"
+  # if id -u "${machineuser}" | grep -q 'no such user'; then
+  #   sudo adduser "${machineuser}"
+  #   sudo adduser "${machineuser}" sudo
+  #   # verify sudo access
+  #   su -c "${machineuser}"
+  #   sudo su
+  #   exit
+  #   echo "logged in as: $(whoami)"
+  # else
+  #   echo "[SKIP] ... user ${machineuser} already exists."
+  # fi
 
 	# source "${__dir}/bootstrap.sh"
 fi
