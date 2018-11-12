@@ -92,17 +92,19 @@ if [[ $(uname -s) == "Linux" ]]; then
 	fi
 
   echo "[CONFIG] ... add config.txt customizations"
-  if grep -q "##### k custom settings" /boot/config.txt; then
-    custom_settings_version=$(grep 'k custom settings v.' /boot/config.txt | sed 's:##### k custom settings v. \(.*\) #####:\1:')
-    if [[ "${custom_settings_version}" == "1.0.1" ]]; then
+  custom_config_file='/boot/config.txt'
+  if grep -q "##### k custom settings" "${custom_config_file}"; then
+    custom_settings_version=$(grep 'k custom settings v.' "${__dir}/config.txt" | sed 's:##### k custom settings v. \(.*\) #####:\1:')
+    custom_settings_current_version=$(grep 'k custom settings v.' "${custom_config_file}" | sed 's:##### k custom settings v. \(.*\) #####:\1:')
+    if [[ "${custom_settings_current_version}" == "${custom_settings_version}" ]]; then
       echo "[SKIP] ... config.txt already set."
     else
       echo "[UDPATE] ... config.txt is being updated."
-      sudo sh -c "sed '/##### k custom settings/,/end #####/d' /boot/config.txt"
-      sudo sh -c "cat ${__dir}/config.txt >> /boot/config.txt"
+      sudo sh -c "sed '/##### k custom settings/,/end #####/d' ${custom_config_file}"
+      sudo sh -c "cat ${__dir}/config.txt >> ${custom_config_file}"
     fi
   else
-    sudo sh -c "cat ${__dir}/config.txt >> /boot/config.txt"
+    sudo sh -c "cat ${__dir}/config.txt >> ${custom_config_file}"
   fi
 
 	# source "${__dir}/bootstrap.sh"
