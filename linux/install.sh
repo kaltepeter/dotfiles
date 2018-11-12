@@ -26,9 +26,9 @@ END
 
 [[ -z "${hostname:-}" ]] && error "env var hostname is required." 1
 
-echo 'macosx/install.sh | ...'
+echo 'linux/install.sh | ...'
 
-# If we're on a Mac, let's install and setup homebrew.
+# If we're on a linux system, let's install and setup homebrew.
 if [[ $(uname -s) == "Linux" ]]; then
 	echo "[INSTALL] .. installing linux specific stuff..."
 
@@ -36,8 +36,8 @@ if [[ $(uname -s) == "Linux" ]]; then
 	# sudo apt-get update
 	# sudo apt-get upgrade
 
-	echo "[CONFIG] ... hostname"
-	sh -c "${__dir}/set-hostname.sh ${hostname}"
+	echo "[CONFIG] ... hostname: ${hostname}"
+	sh -c "${__dir}/set-hostname.sh \"${hostname}\""
 
 	echo "[CONFIG] ... set locale/time/password/etc..."
 	if env | grep -q 'LANG=en_US.UTF-8'; then
