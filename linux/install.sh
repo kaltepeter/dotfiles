@@ -100,7 +100,7 @@ if [[ $(uname -s) == "Linux" ]]; then
       echo "[SKIP] ... config.txt already set."
     else
       echo "[UDPATE] ... config.txt is being updated."
-      sudo sh -c "sed '/##### k custom settings/,/end #####/d' ${custom_config_file}"
+      sudo sh -c "sed -i'' '/##### k custom settings/,/end #####/d' ${custom_config_file}"
       sudo sh -c "cat ${__dir}/config.txt >> ${custom_config_file}"
     fi
   else
