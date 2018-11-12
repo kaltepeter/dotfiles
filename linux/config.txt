@@ -1,0 +1,2 @@
+##### k custom settings #####
+disable_splash=1

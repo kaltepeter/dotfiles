@@ -37,7 +37,7 @@ if [[ $(uname -s) == "Linux" ]]; then
 	# sudo apt-get upgrade
 
 	echo "[CONFIG] ... hostname"
-	sh -c "${__dir}/set-hostname.sh ${hostname} raspberrypi"
+	sh -c "${__dir}/set-hostname.sh ${hostname}"
 
 	echo "[CONFIG] ... set locale/time/password/etc..."
 	if env | grep -q 'LANG=en_US.UTF-8'; then
@@ -90,6 +90,13 @@ if [[ $(uname -s) == "Linux" ]]; then
 	else
 		sudo sed -i.old -e 's:default-user-image=:#default-user-image=:g' /etc/lightdm/pi-greeter.conf
 	fi
+
+  echo "[CONFIG] ... add config.txt customizations"
+  if grep -q "k custom setttings" /boot/config.txt; then
+    echo "[SKIP] ... config.txt already set."
+  else
+    cat "${__dir}/config.txt" >> /boot/config.txt
+  fi
 
 	# source "${__dir}/bootstrap.sh"
 fi
