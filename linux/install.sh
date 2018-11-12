@@ -95,7 +95,7 @@ if [[ $(uname -s) == "Linux" ]]; then
   if grep -q "k custom setttings" /boot/config.txt; then
     echo "[SKIP] ... config.txt already set."
   else
-    cat "${__dir}/config.txt" >> /boot/config.txt
+    sudo sh -c "cat ${__dir}/config.txt >> /boot/config.txt"
   fi
 
 	# source "${__dir}/bootstrap.sh"
