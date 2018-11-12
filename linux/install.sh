@@ -94,7 +94,7 @@ if [[ $(uname -s) == "Linux" ]]; then
   echo "[CONFIG] ... add config.txt customizations"
   if grep -q "##### k custom settings" /boot/config.txt; then
     custom_settings_version=$(grep 'k custom settings v.' /boot/config.txt | sed 's:##### k custom settings v. \(.*\) #####:\1:')
-    if [[ "${custom_settings_version}" == "1.0.0" ]]; then
+    if [[ "${custom_settings_version}" == "1.0.1" ]]; then
       echo "[SKIP] ... config.txt already set."
     else
       echo "[UDPATE] ... config.txt is being updated."
