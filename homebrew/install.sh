@@ -19,21 +19,20 @@ echo "${__file} | ..."
 # using Homebrew.
 
 # Check for Homebrew
-if test ! $(which brew)
-then
-  echo "[INSTALL] ... Homebrew"
+if test ! "$(command -v brew)"; then
+	echo "[INSTALL] ... Homebrew"
 
-  # Install the correct homebrew for each OS type
-  if test "$(uname)" = "Darwin"
-  then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  elif test "$(expr substr $(uname -s) 1 5)" = "Linux"
-  then
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
-  fi
+	# Install the correct homebrew for each OS type
+	if test "$(uname)" = "Darwin"; then
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	# elif test [[ substr "$(uname -s)" 1 5 = "Linux" ]]; then
+	# 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
+  else
+    echo "[SKIP] ... Brew. Not a Mac."
+	fi
 else
-    echo "[SKIP] ... brew already installed."
-    brew --version
+	echo "[SKIP] ... brew already installed."
+	brew --version
 fi
 
 echo ''

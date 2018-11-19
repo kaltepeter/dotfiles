@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # macosx/install
-
 set -o nounset
 set -o errexit
 set -o pipefail

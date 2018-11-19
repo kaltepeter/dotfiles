@@ -28,15 +28,13 @@ END
 [[ -z "${hostname:-}" ]] && error "env var hostname is required." 1
 [[ -z "${machineuser:-}" ]] && error "env var machineuser is required." 1
 
+sh -c "${__dir}/apt-get.sh"
+
 echo 'linux/install.sh | ...'
 
 # If we're on a linux system, let's install and setup homebrew.
 if [[ $(uname -s) == "Linux" ]]; then
 	echo "[INSTALL] .. installing linux specific stuff..."
-
-	echo "[CONFIG] ... check for latest updates..."
-	sudo apt-get update
-	sudo apt-get upgrade
 
 	echo "[CONFIG] ... hostname: ${hostname}"
 	sh -c "${__dir}/set-hostname.sh \"${hostname}\""
@@ -113,6 +111,10 @@ if [[ $(uname -s) == "Linux" ]]; then
     sudo sh -c "cat ${__dir}/config.txt >> ${custom_config_file}"
   fi
 
+  # echo "[CONFIG] ... enable ssh"
+  # sudo systemctl enable ssh
+  # sudo systemctl start ssh
+
   # echo "[CREATE] ... new user"
   # if id -u "${machineuser}" | grep -q 'no such user'; then
   #   sudo adduser "${machineuser}"
@@ -126,6 +128,8 @@ if [[ $(uname -s) == "Linux" ]]; then
   #   echo "[SKIP] ... user ${machineuser} already exists."
   # fi
 
+  # TODO: cleanup
+  # delete .old
 	# source "${__dir}/bootstrap.sh"
 fi
 
