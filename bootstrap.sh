@@ -10,26 +10,42 @@ set -o errexit
 set -o pipefail
 [[ ${DEBUG:-false} == true ]] && set -o xtrace
 
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # shellcheck disable=SC1090
 [[ "${k_custom_lib_loaded:-}" == true ]] || source "${__dir}/shell/lib.sh"
 
-__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
 usage() {
     cat <<END
-usage: bootstrap.sh <email>
+usage: [DEBUG=true] bootstrap.sh
 
-Setup MacOSX with my defaults.
+Setup machine with my defaults. Env vars come from .env
 Configures:
 
-    email: primary email address for the machine. Used for: ssh key comment, associate to github.com
+    email:  primary email address for the machine.
+            Used for: ssh key comment, associate to github.com
+
+    hostname: hostname for machine
+
+    machineuser:  username for the machine to setup.
 
     -h: show this help message
 END
 }
 
-[[ ${1:-} ]] || error "email is empty" 1
+declare email
+declare hostname
 
+if [[ -f "${__dir}/.env" ]]; then
+  # set -o allexport
+  # shellcheck source=/dev/null
+  source "${__dir}/.env"
+  # set +o allexport
+else
+  echo ".env file doesn't exist. creating from .example file."
+  cp "${__dir}/.env.example" "${__dir}/.env"
+  error "IMPORTANT: edit values and re-run bootstrap." 1
+fi
 
 while getopts "h" opt; do
     case $opt in
@@ -44,12 +60,17 @@ while getopts "h" opt; do
 done
 
 shift $(( OPTIND -1 ))
-declare email="${1}"
+
+[[ ${email:-} ]] || error "email is empty" 1
 
 echo ''
 
+if [[ "${DEBUG}" == true ]]; then
+  echo "email: ${email}"
+fi
+
 echo 'bootstrap.sh | Bootstrapping...'
-echo "setting up $(hostname) for ${email}..."
+echo "setting up machine $(hostname) as ${hostname} for ${email}..."
 
 declare data_dir="${HOME}/data"
 ([[ -d "${data_dir}" ]] && echo "[SKIP] ... ${data_dir} exists.") || (echo "[CREATE] ... ${data_dir}..."; mkdir "${data_dir}")
@@ -58,6 +79,7 @@ echo ''
 
 # export for child shells
 export email
+export hostname
 
 # find the installers and run them iteratively
 find . -name install.sh | while read -r installer ; do sh -c "${installer}" ; done
@@ -67,6 +89,7 @@ sh -c "${__dir}/git/bootstrap.sh"
 
 echo "[CLEANUP] ... removing env vars"
 unset email
+unset hostname
 
 echo ''
 echo '***** All installed! **** check for [FAIL] to fix any issues and re-run.'
