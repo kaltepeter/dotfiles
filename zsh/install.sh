@@ -34,7 +34,7 @@ fi
 
 declare -a zsh_configs=('config.zsh')
 
-for config in "${zsh_configs}"; do
+for config in "${zsh_configs[@]}"; do
 	if [[ -L "${zsh_custom_dir}/${config}" ]]; then
 		echo "[SKIP] ... ${zsh_custom_dir}/${config} is already linked."
 	elif [[ -e "${zsh_custom_dir}/${config}" ]]; then
