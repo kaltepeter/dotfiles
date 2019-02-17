@@ -5,7 +5,7 @@ set -o errexit
 set -o pipefail
 [[ ${DEBUG:-false} == true ]] && set -o xtrace
 
-status 'homebrew/brew.sh | ...'
+status "${BASH_SOURCE[0]} | ..."
 
 # modified from: https://github.com/mathiasbynens/dotfiles/blob/master/brew.sh
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # homebrew/install
 
@@ -8,9 +8,8 @@ set -o pipefail
 [[ ${DEBUG:-false} == true ]] && set -o xtrace
 
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-__file="${__dir}/$(basename "${BASH_SOURCE[0]}")"
 
-status "${__file} | ..."
+status "${BASH_SOURCE[0]} | ..."
 
 # from: https://github.com/holman/dotfiles/blob/master/homebrew/install.sh
 #
@@ -21,7 +20,7 @@ status "${__file} | ..."
 
 # Check for Homebrew
 if test ! "$(command -v brew)"; then
-	typed_message INSTALL "Homebrew"
+	typed_message 'INSTALL' "Homebrew"
 
 	# Install the correct homebrew for each OS type
 	if test "$(uname)" = "Darwin"; then
@@ -29,10 +28,10 @@ if test ! "$(command -v brew)"; then
 	# elif test [[ substr "$(uname -s)" 1 5 = "Linux" ]]; then
 	# 	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
   else
-    typed_message SKIP "Brew. Not a Mac."
+    typed_message 'SKIP' "Brew. Not a Mac."
 	fi
 else
-	typed_message SKIP "brew already installed."
+	typed_message 'SKIP' "brew already installed."
 	brew --version
 fi
 

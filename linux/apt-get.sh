@@ -4,7 +4,7 @@ set -o pipefail
 set -o nounset
 [[ ${DEBUG:-} == true ]] && set -o xtrace
 
-typed_message CONFIG "check for latest updates..."
+typed_message 'CONFIG' "check for latest updates..."
 sudo apt-get update
 sudo apt-get upgrade
 
