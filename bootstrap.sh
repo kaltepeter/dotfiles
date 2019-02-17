@@ -8,7 +8,8 @@
 set -o nounset
 set -o errexit
 set -o pipefail
-[[ ${DEBUG:-false} == true ]] && set -o xtrace
+DEBUG="${DEBUG:-false}"
+[[ ${DEBUG} == true ]] && set -o xtrace
 
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
@@ -61,19 +62,19 @@ done
 
 shift $(( OPTIND -1 ))
 
-[[ ${email:-} ]] || error "email is empty" 1
+[[ -z "${email:-}" ]] && error "email is empty" 1
 
 echo ''
 
 if [[ "${DEBUG}" == true ]]; then
-  echo "email: ${email}"
+  declare -p
 fi
 
-echo 'bootstrap.sh | Bootstrapping...'
+status 'bootstrap.sh | Bootstrapping...'
 echo "setting up machine $(hostname) as ${hostname} for ${email}..."
 
 declare data_dir="${HOME}/data"
-([[ -d "${data_dir}" ]] && echo "[SKIP] ... ${data_dir} exists.") || (echo "[CREATE] ... ${data_dir}..."; mkdir "${data_dir}")
+([[ -d "${data_dir}" ]] && typed_message SKIP "${data_dir} exists.") || (typed_message CREATE "${data_dir}..."; mkdir "${data_dir}")
 
 echo ''
 
@@ -87,11 +88,14 @@ find . -name install.sh | while read -r installer ; do sh -c "${installer}" ; do
 sh -c "${__dir}/system/bootstrap.sh"
 sh -c "${__dir}/git/bootstrap.sh"
 
-echo "[CLEANUP] ... removing env vars"
+typed_message CLEANUP "removing env vars"
 unset email
 unset hostname
+unset pw
+unset machineuser
+unset username
 
 echo ''
-echo '***** All installed! **** check for [FAIL] to fix any issues and re-run.'
+typed_message '*****' 'All installed! check for [FAIL] to fix any issues and re-run.'
 
 exit 0

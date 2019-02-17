@@ -37,12 +37,15 @@ done
 shift $(( OPTIND -1 ))
 
 [[ ${1:-} ]] || error "username is empty" 1
+
+status 'create-user.sh | Creating user...'
+
 declare username=${1}
 
 if id "${username}" >/dev/null; then
-  echo "[skip] ... user: ${username} exists."
+  typed_message SKIP "user: ${username} exists."
 else
-  echo "[create] ... creating user: ${username}"
+  typed_message CREATE "creating user: ${username}"
   sudo adduser "${username}"
   sudo adduser "${username}" sudo
   echo "verify new user"

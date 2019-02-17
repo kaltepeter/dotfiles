@@ -28,7 +28,7 @@ old=$(hostname)
 declare new="${1}"
 
 if [[ "${new}" == "${old}" ]]; then
-	echo "[SKIP] ... hostname is already set to: ${new}."
+	typed_message SKIP "hostname is already set to: ${new}."
 	exit 0
 else
 	for file in \
@@ -42,7 +42,7 @@ else
 		/etc/ssh/ssh_host_ed25519_key.pub \
 		/etc/ssmtp/ssmtp.conf; do
 		if [[ -f ${file} ]]; then
-		  echo "[CONFIG] ... replacing ${old} with ${new} in ${file}"
+		  typed_message CONFIG "replacing ${old} with ${new} in ${file}"
 			sudo sed -i.old -e "s:${old}:${new}:g" ${file}
 		fi
 	done

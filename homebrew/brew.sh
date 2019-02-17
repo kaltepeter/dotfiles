@@ -1,11 +1,11 @@
-# #!/usr/bin/env bash
-# # homebrew/brew.sh
-# set -o nounset
-# set -o errexit
-# set -o pipefail
-# [[ ${DEBUG:-false} == true ]] && set -o xtrace
+#!/usr/bin/env bash
+# homebrew/brew.sh
+set -o nounset
+set -o errexit
+set -o pipefail
+[[ ${DEBUG:-false} == true ]] && set -o xtrace
 
-echo 'homebrew/brew.sh | ...'
+status 'homebrew/brew.sh | ...'
 
 # modified from: https://github.com/mathiasbynens/dotfiles/blob/master/brew.sh
 
@@ -35,7 +35,7 @@ if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
 fi;
 
 # Install more recent versions of some macOS tools.
-brew install vim --with-override-system-vi
+brew install vim
 brew install grep
 brew install openssh
 brew install screen

@@ -7,11 +7,11 @@ set -o pipefail
 
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-echo 'macosx/install.sh | ...'
+status 'macosx/install.sh | ...'
 
 # If we're on a Mac, let's install and setup homebrew.
 if [[ $(uname -s) == "Darwin" ]]; then
-  echo "[INSTALL] .. installing macosx specific stuff..."
+  typed_message INSTALL "installing macosx specific stuff..."
   # source "${__dir}/bootstrap.sh"
 fi
 
