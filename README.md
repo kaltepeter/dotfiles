@@ -5,11 +5,14 @@ my dotfiles :)
 
 modify .env.example and save as .env
 
+run `./bootstrap.sh -h` for info
+
 
 ## bootstrap
 
 ```bash
 ./bootstrap.sh
+# DEBUG=true ./bootstrap.sh
 ```
 
 ## Thanks to...

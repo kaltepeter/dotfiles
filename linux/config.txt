@@ -1,0 +1,6 @@
+
+##### k custom settings v. 1.0.1 #####
+
+disable_splash=1
+
+##### k custom settings      end #####
