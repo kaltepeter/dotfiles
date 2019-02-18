@@ -34,6 +34,9 @@ if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
 #  chsh -s "${BREW_PREFIX}/bin/bash";
 fi;
 
+# install python deps
+brew install pyenv
+
 # Install more recent versions of some macOS tools.
 brew install vim
 brew install grep

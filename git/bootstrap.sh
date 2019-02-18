@@ -8,7 +8,7 @@ set -o pipefail
 
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-sh -c "${__dir}/update-ssh-key.py"
+python -m git.update-ssh-key
 
 status "${BASH_SOURCE[0]} | ..."
 

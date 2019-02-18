@@ -97,6 +97,6 @@ unset machineuser
 unset username
 
 echo ''
-typed_message '*****' 'All installed! check for [FAIL] to fix any issues and re-run.'
+typed_message '-----' 'All installed! check for [FAIL] to fix any issues and re-run.'
 
 exit 0
