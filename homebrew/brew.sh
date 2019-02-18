@@ -59,6 +59,17 @@ brew install git-lfs
 
 brew install openssl
 
+brew install docker
+
+# mac osc apps
+brew cask install google-chrome || echo 'google-chrome failed.'
+brew cask install sublime-text || echo 'sublime failed.'
+brew cask install jetbrains-toolbox || echo 'jetbrains-toolbox failed.'
+brew cask install docker || echo 'docker failed.'
+brew cask install brave-browser || echo 'brave-browser failed.'
+brew cask install slack || echo 'slack failed.'
+
+
 # Remove outdated versions from the cellar.
 brew cleanup
 
