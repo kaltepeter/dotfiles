@@ -5,7 +5,7 @@ set -o errexit
 set -o pipefail
 [[ ${DEBUG:-false} == true ]] && set -o xtrace
 
-status 'homebrew/brew.sh | ...'
+status "${BASH_SOURCE[0]} | ..."
 
 # modified from: https://github.com/mathiasbynens/dotfiles/blob/master/brew.sh
 
@@ -33,6 +33,9 @@ if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
   echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells;
 #  chsh -s "${BREW_PREFIX}/bin/bash";
 fi;
+
+# install python deps
+brew install pyenv
 
 # Install more recent versions of some macOS tools.
 brew install vim

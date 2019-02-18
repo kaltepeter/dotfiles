@@ -70,11 +70,12 @@ if [[ "${DEBUG}" == true ]]; then
   declare -p
 fi
 
-status 'bootstrap.sh | Bootstrapping...'
+status "${BASH_SOURCE[0]} | ..."
+
 echo "setting up machine $(hostname) as ${hostname} for ${email}..."
 
 declare data_dir="${HOME}/data"
-([[ -d "${data_dir}" ]] && typed_message SKIP "${data_dir} exists.") || (typed_message CREATE "${data_dir}..."; mkdir "${data_dir}")
+([[ -d "${data_dir}" ]] && typed_message 'SKIP "${data_dir} exists.") || (typed_message CREATE "${data_dir}..."; mkdir' "${data_dir}")
 
 echo ''
 
@@ -88,7 +89,7 @@ find . -name install.sh | while read -r installer ; do sh -c "${installer}" ; do
 sh -c "${__dir}/system/bootstrap.sh"
 sh -c "${__dir}/git/bootstrap.sh"
 
-typed_message CLEANUP "removing env vars"
+typed_message 'CLEANUP' "removing env vars"
 unset email
 unset hostname
 unset pw
@@ -96,6 +97,6 @@ unset machineuser
 unset username
 
 echo ''
-typed_message '*****' 'All installed! check for [FAIL] to fix any issues and re-run.'
+typed_message '-----' 'All installed! check for [FAIL] to fix any issues and re-run.'
 
 exit 0
