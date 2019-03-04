@@ -88,6 +88,7 @@ find . -name install.sh | while read -r installer ; do sh -c "${installer}" ; do
 
 sh -c "${__dir}/system/bootstrap.sh"
 sh -c "${__dir}/git/bootstrap.sh"
+sh -c "${__dir}/jetbrains/bootstrap.sh"
 
 typed_message 'CLEANUP' "removing env vars"
 unset email
