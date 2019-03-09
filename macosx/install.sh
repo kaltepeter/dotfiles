@@ -26,6 +26,9 @@ if [[ $(uname -s) == "Darwin" ]]; then
   # Keep-alive: update existing `sudo` time stamp until `.macos` has finished
   while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
+  softwareupdate --clear-catalog
+  softwareupdate -i
+
   ###############################################################################
   # Activity Monitor                                                            #
   ###############################################################################
@@ -96,6 +99,13 @@ defaults write com.apple.commerce AutoUpdate -bool true
 defaults write com.apple.commerce AutoUpdateRestartRequired -bool true
 
 ###############################################################################
+# Photos                                                                      #
+###############################################################################
+
+# Prevent Photos from opening automatically when devices are plugged in
+defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
+###############################################################################
 # Safari & WebKit                                                             #
 ###############################################################################
 
@@ -117,11 +127,19 @@ defaults write com.apple.Safari ShowSidebarInTopSites -bool false
 # Enable Safari’s debug menu
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
+# Enable debug menu
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+
 # Make Safari’s search banners default to Contains instead of Starts With
 defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
 
 # Remove useless icons from Safari’s bookmarks bar
 defaults write com.apple.Safari ProxiesInBookmarksBar "()"
+
+# Enable webkit developer extras
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 
   ###############################################################################
@@ -138,7 +156,6 @@ defaults write com.apple.Safari ProxiesInBookmarksBar "()"
     # "Mail" \
     # "Messages" \
     # "Opera" \
-    # "Photos" \
     # "SizeUp" \
     # "Spectacle" \
     # "SystemUIServer" \
@@ -147,6 +164,7 @@ defaults write com.apple.Safari ProxiesInBookmarksBar "()"
     # "Tweetbot" \
     # "Twitter" \
     for app in "Activity Monitor" \
+    "Photos" \
     "Safari" \
     "iCal"; do
       killall "${app}" &> /dev/null || true
