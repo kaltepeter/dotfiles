@@ -75,6 +75,12 @@ status () {
   echo -e "\e[36m'${1}'\e[39m"
 } >&1
 
+date_header () {
+  echo ''
+  echo $(date)
+  echo ''
+} >&1
+
 #######################################
 # get tagged message with colors
 # Arguments:

@@ -9,3 +9,4 @@ __pycache__/
 *.so
 
 jetbrains/.settings.json
+*.log

@@ -12,6 +12,7 @@ DEBUG="${DEBUG:-false}"
 [[ ${DEBUG} == true ]] && set -o xtrace
 
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+log_file="${__dir}/bootstrap.log"
 
 # shellcheck disable=SC1090
 [[ "${k_custom_lib_loaded:-}" == true ]] || source "${__dir}/shell/lib.sh"
@@ -82,6 +83,7 @@ echo ''
 # export for child shells
 export email
 export hostname
+export log_file
 
 # find the installers and run them iteratively
 find . -name install.sh | while read -r installer ; do sh -c "${installer}" ; done
@@ -96,6 +98,7 @@ unset hostname
 unset pw
 unset machineuser
 unset username
+unset log_file
 
 echo ''
 typed_message '-----' 'All installed! check for [FAIL] to fix any issues and re-run.'
