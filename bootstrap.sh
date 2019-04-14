@@ -71,7 +71,7 @@ if [[ "${DEBUG}" == true ]]; then
   declare -p
 fi
 
-status "${BASH_SOURCE[0]} | ..."
+status "${BASH_SOURCE[0]} | ..." | tee -a "${log_file}"
 
 echo "setting up machine $(hostname) as ${hostname} for ${email}..."
 
