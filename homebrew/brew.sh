@@ -5,17 +5,17 @@ set -o errexit
 set -o pipefail
 [[ ${DEBUG:-false} == true ]] && set -o xtrace
 
-status "${BASH_SOURCE[0]} | ..."
+status "${BASH_SOURCE[0]} | ..." | tee -a "${log_file}"
 
 # modified from: https://github.com/mathiasbynens/dotfiles/blob/master/brew.sh
 
 # Install command-line tools using Homebrew.
 
 # Make sure we’re using the latest Homebrew.
-brew update
+brew update | tee -a "${log_file}"
 
 # Upgrade any already-installed formulae.
-brew upgrade
+brew upgrade | tee -a "${log_file}"
 
 # Save Homebrew’s installed location.
 BREW_PREFIX=$(brew --prefix)
@@ -77,10 +77,11 @@ brew cask install visual-studio-code || echo 'visual-studio-code failed.'
 brew cask install virtualbox || echo 'virtualbox failed.'
 brew cask install wireshark || echo 'wireshark failed.'
 brew cask install charles || echo 'charles failed.'
+brew cask install gitkraken || echo 'gitkraken failed.'
 
 
 # Remove outdated versions from the cellar.
-brew cleanup
+brew cleanup | tee -a "${log_file}"
 
 echo ''
 exit 0

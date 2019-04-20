@@ -37,6 +37,8 @@ fi
 
 echo ''
 
+xcode-select --install
+
 sh -c "${__dir}/brew.sh"
 
 exit 0

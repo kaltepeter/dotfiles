@@ -71,7 +71,7 @@ open -a "Brave Browser" --args --make-default-browser | tee -a "${log_file}"
 #     end tell
 # EOD
 
-  # Set sidebar icon size to large
+  # Set sidebar icon size to medium
   defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
 
   # Automatic show scrollbars
@@ -80,6 +80,7 @@ open -a "Brave Browser" --args --make-default-browser | tee -a "${log_file}"
 
   # Reveal IP address, hostname, OS version, etc. when clicking the clock
   # in the login window
+  # need to validate
   sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 
   ###############################################################################
@@ -96,10 +97,8 @@ open -a "Brave Browser" --args --make-default-browser | tee -a "${log_file}"
   defaults -currentHost write NSGlobalDomain com.apple.trackpad.threeFingerTapGesture -int 2
 
   # Trackpad: map bottom right corner to right-click
-  defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 0
   defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -int 1
-  defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 0
-  defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+  defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -int 1
 
   # Disable “natural” (Lion-style) scrolling
   defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
