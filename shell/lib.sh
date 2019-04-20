@@ -95,9 +95,18 @@ typed_message () {
    printf '%*s %s\n' 26 "$(get_colorized_prefix $1)" "${2}"
 }
 
+update_brew () {
+  # https://medium.com/@waxzce/keeping-macos-clean-this-is-my-osx-brew-update-cli-command-6c8f12dc1731
+  brew update
+  brew upgrade
+  brew cleanup -s
+  brew cask cleanup
+}
+
 export -f error
 export -f usage
 export -f status
 export -f get_colorized_prefix
+export -f date_header
 export -f typed_message
 export declare k_custom_lib_loaded=true

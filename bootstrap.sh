@@ -86,7 +86,7 @@ export hostname
 export log_file
 
 # find the installers and run them iteratively
-find . -name install.sh | while read -r installer ; do sh -c "${installer}" ; done
+find -s . -name install.sh | while read -r installer ; do sh -c "${installer}" ; done
 
 sh -c "${__dir}/system/bootstrap.sh"
 sh -c "${__dir}/git/bootstrap.sh"

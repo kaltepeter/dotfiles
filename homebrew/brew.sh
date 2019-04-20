@@ -66,6 +66,8 @@ brew install mitmproxy
 
 brew install shellcheck
 
+brew install mas
+
 # mac osc apps
 brew cask install google-chrome || echo 'google-chrome failed.'
 brew cask install sublime-text || echo 'sublime failed.'

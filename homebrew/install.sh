@@ -37,7 +37,7 @@ fi
 
 echo ''
 
-xcode-select --install
+xcode-select --install || typed_message 'SKIP' 'xcode already installed. Use softwareupdate.'
 
 sh -c "${__dir}/brew.sh"
 
