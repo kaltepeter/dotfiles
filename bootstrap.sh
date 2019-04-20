@@ -17,6 +17,8 @@ log_file="${__dir}/bootstrap.log"
 # shellcheck disable=SC1090
 [[ "${k_custom_lib_loaded:-}" == true ]] || source "${__dir}/shell/lib.sh"
 
+date_header
+
 usage() {
     cat <<END
 usage: [DEBUG=true] bootstrap.sh
@@ -71,7 +73,7 @@ if [[ "${DEBUG}" == true ]]; then
   declare -p
 fi
 
-status "${BASH_SOURCE[0]} | ..." | tee -a "${log_file}"
+status "${BASH_SOURCE[0]} | ..."
 
 echo "setting up machine $(hostname) as ${hostname} for ${email}..."
 
@@ -81,26 +83,32 @@ declare data_dir="${HOME}/data"
 echo ''
 
 # export for child shells
+export log_file
 export email
 export hostname
-export log_file
+export apple_store_user
+export apple_store_pw
 
 # find the installers and run them iteratively
 find -s . -name install.sh | while read -r installer ; do sh -c "${installer}" ; done
 
+sh -c "${__dir}/macosx/bootstrap.sh"
 sh -c "${__dir}/system/bootstrap.sh"
 sh -c "${__dir}/git/bootstrap.sh"
 sh -c "${__dir}/jetbrains/bootstrap.sh"
 
 typed_message 'CLEANUP' "removing env vars"
+
+echo ''
+typed_message '-----' 'All installed! check for [FAIL] to fix any issues and re-run.'
+
 unset email
 unset hostname
 unset pw
 unset machineuser
 unset username
 unset log_file
-
-echo ''
-typed_message '-----' 'All installed! check for [FAIL] to fix any issues and re-run.'
+unset apple_store_user
+unset apple_store_pw
 
 exit 0

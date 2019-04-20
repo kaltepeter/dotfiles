@@ -11,9 +11,7 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 [[ "${k_custom_lib_loaded:-}" == true ]] || source "${__dir}/../shell/lib.sh"
 log_file="${log_file:-/dev/null}"
 
-date_header | tee -a "${log_file}"
-
-status "${BASH_SOURCE[0]} | ..." | tee -a "${log_file}"
+status "${BASH_SOURCE[0]} | ..."
 
 # If we're on a Mac, let's install and setup homebrew.
 if [[ $(uname -s) == "Darwin" ]]; then

@@ -5,7 +5,9 @@ set -o errexit
 set -o pipefail
 [[ ${DEBUG:-false} == true ]] && set -o xtrace
 
-status "${BASH_SOURCE[0]} | ..." | tee -a "${log_file}"
+status "${BASH_SOURCE[0]} | ..."
+
+log_file="${log_file:-/dev/null}"
 
 # modified from: https://github.com/mathiasbynens/dotfiles/blob/master/brew.sh
 
@@ -69,17 +71,44 @@ brew install shellcheck
 brew install mas
 
 # mac osc apps
-brew cask install google-chrome || echo 'google-chrome failed.'
-brew cask install sublime-text || echo 'sublime failed.'
-brew cask install jetbrains-toolbox || echo 'jetbrains-toolbox failed.'
-brew cask install docker || echo 'docker failed.'
-brew cask install brave-browser || echo 'brave-browser failed.'
-brew cask install slack || echo 'slack failed.'
-brew cask install visual-studio-code || echo 'visual-studio-code failed.'
-brew cask install virtualbox || echo 'virtualbox failed.'
-brew cask install wireshark || echo 'wireshark failed.'
-brew cask install charles || echo 'charles failed.'
-brew cask install gitkraken || echo 'gitkraken failed.'
+cask_list_installed=( $(brew cask list) )
+cask_list=('google-chrome' \
+  'sublime-text' \
+  'jetbrains-toolbox' \
+  'docker' \
+  'brave-browser' \
+  'slack' \
+  'visual-studio-code' \
+  'virtualbox' \
+  'virtualbox-extension-pack' \
+  'wireshark' \
+  'charles' \
+  'gitkraken')
+for item in ${cask_list[*]}; do
+  if [[ $(echo "${cask_list_installed[@]}" | grep -o "${item}") ]]; then
+    typed_message 'SKIP' "${item} is already installed."
+  else
+    typed_message 'INSTALL' "Installing ${item}"
+    if [[ "${item}" == 'virtualbox' ]]; then
+      # read -p "see https://developer.apple.com/library/archive/technotes/tn2459/_index.html about how to approve virtualbox kext to continue. press [enter]"
+      echo "Due to apple security update virtualbox may fail: see https://developer.apple.com/library/archive/technotes/tn2459/_index.html and approve when it asks for password."
+    fi
+    brew cask install "${item}"
+  fi
+done
+
+# brew cask install google-chrome || echo 'google-chrome failed.'
+# brew cask install sublime-text || echo 'sublime failed.'
+# brew cask install jetbrains-toolbox || echo 'jetbrains-toolbox failed.'
+# brew cask install docker || echo 'docker failed.'
+# brew cask install brave-browser || echo 'brave-browser failed.'
+# brew cask install slack || echo 'slack failed.'
+# brew cask install visual-studio-code || echo 'visual-studio-code failed.'
+# brew cask install virtualbox || { read -p "see https://developer.apple.com/library/archive/technotes/tn2459/_index.html about how to approve virtualbox kext to continue. press [enter]"; echo 'virtualbox failed.'; }
+# brew cask install virtualbox-extension-pack || echo 'virtualbox extensions failed.'
+# brew cask install wireshark || echo 'wireshark failed.'
+# brew cask install charles || echo 'charles failed.'
+# brew cask install gitkraken || echo 'gitkraken failed.'
 
 
 # Remove outdated versions from the cellar.
