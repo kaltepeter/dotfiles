@@ -97,6 +97,13 @@ typed_message () {
    printf '%*s %s\n' 26 "$(get_colorized_prefix $1)" "${2}" | tee -a "${log_file}"
 }
 
+#######################################
+# update and cleanup brew
+# Arguments:
+#   None
+# Returns:
+#   None
+#######################################
 update_brew () {
   # https://medium.com/@waxzce/keeping-macos-clean-this-is-my-osx-brew-update-cli-command-6c8f12dc1731
   brew update
@@ -104,9 +111,13 @@ update_brew () {
   brew cask upgrade
   brew cleanup -s
   # brew cask cleanup
-  brew doctor | tee -a "${log_file}"
+  # brew doctor always errors, not great
+  typed_message 'VERIFY' "Check 'brew doctor' output in log for issues."
+  brew doctor >>"${log_file}" 2>&1
   brew missing | tee -a "${log_file}"
-  brew cask doctor
+  echo "" | tee -a "${log_file}"
+  brew cask doctor 1>> "${log_file}"
+  echo "" | tee -a "${log_file}"
 }
 
 export -f error

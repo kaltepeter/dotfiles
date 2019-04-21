@@ -5,6 +5,8 @@ set -o errexit
 set -o pipefail
 [[ ${DEBUG:-false} == true ]] && set -o xtrace
 
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 status "${BASH_SOURCE[0]} | ..."
 
 log_file="${log_file:-/dev/null}"
@@ -92,24 +94,12 @@ for item in ${cask_list[*]}; do
     if [[ "${item}" == 'virtualbox' ]]; then
       # read -p "see https://developer.apple.com/library/archive/technotes/tn2459/_index.html about how to approve virtualbox kext to continue. press [enter]"
       echo "Due to apple security update virtualbox may fail: see https://developer.apple.com/library/archive/technotes/tn2459/_index.html and approve when it asks for password."
+      osascript "${__dir}/../macosx/scripts/show_security_settings.applescript"
+      read -p "If the security window needs approval, wait for the preferences to load and approve. [enter] to contine."
     fi
     brew cask install "${item}"
   fi
 done
-
-# brew cask install google-chrome || echo 'google-chrome failed.'
-# brew cask install sublime-text || echo 'sublime failed.'
-# brew cask install jetbrains-toolbox || echo 'jetbrains-toolbox failed.'
-# brew cask install docker || echo 'docker failed.'
-# brew cask install brave-browser || echo 'brave-browser failed.'
-# brew cask install slack || echo 'slack failed.'
-# brew cask install visual-studio-code || echo 'visual-studio-code failed.'
-# brew cask install virtualbox || { read -p "see https://developer.apple.com/library/archive/technotes/tn2459/_index.html about how to approve virtualbox kext to continue. press [enter]"; echo 'virtualbox failed.'; }
-# brew cask install virtualbox-extension-pack || echo 'virtualbox extensions failed.'
-# brew cask install wireshark || echo 'wireshark failed.'
-# brew cask install charles || echo 'charles failed.'
-# brew cask install gitkraken || echo 'gitkraken failed.'
-
 
 # Remove outdated versions from the cellar.
 brew cleanup | tee -a "${log_file}"
