@@ -16,6 +16,8 @@ status "${BASH_SOURCE[0]} | ..."
 # If we're on a Mac, let's install and setup homebrew.
 if [[ $(uname -s) == "Darwin" ]]; then
   typed_message 'INSTALL' "installing macosx specific stuff..."
+
+  read -p "enable script editor and terminal: https://developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide/AutomatetheUserInterface.html. press [enter] to continue"
   # source "${__dir}/bootstrap.sh"
   # Close any open System Preferences panes, to prevent them from overriding
   # settings we’re about to change
