@@ -94,7 +94,7 @@ for item in ${cask_list[*]}; do
     if [[ "${item}" == 'virtualbox' ]]; then
       # read -p "see https://developer.apple.com/library/archive/technotes/tn2459/_index.html about how to approve virtualbox kext to continue. press [enter]"
       echo "Due to apple security update virtualbox may fail: see https://developer.apple.com/library/archive/technotes/tn2459/_index.html and approve when it asks for password."
-      osascript "${__dir}/../macosx/scripts/show_security_settings.applescript"
+      osascript "${__dir}/../macosx/script/show_security_settings.applescript"
       read -p "If the security window needs approval, wait for the preferences to load and approve. [enter] to contine."
     fi
     brew cask install "${item}"
