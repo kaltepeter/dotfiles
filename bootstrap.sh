@@ -89,6 +89,9 @@ export hostname
 export apple_store_user
 export apple_store_pw
 
+# pre-req: allow applescript to run in terminal
+osascript "${__dir}/macosx/script/show_security_settings.applescript"
+
 # find the installers and run them iteratively
 find -s . -name install.sh | while read -r installer ; do sh -c "${installer}" ; done
 
