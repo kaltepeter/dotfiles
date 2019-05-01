@@ -113,7 +113,7 @@ update_brew () {
   # brew cask cleanup
   # brew doctor always errors, not great
   typed_message 'VERIFY' "Check 'brew doctor' output in log for issues."
-  brew doctor >>"${log_file}" 2>&1
+  (brew doctor >>"${log_file}" 2>&1) || true
   brew missing | tee -a "${log_file}"
   echo "" | tee -a "${log_file}"
   brew cask doctor 1>> "${log_file}"

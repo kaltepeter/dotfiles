@@ -90,6 +90,7 @@ open -a "Brave Browser" --args --make-default-browser | tee -a "${log_file}"
   # Trackpad: enable tap to click for this user and for the login screen
   defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
   defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+  defaults write com.apple.AppleMultitouchTrackpad FirstClickThreshold -int 0
   # defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
   # lookup with three finger tap
