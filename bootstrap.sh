@@ -98,7 +98,7 @@ export apple_store_pw
 [[ $(command -v osascript) ]] && osascript "${__dir}/macosx/script/show_security_settings.applescript"
 
 # find the installers and run them iteratively
-find -s . -name install.sh | while read -r installer ; do sh -c "${installer}" ; done
+find . -name install.sh | sort | while read -r installer ; do sh -c "${installer}" ; done
 
 sh -c "${__dir}/macosx/bootstrap.sh"
 sh -c "${__dir}/system/bootstrap.sh"
