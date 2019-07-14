@@ -79,9 +79,9 @@ echo "setting up machine $(hostname) as ${hostname} for ${email}..."
 
 declare data_dir="${HOME}/data"
 if [[ -d "${data_dir}" ]]; then
-  typed_message "SKIP ${data_dir} exists."
+  typed_message 'SKIP' "${data_dir} exists."
 else
-  typed_message "CREATE ${data_dir}..."
+  typed_message 'CREATE' "${data_dir}...";
   mkdir "${data_dir}"
 fi
 
