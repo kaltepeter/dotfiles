@@ -78,7 +78,7 @@ status "${BASH_SOURCE[0]} | ..."
 echo "setting up machine $(hostname) as ${hostname} for ${email}..."
 
 declare data_dir="${HOME}/data"
-([[ -d "${data_dir}" ]] && typed_message 'SKIP "${data_dir} exists.") || (typed_message CREATE "${data_dir}..."; mkdir' "${data_dir}")
+[[ -d "${data_dir}" ]] && typed_message 'SKIP "${data_dir} exists.") || (typed_message CREATE "${data_dir}..."; mkdir)' "${data_dir}"
 
 echo ''
 
