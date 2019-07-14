@@ -23,14 +23,17 @@ else
 	mkdir "${material_theme_dir}"
 fi
 
-materialshell_theme="${material_theme_dir}/materialshell.zsh-theme"
-if [[ -L "${materialshell_theme}" ]]; then
-	typed_message 'SKIP' "${materialshell_theme} is already linked."
-elif [[ -e "${materialshell_theme}" ]]; then
-	typed_message 'FAIL' "${materialshell_theme} already exists. delete to relink."
-else
-	ln -s "${__dir}/../materialshell/materialshell.zsh" "${materialshell_theme}"
-fi
+declare -a zsh_themes=("${material_theme_dir}/materialshell.zsh-theme")
+
+for theme in "${zsh_themes[@]}"; do
+  if [[ -L "${theme}" ]]; then
+    typed_message 'SKIP' "${theme} is already linked."
+  elif [[ -e "${theme}" ]]; then
+    typed_message 'FAIL' "${theme} already exists. delete to relink."
+  else
+    ln -s "${__dir}/../materialshell/materialshell.zsh" "${theme}"
+  fi
+done
 
 declare -a zsh_configs=('config.zsh')
 
