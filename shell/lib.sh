@@ -4,6 +4,8 @@ set -o pipefail
 set -o nounset
 [[ ${DEBUG:-} == true ]] && set -o xtrace
 
+log_file="${log_file:-/dev/null}"
+
 usage() {
 	cat <<END
 Overwrite usage function in shell script to provide help.
@@ -56,8 +58,8 @@ get_colorized_prefix() {
 #   None
 #######################################
 error () {
-  echo -e "\e[31mError: ${1}\e[39m"
-  echo ''
+  echo -e "\e[31mError: ${1}\e[39m" | tee -a "${log_file}"
+  echo '' | tee -a "${log_file}"
   usage
   echo ''
   exit "${2}"
@@ -72,7 +74,13 @@ error () {
 #   None
 #######################################
 status () {
-  echo -e "\e[36m'${1}'\e[39m"
+  echo -e "\e[36m'${1}'\e[39m" | tee -a "${log_file}"
+} >&1
+
+date_header () {
+  echo '' | tee -a "${log_file}"
+  echo $(date) | tee -a "${log_file}"
+  echo '' | tee -a "${log_file}"
 } >&1
 
 #######################################
@@ -86,12 +94,37 @@ status () {
 #            [SKIP] ... My message
 #######################################
 typed_message () {
-   printf '%*s %s\n' 26 "$(get_colorized_prefix $1)" "${2}"
+   printf '%*s %s\n' 26 "$(get_colorized_prefix $1)" "${2}" | tee -a "${log_file}"
+}
+
+#######################################
+# update and cleanup brew
+# Arguments:
+#   None
+# Returns:
+#   None
+#######################################
+update_brew () {
+  # https://medium.com/@waxzce/keeping-macos-clean-this-is-my-osx-brew-update-cli-command-6c8f12dc1731
+  brew update
+  brew upgrade
+  brew cask upgrade
+  brew cleanup -s
+  # brew cask cleanup
+  # brew doctor always errors, not great
+  typed_message 'VERIFY' "Check 'brew doctor' output in log for issues."
+  (brew doctor >>"${log_file}" 2>&1) || true
+  brew missing | tee -a "${log_file}"
+  echo "" | tee -a "${log_file}"
+  brew cask doctor 1>> "${log_file}"
+  echo "" | tee -a "${log_file}"
 }
 
 export -f error
 export -f usage
 export -f status
 export -f get_colorized_prefix
+export -f date_header
 export -f typed_message
+export -f update_brew
 export declare k_custom_lib_loaded=true

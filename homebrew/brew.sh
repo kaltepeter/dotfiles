@@ -5,17 +5,21 @@ set -o errexit
 set -o pipefail
 [[ ${DEBUG:-false} == true ]] && set -o xtrace
 
+__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 status "${BASH_SOURCE[0]} | ..."
+
+log_file="${log_file:-/dev/null}"
 
 # modified from: https://github.com/mathiasbynens/dotfiles/blob/master/brew.sh
 
 # Install command-line tools using Homebrew.
 
 # Make sure we’re using the latest Homebrew.
-brew update
+brew update | tee -a "${log_file}"
 
 # Upgrade any already-installed formulae.
-brew upgrade
+brew upgrade | tee -a "${log_file}"
 
 # Save Homebrew’s installed location.
 BREW_PREFIX=$(brew --prefix)
@@ -59,8 +63,46 @@ brew install git-lfs
 
 brew install openssl
 
+brew install docker
+
+# http proxy
+brew install mitmproxy
+
+brew install shellcheck
+
+brew install mas
+
+# mac osc apps
+cask_list_installed=( $(brew cask list) )
+cask_list=('google-chrome' \
+  'sublime-text' \
+  'jetbrains-toolbox' \
+  'docker' \
+  'brave-browser' \
+  'slack' \
+  'visual-studio-code' \
+  'virtualbox' \
+  'virtualbox-extension-pack' \
+  'wireshark' \
+  'charles' \
+  'gitkraken')
+for item in ${cask_list[*]}; do
+  if [[ $(echo "${cask_list_installed[@]}" | grep -o "${item}") ]]; then
+    typed_message 'SKIP' "${item} is already installed."
+  else
+    typed_message 'INSTALL' "Installing ${item}"
+    if [[ "${item}" == 'virtualbox' ]]; then
+      # read -p "see https://developer.apple.com/library/archive/technotes/tn2459/_index.html about how to approve virtualbox kext to continue. press [enter]"
+      echo "Due to apple security update virtualbox may fail: see https://developer.apple.com/library/archive/technotes/tn2459/_index.html and approve when it asks for password."
+      osascript "${__dir}/../macosx/script/show_security_settings.applescript"
+      read -p "If the security window needs approval, wait for the preferences to load and approve. [enter] to contine."
+    fi
+    brew cask install "${item}"
+  fi
+done
+
 # Remove outdated versions from the cellar.
-brew cleanup
+brew cleanup | tee -a "${log_file}"
 
 echo ''
 exit 0

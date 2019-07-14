@@ -9,6 +9,9 @@ set -o pipefail
 
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
+[[ "${k_custom_lib_loaded:-}" == true ]] || source "${__dir}/../shell/lib.sh"
+
 status "${BASH_SOURCE[0]} | ..."
 
 # from: https://github.com/holman/dotfiles/blob/master/homebrew/install.sh
@@ -32,10 +35,14 @@ if test ! "$(command -v brew)"; then
 	fi
 else
 	typed_message 'SKIP' "brew already installed."
-	brew --version
+  typed_message 'INSTALL' "Updating and cleaning brew."
+  update_brew
+  brew --version
 fi
 
 echo ''
+
+xcode-select --install || typed_message 'SKIP' 'xcode already installed. Use softwareupdate.'
 
 sh -c "${__dir}/brew.sh"
 

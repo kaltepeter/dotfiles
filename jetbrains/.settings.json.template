@@ -1,0 +1,29 @@
+{
+    "autostart": true,
+    "channel_rollback_max_history": 2,
+    "ordering": [
+    ],
+    "privacy_policy": {
+        "accepted_version": "1.5",
+        "eua_accepted_version": "1.2"
+    },
+    "proxy": {
+        "auth": {
+        }
+    },
+    "shell_scripts": {
+        "enabled": true,
+        "location": "__HOME__/data/jetbrains"
+    },
+    "statistics": {
+        "allow": true
+    },
+    "update": {
+        "filter": {
+            "quality_filter": {
+                "order_value": 10000
+            }
+        },
+        "install_automatically": true
+    }
+}

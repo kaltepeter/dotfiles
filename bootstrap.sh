@@ -12,9 +12,12 @@ DEBUG="${DEBUG:-false}"
 [[ ${DEBUG} == true ]] && set -o xtrace
 
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+log_file="${__dir}/bootstrap.log"
 
 # shellcheck disable=SC1090
 [[ "${k_custom_lib_loaded:-}" == true ]] || source "${__dir}/shell/lib.sh"
+
+date_header
 
 usage() {
     cat <<END
@@ -80,23 +83,35 @@ declare data_dir="${HOME}/data"
 echo ''
 
 # export for child shells
+export log_file
 export email
 export hostname
+export apple_store_user
+export apple_store_pw
+
+# pre-req: allow applescript to run in terminal
+osascript "${__dir}/macosx/script/show_security_settings.applescript"
 
 # find the installers and run them iteratively
-find . -name install.sh | while read -r installer ; do sh -c "${installer}" ; done
+find -s . -name install.sh | while read -r installer ; do sh -c "${installer}" ; done
 
+sh -c "${__dir}/macosx/bootstrap.sh"
 sh -c "${__dir}/system/bootstrap.sh"
 sh -c "${__dir}/git/bootstrap.sh"
+sh -c "${__dir}/jetbrains/bootstrap.sh"
 
 typed_message 'CLEANUP' "removing env vars"
+
+echo ''
+typed_message '-----' 'All installed! check for [FAIL] to fix any issues and re-run.'
+
 unset email
 unset hostname
 unset pw
 unset machineuser
 unset username
-
-echo ''
-typed_message '-----' 'All installed! check for [FAIL] to fix any issues and re-run.'
+unset log_file
+unset apple_store_user
+unset apple_store_pw
 
 exit 0
