@@ -8,7 +8,7 @@ set -o nounset
 readonly __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-[[ $(k_custom_lib_loaded) == true ]] || source "${__dir}/../shell/lib.sh"
+[[ $(command -v k_custom_lib_loaded) ]] || source "${__dir}/../shell/lib.sh"
 
 usage() {
 	cat <<END
@@ -29,7 +29,7 @@ END
 # If we're on a linux system, let's install and setup homebrew.
 if [[ $(uname -s) == "Linux" ]]; then
 	[[ -z "${hostname:-}" ]] && error "env var hostname is required." 1
-	[[ -z "${machineuser:-}" ]] && error "env varßmachineuser is required." 1
+	[[ -z "${machineuser:-}" ]] && error "env var machineuser is required." 1
 
 	sh -c "${__dir}/apt-get.sh"
 
