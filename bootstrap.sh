@@ -41,10 +41,10 @@ declare email
 declare hostname
 
 if [[ -f "${__dir}/.env" ]]; then
-  # set -o allexport
+  set -o allexport
   # shellcheck source=/dev/null
   source "${__dir}/.env"
-  # set +o allexport
+  set +o allexport
 else
   echo ".env file doesn't exist. creating from .example file."
   cp "${__dir}/.env.example" "${__dir}/.env"
