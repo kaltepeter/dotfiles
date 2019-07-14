@@ -15,7 +15,7 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 log_file="${__dir}/bootstrap.log"
 
 # shellcheck disable=SC1090
-[[ $(command -v k_custom_lib_loaded) ]] || source "${__dir}/../shell/lib.sh"
+[[ $(command -v k_custom_lib_loaded) ]] || source "${__dir}/shell/lib.sh"
 
 date_header
 
