@@ -120,6 +120,10 @@ update_brew () {
   echo "" | tee -a "${log_file}"
 }
 
+k_custom_lib_loaded() {
+  echo true
+}
+
 export -f error
 export -f usage
 export -f status
@@ -127,4 +131,4 @@ export -f get_colorized_prefix
 export -f date_header
 export -f typed_message
 export -f update_brew
-export declare k_custom_lib_loaded=true
+export -f k_custom_lib_loaded
