@@ -8,7 +8,8 @@ set -o pipefail
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # shellcheck disable=SC1090
-[[ "${k_custom_lib_loaded:-}" == true ]] || source "${__dir}/../shell/lib.sh"
+[[ $(k_custom_lib_loaded) == true ]] || source "${__dir}/../shell/lib.sh"
+
 log_file="${log_file:-/dev/null}"
 
 status "${BASH_SOURCE[0]} | ..."
