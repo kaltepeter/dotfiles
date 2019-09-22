@@ -253,7 +253,6 @@ defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
     "Photos" \
     "Safari" \
     "SystemUIServer" \
-    "Terminal" \
     "iCal"; do
       killall "${app}" &> /dev/null || true
     done

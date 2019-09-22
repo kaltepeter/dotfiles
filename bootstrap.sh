@@ -119,4 +119,6 @@ unset log_file
 unset apple_store_user
 unset apple_store_pw
 
+killall "Terminal" &> /dev/null || true
+
 exit 0

@@ -72,6 +72,13 @@ brew install shellcheck
 
 brew install mas
 
+# taps
+brew tap caskroom/fonts
+# brew tap sambadevi/powerlevel9k
+
+# theme
+# brew install powerlevel9k
+
 # mac osc apps
 cask_list_installed=( $(brew cask list) )
 cask_list=('google-chrome' \
@@ -85,7 +92,11 @@ cask_list=('google-chrome' \
   'virtualbox-extension-pack' \
   'wireshark' \
   'charles' \
-  'gitkraken')
+  'gitkraken' \
+  'font-hack-nerd-font' \
+  'font-hack-nerd-font-mono' \
+  'font-firacode-nerd-font' \
+  'font-firacode-nerd-font-mono')
 for item in ${cask_list[*]}; do
   if [[ $(echo "${cask_list_installed[@]}" | grep -o "${item}") ]]; then
     typed_message 'SKIP' "${item} is already installed."
