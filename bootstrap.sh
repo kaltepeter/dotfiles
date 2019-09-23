@@ -15,7 +15,7 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 log_file="${__dir}/bootstrap.log"
 
 # shellcheck disable=SC1090
-[[ "${k_custom_lib_loaded:-}" == true ]] || source "${__dir}/shell/lib.sh"
+[[ $(command -v k_custom_lib_loaded) ]] || source "${__dir}/shell/lib.sh"
 
 date_header
 
@@ -41,10 +41,10 @@ declare email
 declare hostname
 
 if [[ -f "${__dir}/.env" ]]; then
-  # set -o allexport
+  set -o allexport
   # shellcheck source=/dev/null
   source "${__dir}/.env"
-  # set +o allexport
+  set +o allexport
 else
   echo ".env file doesn't exist. creating from .example file."
   cp "${__dir}/.env.example" "${__dir}/.env"
@@ -78,7 +78,12 @@ status "${BASH_SOURCE[0]} | ..."
 echo "setting up machine $(hostname) as ${hostname} for ${email}..."
 
 declare data_dir="${HOME}/data"
-([[ -d "${data_dir}" ]] && typed_message 'SKIP "${data_dir} exists.") || (typed_message CREATE "${data_dir}..."; mkdir' "${data_dir}")
+if [[ -d "${data_dir}" ]]; then
+  typed_message 'SKIP' "${data_dir} exists."
+else
+  typed_message 'CREATE' "${data_dir}...";
+  mkdir "${data_dir}"
+fi
 
 echo ''
 
@@ -89,11 +94,11 @@ export hostname
 export apple_store_user
 export apple_store_pw
 
-# pre-req: allow applescript to run in terminal
-osascript "${__dir}/macosx/script/show_security_settings.applescript"
+# pre-req: MAC allow applescript to run in terminal
+[[ $(command -v osascript) ]] && osascript "${__dir}/macosx/script/show_security_settings.applescript"
 
 # find the installers and run them iteratively
-find -s . -name install.sh | while read -r installer ; do sh -c "${installer}" ; done
+find . -name install.sh | sort | while read -r installer ; do sh -c "${installer}" ; done
 
 sh -c "${__dir}/macosx/bootstrap.sh"
 sh -c "${__dir}/system/bootstrap.sh"
@@ -113,5 +118,7 @@ unset username
 unset log_file
 unset apple_store_user
 unset apple_store_pw
+
+killall "Terminal" &> /dev/null || true
 
 exit 0

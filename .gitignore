@@ -10,3 +10,5 @@ __pycache__/
 
 jetbrains/.settings.json
 *.log
+terminal/modified_themes/*
+.idea
