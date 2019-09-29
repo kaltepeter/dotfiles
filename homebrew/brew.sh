@@ -21,6 +21,9 @@ brew update | tee -a "${log_file}"
 # Upgrade any already-installed formulae.
 brew upgrade | tee -a "${log_file}"
 
+# upgrade casks
+brew cask upgrade | tee -a "${log_file}"
+
 # Save Homebrew’s installed location.
 BREW_PREFIX=$(brew --prefix)
 
