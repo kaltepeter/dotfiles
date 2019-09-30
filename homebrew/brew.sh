@@ -77,6 +77,8 @@ brew install mas
 
 brew install node
 
+brew install hub
+
 # taps
 brew tap caskroom/fonts
 # brew tap sambadevi/powerlevel9k
