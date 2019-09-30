@@ -75,6 +75,8 @@ brew install shellcheck
 
 brew install mas
 
+brew install node
+
 # taps
 brew tap caskroom/fonts
 # brew tap sambadevi/powerlevel9k
@@ -103,6 +105,8 @@ cask_list=('google-chrome' \
 for item in ${cask_list[*]}; do
   if [[ $(echo "${cask_list_installed[@]}" | grep -o "${item}") ]]; then
     typed_message 'SKIP' "${item} is already installed."
+    # upgrade if possible
+
   else
     typed_message 'INSTALL' "Installing ${item}"
     if [[ "${item}" == 'virtualbox' ]]; then
