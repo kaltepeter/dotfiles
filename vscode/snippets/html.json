@@ -1,0 +1,122 @@
+{
+	// Place your snippets for html here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"MDC Text Field": {
+		"prefix": "mdc-tf",
+		"description": "Material Design Text Field. \n\nhttps://material.io/develop/web/components/input-controls/text-field/",
+		"body": [
+		  "<div class=\"mdc-text-field\">",
+		  "<input type=\"${1|text,password|}\" id=\"${2}-input\" name=\"${2}\" class=\"mdc-text-field__input\">",
+		  "<label class=\"mdc-floating-label\" for=\"${2}-input\">${3:Hint text}</label>",
+		  "<div class=\"mdc-line-ripple\"></div>",
+		  "</div>"
+		]
+	},
+	"MDC Button": {
+		"prefix": "mdc-btn",
+		"description": "Material Design Button. \n\nhttps://material.io/develop/web/components/buttons/",
+		"body": [
+			"<button class=\"mdc-button\">",
+  			"<span class=\"mdc-button__label\">${1:Button}</span>",
+			"</button>"
+		]
+	},
+	"MDC Button - Raised": {
+		"prefix": "mdc-btn-r",
+		"description": "Material Design Button - rasied variant. \n\nhttps://material.io/develop/web/components/buttons/",
+		"body": [
+			"<button class=\"mdc-button mdc-button--raised\">",
+  			"<span class=\"mdc-button__label\">${1:Button}</span>",
+			"</button>"
+		]
+	},
+	"MDC Drawer": {
+		"prefix": "mdc-dr",
+		"description": "Material Design Drawer. \n\nhttps://material.io/develop/web/components/drawers/",
+		"body": [
+			"<aside class=\"mdc-drawer\">",
+				"<div class=\"mdc-drawer__content\">",
+					"<nav class=\"mdc-list\">",
+						"<a class=\"mdc-list-item mdc-list-item--activated\" href=\"#\" aria-current=\"page\">",
+							"<i class=\"material-icons mdc-list-item__graphic\" aria-hidden=\"true\">inbox</i>",
+							"<span class=\"mdc-list-item__text\">Inbox</span>",
+						"</a>",
+						"<a class=\"mdc-list-item\" href=\"#\">",
+							"<i class=\"material-icons mdc-list-item__graphic\" aria-hidden=\"true\">send</i>",
+							"<span class=\"mdc-list-item__text\">Outgoing</span>",
+						"</a>",
+						"<a class=\"mdc-list-item\" href=\"#\">",
+							"<i class=\"material-icons mdc-list-item__graphic\" aria-hidden=\"true\">drafts</i>",
+							"<span class=\"mdc-list-item__text\">Drafts</span>",
+						"</a>",
+					"</nav>",
+				"</div>",
+		  	"</aside>"
+		]
+	},
+	"MDC Drawer - with header": {
+		"prefix": "mdc-dr-h",
+		"description": "Material Design Drawer with header variant. \n\nhttps://material.io/develop/web/components/drawers/",
+		"body": [
+			"<aside class=\"mdc-drawer\">",
+				"<div class=\"mdc-drawer__header\">",
+    				"<h3 class=\"mdc-drawer__title\">Mail</h3>",
+    				"<h6 class=\"mdc-drawer__subtitle\">email@material.io</h6>",
+  				"</div>",
+				"<div class=\"mdc-drawer__content\">",
+					"<nav class=\"mdc-list\">",
+						"<a class=\"mdc-list-item mdc-list-item--activated\" href=\"#\" aria-current=\"page\">",
+							"<i class=\"material-icons mdc-list-item__graphic\" aria-hidden=\"true\">inbox</i>",
+							"<span class=\"mdc-list-item__text\">Inbox</span>",
+						"</a>",
+						"<a class=\"mdc-list-item\" href=\"#\">",
+							"<i class=\"material-icons mdc-list-item__graphic\" aria-hidden=\"true\">send</i>",
+							"<span class=\"mdc-list-item__text\">Outgoing</span>",
+						"</a>",
+						"<a class=\"mdc-list-item\" href=\"#\">",
+							"<i class=\"material-icons mdc-list-item__graphic\" aria-hidden=\"true\">drafts</i>",
+							"<span class=\"mdc-list-item__text\">Drafts</span>",
+						"</a>",
+					"</nav>",
+				"</div>",
+		  	"</aside>"
+		]
+	},
+	"MDC Image List": {
+		"prefix": "mdc-il",
+		"description": "Material Design Image List. \n\nhttps://material.io/develop/web/components/image-lists/",
+		"body": [
+			"<ul class=\"mdc-image-list ${1:my-iamge-list}\">",
+				"<li class=\"mdc-image-list__item\">",
+					"<img class=\"mdc-image-list__image\" src=\"${2:image.jpg}\">",
+					"<div class=\"mdc-image-list__supporting\">",
+					"<span class=\"mdc-image-list__label\">${3}</span>",
+					"</div>",
+				"</li>",
+			"</ul>"
+		]
+	},
+	"MDC Image List Item": {
+		"prefix": "mdc-il-i",
+		"description": "Material Design Image List Item. \n\nhttps://material.io/develop/web/components/image-lists/",
+		"body": [
+			"<li class=\"mdc-image-list__item\">",
+				"<img class=\"mdc-image-list__image\" src=\"${1:image.jpg}\">",
+				"<div class=\"mdc-image-list__supporting\">",
+				"<span class=\"mdc-image-list__label\">${2}</span>",
+				"</div>",
+			"</li>"
+		]
+	}
+}
