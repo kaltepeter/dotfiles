@@ -21,6 +21,9 @@ brew update | tee -a "${log_file}"
 # Upgrade any already-installed formulae.
 brew upgrade | tee -a "${log_file}"
 
+# upgrade casks
+brew cask upgrade | tee -a "${log_file}"
+
 # Save Homebrew’s installed location.
 BREW_PREFIX=$(brew --prefix)
 
@@ -72,6 +75,10 @@ brew install shellcheck
 
 brew install mas
 
+brew install node
+
+brew install hub
+
 # taps
 brew tap caskroom/fonts
 # brew tap sambadevi/powerlevel9k
@@ -100,6 +107,8 @@ cask_list=('google-chrome' \
 for item in ${cask_list[*]}; do
   if [[ $(echo "${cask_list_installed[@]}" | grep -o "${item}") ]]; then
     typed_message 'SKIP' "${item} is already installed."
+    # upgrade if possible
+
   else
     typed_message 'INSTALL' "Installing ${item}"
     if [[ "${item}" == 'virtualbox' ]]; then
