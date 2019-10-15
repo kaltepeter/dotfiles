@@ -59,5 +59,21 @@ typed_message 'CONFIG' "setting vars from ${__dir}/.env"
 source "${__dir}/.env"
 set +o allexport
 
+declare data_dir="${HOME}/data"
+if [[ -d "${data_dir}" ]]; then
+  typed_message 'SKIP' "${data_dir} exists."
+else
+  typed_message 'CREATE' "${data_dir}..."
+  mkdir "${data_dir}"
+fi
+
+git clone git@github.com:kaltepeter/dotfiles.git "${HOME}/data/"
+
+cd "${HOME}/data"
+
+sh "${__dir}/bootstrap.sh"
+
+echo ''
+
 echo ''
 exit 0
