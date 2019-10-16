@@ -77,9 +77,7 @@ typed_message 'CONFIG' "setting vars from ${__dir}/.env"
 source "${__dir}/.env"
 set +o allexport
 
-sh "${__dir}/bootstrap.sh"
-
-echo ''
+echo "RUN ./${__dir}/bootstrap.sh in clean tab to start"
 
 echo ''
 exit 0
