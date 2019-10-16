@@ -14,9 +14,9 @@ else
 fi
 
 # clone http to avoid perm issues
-git clone https://github.com/kaltepeter/dotfiles.git "${HOME}/data/"
+git clone https://github.com/kaltepeter/dotfiles.git "${HOME}/data/dotfiles"
 
-cd "${HOME}/data"
+cd "${HOME}/data/dotfiles"
 
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 log_file="${__dir}/install.log"
