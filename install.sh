@@ -7,9 +7,9 @@ set -o nounset
 
 declare data_dir="${HOME}/data"
 if [[ -d "${data_dir}" ]]; then
-  typed_message 'SKIP' "${data_dir} exists."
+  echo "SKIP ${data_dir} exists."
 else
-  typed_message 'CREATE' "${data_dir}..."
+  echo "CREATE ${data_dir}..."
   mkdir "${data_dir}"
 fi
 
