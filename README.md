@@ -1,9 +1,10 @@
 # dotfiles
+
 my dotfiles :)
 
 ## Pre-requisite
 
-modify .env.example and save as .env
+modify .env.example and save as .env or run self installer: `curl -fsSL https://raw.githubusercontent.com/kaltepeter/dotfiles/master/install.sh | bash` 
 
 run `./bootstrap.sh -h` for info
 
