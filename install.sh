@@ -13,7 +13,8 @@ else
   mkdir "${data_dir}"
 fi
 
-git clone git@github.com:kaltepeter/dotfiles.git "${HOME}/data/"
+# clone http to avoid perm issues
+git clone https://github.com/kaltepeter/dotfiles.git "${HOME}/data/"
 
 cd "${HOME}/data"
 
