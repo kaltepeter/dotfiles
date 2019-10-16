@@ -37,9 +37,9 @@ brew install bash-completion2
 
 # Switch to using brew-installed bash as default shell
 if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
-  echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells;
+  echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells
 #  chsh -s "${BREW_PREFIX}/bin/bash";
-fi;
+fi
 
 # install python deps
 brew install pyenv
@@ -56,9 +56,9 @@ brew install zsh-completions
 
 # Switch to using brew-installed zsh as default shell
 if ! grep -Fq "${BREW_PREFIX}/bin/zsh" /etc/shells; then
-  echo "${BREW_PREFIX}/bin/zsh" | sudo tee -a /etc/shells;
-  chsh -s "${BREW_PREFIX}/bin/zsh";
-fi;
+  echo "${BREW_PREFIX}/bin/zsh" | sudo tee -a /etc/shells
+  chsh -s "${BREW_PREFIX}/bin/zsh"
+fi
 
 # Install other useful binaries.
 brew install git
@@ -80,29 +80,29 @@ brew install node
 brew install hub
 
 # taps
-brew tap caskroom/fonts
+brew tap homebrew/cask-fonts
 # brew tap sambadevi/powerlevel9k
 
 # theme
 # brew install powerlevel9k
 
 # mac osc apps
-cask_list_installed=( $(brew cask list) )
-cask_list=('google-chrome' \
-  'sublime-text' \
-  'jetbrains-toolbox' \
-  'docker' \
-  'brave-browser' \
-  'slack' \
-  'visual-studio-code' \
-  'virtualbox' \
-  'virtualbox-extension-pack' \
-  'wireshark' \
-  'charles' \
-  'gitkraken' \
-  'font-hack-nerd-font' \
-  'font-hack-nerd-font-mono' \
-  'font-firacode-nerd-font' \
+cask_list_installed=($(brew cask list))
+cask_list=('google-chrome'
+  'sublime-text'
+  'jetbrains-toolbox'
+  'docker'
+  'brave-browser'
+  'slack'
+  'visual-studio-code'
+  'virtualbox'
+  'virtualbox-extension-pack'
+  'wireshark'
+  'charles'
+  'gitkraken'
+  'font-hack-nerd-font'
+  'font-hack-nerd-font-mono'
+  'font-firacode-nerd-font'
   'font-firacode-nerd-font-mono')
 for item in ${cask_list[*]}; do
   if [[ $(echo "${cask_list_installed[@]}" | grep -o "${item}") ]]; then
