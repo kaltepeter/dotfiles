@@ -13,8 +13,13 @@ else
   mkdir "${data_dir}"
 fi
 
-# clone http to avoid perm issues
-git clone https://github.com/kaltepeter/dotfiles.git "${HOME}/data/dotfiles"
+if [[ -d "${HOME}/data/dotfiles" ]]; then
+  echo "SKIP ${HOME}/data/dotfiles exists."
+else
+  echo "CREATE cloning kaltepeter/dotfiles to ${HOME}/data/dotfiles..."
+  # clone http to avoid perm issues
+  git clone https://github.com/kaltepeter/dotfiles.git "${HOME}/data/dotfiles"
+fi
 
 cd "${HOME}/data/dotfiles"
 
