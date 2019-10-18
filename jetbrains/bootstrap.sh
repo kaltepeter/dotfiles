@@ -17,6 +17,7 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [[ $(uname -s) == "Darwin" ]]; then
   typed_message 'INSTALL' "installing jetbrains on MacOSX ..."
+  open -a "Jetbrains\ Toolbox"
   jetbrains_home="${HOME}/Library/Application Support/JetBrains/Toolbox"
   settings_file="${__dir}/.settings.json"
   cp "${settings_file}.template" "${settings_file}"
