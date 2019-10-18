@@ -42,6 +42,7 @@ if [[ $(uname -s) == "Darwin" ]]; then
 
   # check scripts
   jetbrains_scripts="${HOME}/data/jetbrains"
+  [[ ! -d ${jetbrains_scripts} ]] && mkdir "${jetbrains_scripts}"
   ls "${jetbrains_scripts}" | xargs -I % sh -c "ln -s ${jetbrains_scripts}/% /usr/local/bin/% || true"
   [[ $(command -v idea) ]] || read -rp 'IntelliJ (IDEA) app not found. install a version through jetbrains toolbox. Press [enter] to continue'
   # check for apps, prompt install, rerun link
