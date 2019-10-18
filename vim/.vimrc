@@ -1,4 +1,4 @@
-# copied from https://gist.github.com/substack/907343
+" copied from https://gist.github.com/substack/907343
 set autoindent
 set indentexpr=off
 set expandtab
