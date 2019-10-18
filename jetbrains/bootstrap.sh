@@ -17,7 +17,6 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if [[ $(uname -s) == "Darwin" ]]; then
   typed_message 'INSTALL' "installing jetbrains on MacOSX ..."
-  open -a "Jetbrains Toolbox"
   jetbrains_home="${HOME}/Library/Application Support/JetBrains/Toolbox"
   settings_file="${__dir}/.settings.json"
   cp "${settings_file}.template" "${settings_file}"
@@ -27,14 +26,14 @@ if [[ $(uname -s) == "Darwin" ]]; then
   java_prefs_plist="${HOME}/Library/Preferences/com.apple.java.util.prefs.plist"
   jetbrains_userid=$(/usr/libexec/PlistBuddy -c "Print :/:jetbrains/:jetprofile/:userid" "${java_prefs_plist}")
 
-  if [[ -z "${jetbrains_userid}" ]]; then
+  if [[ ! $jetbrains_userid ]]; then
     typed_message 'CREATE' "configs for jetbrains toolbox"
     cp "${settings_file}" "${jetbrains_home}/.settings.json"
 
     # Login to jetbrains
     # /usr/libexec/PlistBuddy -c "Set :/:jetbrains/:jetprofile/:userid myuser" "${java_prefs_plist}"
     open -a "JetBrains Toolbox"
-    read -p "login to jetbrains toolbox and press [enter] to continue"
+    read -r -p "login to jetbrains toolbox and press [enter] to continue"
     [[ -z "${jetbrains_userid}" ]] && error 'failed to loging to jetbrains toolbox' 1
   else
     open -a "JetBrains Toolbox"
