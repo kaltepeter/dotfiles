@@ -23,6 +23,9 @@ fi
 
 cd "${HOME}/data/dotfiles"
 
+git submodule init
+git submodule update
+
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 log_file="${__dir}/install.log"
 
