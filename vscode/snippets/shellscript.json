@@ -1,0 +1,183 @@
+{
+	// Place your snippets for shellscript here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"shebang": {
+		"prefix": "shebang",
+		"body": [
+			"#!/usr/bin/env bash",
+			"$0"
+		],
+		"description": "shebang line for bash"
+	},
+	"seto": {
+		"prefix": "seto",
+		"body": [
+			"set -o errexit",
+			"set -o pipefail",
+			"set -o nounset",
+			"[[ \\${DEBUG:-} == true ]] && set -o xtrace",
+			"$0"
+		],
+		"description": "set -o  for best practices"
+	},
+	"Script parent dir": {
+		"prefix": "__dir",
+		"body": [
+			"readonly __dir=\"\\$(cd \"\\$(dirname \"\\${BASH_SOURCE[0]}\")\" && pwd)\"",
+			"$0"
+		],
+		"description": "Get the parent directory of the script as __dir"
+	},
+	"Script": {
+		"prefix": "__file",
+		"body": [
+			"readonly __file=\"\\${__dir}/\\$(basename \"\\${BASH_SOURCE[0]}\")\"",
+			"$0"
+		],
+		"description": "Get the script as __file"
+	},
+	"Script basename": {
+		"prefix": "__base",
+		"body": [
+			"readonly __base=\"\\$(basename \\${__file} .sh)\"",
+			"$0"
+		],
+		"description": "Get the script basename as __base"
+	},
+	"app root": {
+		"prefix": "__root",
+		"body": [
+			"readonly __root=\"\\$(cd \"\\$(dirname \"\\${__dir}\")\" && ${1:app_dir})\"",
+			"$0"
+		],
+		"description": "set the app root as __root"
+	},
+	"var=\"${1:-}\"": {
+		"prefix": "arg",
+		"body": [
+			"${1:var_name}=\"\\${${2:1}:-}\"",
+			"$0"
+		],
+		"description": "set <var_name> to argument or var"
+	},
+	"generate main()": {
+		"prefix": "main",
+		"body": [
+			"main($1) {",
+			"\t${2:echo \"hello\"}$0",
+			"}",
+			"",
+			"main \"\\$@\""
+		],
+		"description": "generate main() and call following shell styleguide"
+	},
+	"generate method call with log": {
+		"prefix": "meth",
+		"body": [
+			"${1:method_name} 1> \"\\${FLAGS_out}\""
+		],
+		"description": "generate method() can log output to --out"
+	},
+	"generate die()": {
+		"prefix": "die",
+		"body": [
+			"die() {",
+			"\techo \"\\${0##*/}: error: \\$*\" >&2",
+			"\texit 1",
+			"}",
+			"$0"
+		],
+		"description": "generate die() and call following shell styleguide"
+	},
+	"shflags source": {
+		"prefix": "shf source",
+		"body": [
+			"# shellcheck source=${1:/usr/local/bin/shflags}",
+			". \"${2:\\${SCRIPT_DIR}}/$1\"$0"
+		],
+		"description": "insert shflags source lines"
+	},
+	"shflags FLAGS_HELP": {
+		"prefix": "shf help",
+		"body": [
+			"FLAGS_HELP=$(cat <<EOF",
+			"USAGE: \\$0 [flags] ${1:command}",
+			"$1:",
+			"\t${2:command1}:\t${3:command1_desc}$4",
+			"EOF",
+			")",
+			"$0"
+		],
+		"description": "Insert FLAGS_HELP multiline block for shflags"
+	},
+	"shflags parse the command line": {
+		"prefix": "shf parse",
+		"body": [
+			"# parse the command-line",
+			"FLAGS \"\\$@\" || exit 1",
+			"eval set -- \"\\${FLAGS_ARGV}\"",
+			"set -eu",
+			"$0"
+		],
+		"description": "insert parsing for shflags"
+	},
+	"shflags default flags": {
+		"prefix": "shf df",
+		"body": [
+			"DEFINE_string out '/dev/stdin' 'Write output to this file' 'o'",
+			"DEFINE_boolean verbose \"\\${FLAGS_FALSE}\" 'Enable verbose output' 'v'",
+			"$0"
+		],
+		"description": "generate default flags from styleguide: https://www.chromium.org/chromium-os/shell-style-guidelines#TOC-Default-Assignments"
+	},
+	"shflags default flag checks": {
+		"prefix": "shf dc",
+		"body": [
+			"if [[ \\${FLAGS_verbose} -eq \\${FLAGS_TRUE} ]]; then",
+			"\techo \"verbose mode is enabled!\"",
+			"else",
+			"\techo \"will be quiet\"",
+			"fi",
+			"",
+			"if [[ -z \\${FLAGS_out} ]]; then",
+			"\tdie \"--out flag is missing\"",
+			"fi",
+			"echo \"writing output to: '\\${FLAGS_out}'\"",
+			"",
+			" if [[ \"\\${FLAGS_help}\" -eq \\${FLAGS_TRUE} ]]; then",
+			"\texit 0",
+			"fi",
+			"",
+			"# Now remaining arguments are in \"\\$@\".",
+			"$0"
+		],
+		"description": "generate default flag checks, usually in main body"
+	},
+	"shflags string arg": {
+		"prefix": "shf str",
+		"body": [
+			"DEFINE_string '${1:name}' '${2:default}' '${1} ${3:description}' '${4:n}$0'"
+		],
+		"description": "generate shflags string param"
+	},
+	"jq read var and assign": {
+		"prefix": "jq r",
+		"body": [
+			"${1:var_name}=$(jq -r '.${1}' \"\\${${2:config_json}}\")",
+			"echo \"${1}: \\${${1}}\"",
+			"$0"
+		],
+		"description": "use jq to extract var value and assign to var of same name"
+	}
+}
