@@ -88,22 +88,25 @@ brew tap homebrew/cask-fonts
 
 # mac osc apps
 cask_list_installed=($(brew cask list))
-cask_list=('google-chrome'
-  'sublime-text'
-  'jetbrains-toolbox'
-  'docker'
+cask_list=(
   'brave-browser'
-  'slack'
-  'visual-studio-code'
-  'virtualbox'
-  'virtualbox-extension-pack'
-  'wireshark'
   'charles'
-  'gitkraken'
+  'docker'
+  'font-firacode-nerd-font'
+  'font-firacode-nerd-font-mono'
   'font-hack-nerd-font'
   'font-hack-nerd-font-mono'
-  'font-firacode-nerd-font'
-  'font-firacode-nerd-font-mono')
+  'google-chrome'
+  'gitkraken'
+  'jetbrains-toolbox'
+  'p4v'
+  'slack'
+  'sublime-text'
+  'virtualbox'
+  'virtualbox-extension-pack'
+  'visual-studio-code'
+  'wireshark'
+)
 for item in ${cask_list[*]}; do
   if [[ $(echo "${cask_list_installed[@]}" | grep -o "${item}") ]]; then
     typed_message 'SKIP' "${item} is already installed."
