@@ -12,3 +12,4 @@ jetbrains/.settings.json
 *.log
 terminal/modified_themes/*
 .idea
+.DS_Store
