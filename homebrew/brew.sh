@@ -7,6 +7,9 @@ set -o pipefail
 
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
+[[ $(command -v k_custom_lib_loaded) ]] || source "${__dir}/../shell/lib.sh"
+
 status "${BASH_SOURCE[0]} | ..."
 
 log_file="${log_file:-/dev/null}"
@@ -79,9 +82,12 @@ brew install node
 
 brew install hub
 
+brew install mongodb-community
+
 # taps
 brew tap homebrew/cask-fonts
 # brew tap sambadevi/powerlevel9k
+brew tap mongodb/brew
 
 # theme
 # brew install powerlevel9k
@@ -103,7 +109,9 @@ cask_list=('google-chrome'
   'font-hack-nerd-font'
   'font-hack-nerd-font-mono'
   'font-firacode-nerd-font'
-  'font-firacode-nerd-font-mono')
+  'font-firacode-nerd-font-mono'
+  'studio-3t'
+  'postman')
 for item in ${cask_list[*]}; do
   if [[ $(echo "${cask_list_installed[@]}" | grep -o "${item}") ]]; then
     typed_message 'SKIP' "${item} is already installed."
@@ -123,6 +131,9 @@ done
 
 # Remove outdated versions from the cellar.
 brew cleanup | tee -a "${log_file}"
+
+# start services
+brew services start mongodb-community
 
 echo ''
 exit 0
