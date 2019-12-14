@@ -7,6 +7,9 @@ set -o pipefail
 
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+# shellcheck disable=SC1090
+[[ $(command -v k_custom_lib_loaded) ]] || source "${__dir}/../shell/lib.sh"
+
 status "${BASH_SOURCE[0]} | ..."
 
 log_file="${log_file:-/dev/null}"
@@ -107,7 +110,8 @@ cask_list=('google-chrome'
   'font-hack-nerd-font-mono'
   'font-firacode-nerd-font'
   'font-firacode-nerd-font-mono'
-  'studio-3t')
+  'studio-3t'
+  'postman')
 for item in ${cask_list[*]}; do
   if [[ $(echo "${cask_list_installed[@]}" | grep -o "${item}") ]]; then
     typed_message 'SKIP' "${item} is already installed."
