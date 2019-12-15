@@ -37,7 +37,7 @@ for theme in "${zsh_themes[@]}"; do
   fi
 done
 
-declare -a zsh_configs=('config.zsh' 'powerlevel9k.zsh')
+declare -a zsh_configs=('config.zsh' 'powerlevel9k.zsh' 'alias.zsh')
 
 for config in "${zsh_configs[@]}"; do
 	if [[ -L "${zsh_custom_dir}/${config}" ]]; then

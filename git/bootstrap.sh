@@ -53,7 +53,7 @@ git config --global diff.tool.p4merge.path "$(command -v p4merge)"
 git config --global merge.tool p4merge
 git config --global mergetool.p4merge.path "$(command -v p4merge)"
 
-# git config --global mergetool.keepBackup false
+git config --global mergetool.keepBackup false
 
 echo ''
 exit 0
