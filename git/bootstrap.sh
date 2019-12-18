@@ -7,8 +7,16 @@ set -o pipefail
 [[ ${DEBUG:-false} == true ]] && set -o xtrace
 
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+__cur_dir=$(pwd)
+
+# shellcheck disable=SC1090
+[[ $(command -v k_custom_lib_loaded) ]] || source "${__dir}/../shell/lib.sh"
+
+cd "${__dir}/.."
 
 python -m git.update-ssh-key
+
+cd "${__cur_dir}"
 
 status "${BASH_SOURCE[0]} | ..."
 
@@ -36,6 +44,16 @@ if [[ $(echo ${github_fingerprint} | grep -e 'SHA256:nThbg6kXUpJWGl7E1IGOCspRomT
 else
 	error "could not verify fingerprint" 1
 fi
+
+typed_message 'CONFIG' "Configure git globally"
+
+git config --global diff.tool p4merge
+git config --global diff.tool.p4merge.path "$(command -v p4merge)"
+
+git config --global merge.tool p4merge
+git config --global mergetool.p4merge.path "$(command -v p4merge)"
+
+git config --global mergetool.keepBackup false
 
 echo ''
 exit 0

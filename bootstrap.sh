@@ -105,6 +105,7 @@ sh -c "${__dir}/system/bootstrap.sh"
 sh -c "${__dir}/git/bootstrap.sh"
 sh -c "${__dir}/jetbrains/bootstrap.sh"
 sh -c "${__dir}/vim/bootstrap.sh"
+sh -c "${__dir}/shell/bootstrap.sh"
 
 typed_message 'CLEANUP' "removing env vars"
 
