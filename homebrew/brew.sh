@@ -84,6 +84,10 @@ brew install hub
 
 brew install mongodb-community
 
+brew install cloudfoundry/tap/cf-cli
+
+brew install rabbitmq
+
 # taps
 brew tap homebrew/cask-fonts
 # brew tap sambadevi/powerlevel9k
