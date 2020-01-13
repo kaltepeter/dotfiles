@@ -109,6 +109,7 @@ cask_list=(
   'google-chrome'
   'gitkraken'
   'jetbrains-toolbox'
+  'ngrok'
   'p4v'
   'postman'
   'slack'
