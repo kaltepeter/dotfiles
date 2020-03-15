@@ -24,7 +24,7 @@ if [[ $(uname -s) == "Darwin" ]]; then
 
   # sed -i' ' "s/myemail@example.com/${jetbrains_login}/g" "${settings_file}"
   java_prefs_plist="${HOME}/Library/Preferences/com.apple.java.util.prefs.plist"
-  jetbrains_userid="/usr/libexec/PlistBuddy -c \"Print :/:jetbrains/:jetprofile/:userid\" \"${java_prefs_plist}\""
+  jetbrains_userid=$(/usr/libexec/PlistBuddy -c "Print :/:jetbrains/:jetprofile/:userid" "${java_prefs_plist}")
 
   if [[ ! $(jetbrains_userid) ]]; then
     typed_message 'CREATE' "configs for jetbrains toolbox"
