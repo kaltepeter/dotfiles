@@ -90,7 +90,7 @@ for item in ${vscode_extensions_installed[*]}; do
   # maintain list of installs, uninstall extension if not in new list
   if [[ ! $(echo "${vscode_extensions[@]}" | grep -o "${item}") ]]; then
     typed_message 'CLEANUP' "Uninstalling ${item}"
-    code --uninstall-extension "${item}" | tee -a "${log_file}"
+   # code --uninstall-extension "${item}" | tee -a "${log_file}"
   fi
 done
 
