@@ -237,7 +237,6 @@ defaults write com.apple.dock static-only -bool true
   # Kill affected applications                                                  #
   ###############################################################################
 
-    # "Calendar" \
     # "Contacts" \
     # "Google Chrome Canary" \
     # "Google Chrome" \
@@ -251,13 +250,13 @@ defaults write com.apple.dock static-only -bool true
     # "Twitter" \
     for app in "Activity Monitor" \
     "Brave Browser" \
+    "Calendar" \
     "cfprefsd" \
     "Dock" \
     "Finder" \
     "Photos" \
     "Safari" \
-    "SystemUIServer" \
-    "iCal"; do
+    "SystemUIServer"; do
       killall "${app}" &> /dev/null || true
     done
     echo "Done. Note that some of these changes require a logout/restart to take effect."
