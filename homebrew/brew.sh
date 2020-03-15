@@ -88,6 +88,8 @@ brew install cloudfoundry/tap/cf-cli
 
 brew install rabbitmq
 
+brew install azure-cli
+
 # taps
 brew tap homebrew/cask-fonts
 # brew tap sambadevi/powerlevel9k
