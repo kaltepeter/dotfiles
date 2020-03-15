@@ -95,6 +95,8 @@ brew install rabbitmq
 
 brew install azure-cli
 
+brew install gnupg
+
 # theme
 # brew install powerlevel9k
 

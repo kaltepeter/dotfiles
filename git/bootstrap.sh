@@ -45,6 +45,22 @@ else
 	error "could not verify fingerprint" 1
 fi
 
+typed_message 'CONFIG' "Adding gpg keys"
+
+gpg --list-secret-keys --keyid-format LONG
+read -r -e -i "n" -p "Do you need to generate a gpg key? [y|n] (default n):" generate_gpg_key
+
+if [[ "${generate_gpg_key}" == 'y' ]]; then
+  gpg --full-generate-key
+fi
+
+gpg --list-secret-keys --keyid-format LONG
+read -r -p 'Enter ID of gpg key for github: ' github_gpg
+git config --global user.signingkey "${github_gpg}"
+git config --global commit.gpgsign true
+typed_message 'INFO' 'Download gpg tools'
+open 'https://gpgtools.org/'
+
 typed_message 'CONFIG' "Configure git globally"
 
 git config --global diff.tool p4merge
@@ -54,6 +70,12 @@ git config --global merge.tool p4merge
 git config --global mergetool.p4merge.path "$(command -v p4merge)"
 
 git config --global mergetool.keepBackup false
+
+read -r -p "github user full name: " github_user_name
+git config --global user.name "${github_user_name}"
+read -r -p "github email: " github_email
+git config --global user.email "${github_email}"
+
 
 echo ''
 exit 0
