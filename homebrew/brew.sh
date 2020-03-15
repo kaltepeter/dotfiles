@@ -63,6 +63,11 @@ if ! grep -Fq "${BREW_PREFIX}/bin/zsh" /etc/shells; then
   chsh -s "${BREW_PREFIX}/bin/zsh"
 fi
 
+# taps
+brew tap homebrew/cask-fonts
+# brew tap sambadevi/powerlevel9k
+brew tap mongodb/brew
+
 # Install other useful binaries.
 brew install git
 brew install git-lfs
@@ -89,11 +94,6 @@ brew install cloudfoundry/tap/cf-cli
 brew install rabbitmq
 
 brew install azure-cli
-
-# taps
-brew tap homebrew/cask-fonts
-# brew tap sambadevi/powerlevel9k
-brew tap mongodb/brew
 
 # theme
 # brew install powerlevel9k
