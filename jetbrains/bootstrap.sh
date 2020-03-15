@@ -32,11 +32,11 @@ if [[ $(uname -s) == "Darwin" ]]; then
 
     # Login to jetbrains
     # /usr/libexec/PlistBuddy -c "Set :/:jetbrains/:jetprofile/:userid myuser" "${java_prefs_plist}"
-    open -a "JetBrains Toolbox"
+    open -a "Jetbrains Toolbox"
     read -r -p "login to jetbrains toolbox and press [enter] to continue"
     [[ -z "${jetbrains_userid}" ]] && error 'failed to loging to jetbrains toolbox' 1
   else
-    open -a "JetBrains Toolbox"
+    open -a "Jetbrains Toolbox"
     typed_message 'SKIP' 'already logged into jetbrains toolbox'
   fi
 
