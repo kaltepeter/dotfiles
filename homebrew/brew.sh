@@ -106,6 +106,7 @@ cask_list=(
   'brave-browser'
   'charles'
   'docker'
+  'evernote'
   'font-firacode-nerd-font'
   'font-firacode-nerd-font-mono'
   'font-hack-nerd-font'
