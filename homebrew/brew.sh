@@ -68,6 +68,9 @@ brew tap homebrew/cask-fonts
 # brew tap sambadevi/powerlevel9k
 brew tap mongodb/brew
 
+brew install ffmpeg
+brew install gifsicle
+
 # Install other useful binaries.
 brew install git
 brew install git-lfs
@@ -124,6 +127,7 @@ cask_list=(
   'virtualbox-extension-pack'
   'visual-studio-code'
   'wireshark'
+  'xquartz' #dependency for gifsicle, only required for mountain-lion and above
 )
 for item in ${cask_list[*]}; do
   if [[ $(echo "${cask_list_installed[@]}" | grep -o "${item}") ]]; then
@@ -141,6 +145,9 @@ for item in ${cask_list[*]}; do
     brew cask install "${item}"
   fi
 done
+
+# wrap up ffmpeg setup: https://gist.github.com/dergachev/4627207
+open "$(command -v XQuartz)" # runs the XQuartz installer (YOU NEED TO UPDATE THE PATH)
 
 # Remove outdated versions from the cellar.
 brew cleanup | tee -a "${log_file}"
