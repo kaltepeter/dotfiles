@@ -9,3 +9,4 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH=$PATH:/usr/local/opt/rabbitmq/sbin
 export PATH="/usr/local/sbin:$PATH"
+export TIMEFMT='%J %U user %S system %P cpu %*E total max RSS %M'
