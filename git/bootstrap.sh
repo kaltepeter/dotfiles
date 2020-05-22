@@ -76,6 +76,7 @@ git config --global user.name "${github_user_name}"
 read -r -p "github email: " github_email
 git config --global user.email "${github_email}"
 
+git config --global pager.branch false
 
 echo ''
 exit 0
