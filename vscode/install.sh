@@ -18,72 +18,78 @@ log_file="${log_file:-/dev/null}"
 
 vscode_extensions_installed=( $(code --list-extensions) )
 vscode_extensions=( \
-  Equinusocio.vsc-material-theme \
-  TobiasTimm.raiju \
-  Tyriar.theme-sapphire \
+  1tontech.angular-material \
   ahmadawais.shades-of-purple \
-  johnpapa.vscode-peacock \
-  CoenraadS.bracket-pair-colorizer-2 \
-  k--kato.intellij-idea-keybindings \
-  misogi.ruby-rubocop \
-  DavidAnson.vscode-markdownlint \
-  ms-vscode.vscode-typescript-tslint-plugin \
-  timonwong.shellcheck \
-  dbaeumer.vscode-eslint \
-  foxundermoon.shell-format \
-  EditorConfig.EditorConfig \
-  darkriszty.markdown-table-prettify \
-  miclo.sort-typescript-imports \
-  esbenp.prettier-vscode \
-  eamodio.gitlens \
-  codezombiech.gitignore \
-  donjayamanne.githistory \
-  GitHub.vscode-pull-request-github \
-  rebornix.ruby \
   alexkrechik.cucumberautocomplete \
-  ms-python.python \
-  ms-azuretools.vscode-docker \
-  narekmal.vscode-run-git-difftool \
+  Angular.ng-template \
   bbenoist.vagrant \
-  stpn.vscode-graphql \
-  joaompinto.asciidoctor-vscode \
+  bengreenier.vscode-node-readme \
+  bierner.markdown-preview-github-styles \
+  buenon.scratchpads \
+  burkeholland.simple-react-snippets \
+  ChakrounAnas.turbo-console-log \
+  codezombiech.gitignore \
+  CoenraadS.bracket-pair-colorizer-2 \
+  darkriszty.markdown-table-prettify \
+  DavidAnson.vscode-markdownlint \
+  dbaeumer.vscode-eslint \
+  donjayamanne.githistory \
   DotJoshJohnson.xml \
+  eamodio.gitlens \
+  EditorConfig.EditorConfig \
+  emilast.LogFileHighlighter \
+  Equinusocio.vsc-material-theme \
+  esbenp.prettier-vscode \
+  foxundermoon.shell-format \
+  gioboa.jira-plugin \
+  GitHub.vscode-pull-request-github \
+  HaaLeo.timing \
+  hbenl.vscode-jasmine-test-adapter \
+  hbenl.vscode-test-explorer \
+  iciclesoft.workspacesort \
+  jmMeessen.jenkins-declarative-support \
+  joaompinto.asciidoctor-vscode \
+  johnpapa.vscode-peacock \
   jpogran.puppet-vscode \
+  k--kato.intellij-idea-keybindings \
+  miclo.sort-typescript-imports \
+  mikestead.dotenv \
+  misogi.ruby-rubocop \
+  ms-azuretools.vscode-azurefunctions \
+  ms-azuretools.vscode-docker \
+  ms-mssql.mssql \
+  ms-python.python \
+  ms-vscode.azure-account \
   ms-vscode.cpptools \
   ms-vscode.powershell \
-  mikestead.dotenv \
-  RandomChance.logstash \
-  redhat.vscode-yaml \
-  bengreenier.vscode-node-readme \
-  Angular.ng-template \
-  william-voyek.vscode-nginx \
-  Pivotal.vscode-manifest-yaml \
-  emilast.LogFileHighlighter \
-  jmMeessen.jenkins-declarative-support \
-  ms-mssql.mssql \
-  naco-siren.gradle-language \
-  npclaudiu.vscode-gn \
-  xyz.plsql-language \
-  burkeholland.simple-react-snippets \
-  hbenl.vscode-test-explorer \
-  raagh.angular-karma-test-explorer \
-  hbenl.vscode-jasmine-test-adapter \
-  rtbenfield.vscode-jest-test-adapter \
-  Orta.vscode-jest \
-  msjsdiag.debugger-for-chrome \
-  ChakrounAnas.turbo-console-log \
-  nrwl.angular-console \
-  HaaLeo.timing \
-  buenon.scratchpads \
-  WallabyJs.quokka-vscode \
-  iciclesoft.workspacesort \
-  streetsidesoftware.code-spell-checker \
-  tht13.html-preview-vscode \
-  bierner.markdown-preview-github-styles \
-  gioboa.jira-plugin \
-  # gayanhewa.local-history \
+  ms-vscode.vscode-typescript-tslint-plugin \
+  ms-vsliveshare.vsliveshare \
   ms-vsliveshare.vsliveshare-pack \
+  msjsdiag.debugger-for-chrome \
+  naco-siren.gradle-language \
+  narekmal.vscode-run-git-difftool \
+  npclaudiu.vscode-gn \
+  nrwl.angular-console \
+  Orta.vscode-jest \
+  Pivotal.vscode-manifest-yaml \
+  raagh.angular-karma-test-explorer \
+  RandomChance.logstash \
+  rebornix.ruby \
+  redhat.vscode-yaml \
+  rtbenfield.vscode-jest-test-adapter \
   ryu1kn.partial-diff \
+  stpn.vscode-graphql \
+  streetsidesoftware.code-spell-checker \
+  svelte.svelte-vscode \
+  tht13.html-preview-vscode \
+  timonwong.shellcheck \
+  TobiasTimm.raiju \
+  Tyriar.sort-lines \
+  Tyriar.theme-sapphire \
+  WallabyJs.quokka-vscode \
+  william-voyek.vscode-nginx \
+  wingrunr21.vscode-ruby \
+  xyz.plsql-language \
 )
 
 for item in ${vscode_extensions_installed[*]}; do
