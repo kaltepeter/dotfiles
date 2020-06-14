@@ -52,6 +52,7 @@ vscode_extensions=( \
   johnpapa.vscode-peacock \
   jpogran.puppet-vscode \
   k--kato.intellij-idea-keybindings \
+  kavod-io.vscode-jest-test-adapter \
   miclo.sort-typescript-imports \
   mikestead.dotenv \
   misogi.ruby-rubocop \
@@ -76,7 +77,6 @@ vscode_extensions=( \
   RandomChance.logstash \
   rebornix.ruby \
   redhat.vscode-yaml \
-  rtbenfield.vscode-jest-test-adapter \
   ryu1kn.partial-diff \
   stpn.vscode-graphql \
   streetsidesoftware.code-spell-checker \
