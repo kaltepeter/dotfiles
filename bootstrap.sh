@@ -88,9 +88,12 @@ fi
 echo ''
 
 # export for child shells
-export log_file
 export email
 export hostname
+export pw
+export machineuser
+export username
+export log_file
 export apple_store_user
 export apple_store_pw
 

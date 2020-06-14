@@ -13,3 +13,5 @@ jetbrains/.settings.json
 terminal/modified_themes/*
 .idea
 .DS_Store
+
+0-vars.zsh

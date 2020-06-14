@@ -37,7 +37,7 @@ for theme in "${zsh_themes[@]}"; do
   fi
 done
 
-declare -a zsh_configs=('config.zsh' 'powerlevel9k.zsh' 'alias.zsh')
+declare -a zsh_configs=('0-vars.zsh' 'config.zsh' 'powerlevel9k.zsh' 'alias.zsh')
 
 for config in "${zsh_configs[@]}"; do
 	if [[ -L "${zsh_custom_dir}/${config}" ]]; then
@@ -48,6 +48,12 @@ for config in "${zsh_configs[@]}"; do
 		ln -s "${__dir}/${config}" "${zsh_custom_dir}/"
 	fi
 done
+
+export log_file
+
+sh -c "${__dir}/configure-vars.zsh"
+
+unset log_file
 
 echo ''
 exit 0
