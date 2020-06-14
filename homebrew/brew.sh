@@ -67,6 +67,7 @@ fi
 brew tap homebrew/cask-fonts
 # brew tap sambadevi/powerlevel9k
 brew tap mongodb/brew
+brew tap azure/functions
 
 brew install ffmpeg
 brew install gifsicle
@@ -99,6 +100,8 @@ brew install rabbitmq
 brew install azure-cli
 
 brew install gnupg
+
+brew install azure-functions-core-tools@3
 
 # theme
 # brew install powerlevel9k
