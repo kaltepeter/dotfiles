@@ -118,6 +118,7 @@ cask_list=(
   'gitkraken'
   'jetbrains-toolbox'
   'ngrok'
+  'numi'
   'p4v'
   'postman'
   'slack'
