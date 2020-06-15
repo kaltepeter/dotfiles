@@ -63,6 +63,9 @@ open 'https://gpgtools.org/'
 
 typed_message 'CONFIG' "Configure git globally"
 
+# https://codeinthehole.com/guides/resolving-conflicts-during-a-git-rebase/
+git config --global merge.conflictstyle diff3
+
 git config --global diff.tool p4merge
 git config --global diff.tool.p4merge.path "$(command -v p4merge)"
 
