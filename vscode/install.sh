@@ -28,6 +28,7 @@ vscode_extensions=( \
   buenon.scratchpads \
   burkeholland.simple-react-snippets \
   ChakrounAnas.turbo-console-log \
+  CodeStream.codestream \
   codezombiech.gitignore \
   CoenraadS.bracket-pair-colorizer-2 \
   darkriszty.markdown-table-prettify \
@@ -39,6 +40,7 @@ vscode_extensions=( \
   EditorConfig.EditorConfig \
   emilast.LogFileHighlighter \
   Equinusocio.vsc-material-theme \
+  equinusocio.vsc-material-theme-icons \
   esbenp.prettier-vscode \
   foxundermoon.shell-format \
   gioboa.jira-plugin \
