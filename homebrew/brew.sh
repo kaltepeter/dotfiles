@@ -12,20 +12,7 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 status "${BASH_SOURCE[0]} | ..."
 
-log_file="${log_file:-/dev/null}"
-
 # modified from: https://github.com/mathiasbynens/dotfiles/blob/master/brew.sh
-
-# Install command-line tools using Homebrew.
-
-# Make sure we’re using the latest Homebrew.
-brew update | tee -a "${log_file}"
-
-# Upgrade any already-installed formulae.
-brew upgrade | tee -a "${log_file}"
-
-# upgrade casks
-brew cask upgrade | tee -a "${log_file}"
 
 # Save Homebrew’s installed location.
 BREW_PREFIX=$(brew --prefix)
@@ -102,6 +89,8 @@ brew install azure-cli
 brew install gnupg
 
 brew install azure-functions-core-tools@3
+
+brew install git-secrets
 
 # theme
 # brew install powerlevel9k

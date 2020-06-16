@@ -108,7 +108,7 @@ update_brew () {
   # https://medium.com/@waxzce/keeping-macos-clean-this-is-my-osx-brew-update-cli-command-6c8f12dc1731
   brew update
   brew upgrade
-  brew cask upgrade
+  (brew cask upgrade >>"${log_file}" 2>&1) || true
   brew cleanup -s
   # brew cask cleanup
   # brew doctor always errors, not great
