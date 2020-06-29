@@ -86,7 +86,7 @@ brew install rabbitmq
 
 brew install azure-cli
 
-brew install gnupg
+brew install gnupg2
 
 brew install azure-functions-core-tools@3
 
@@ -98,6 +98,7 @@ brew install git-secrets
 # mac osc apps
 cask_list_installed=($(brew cask list))
 cask_list=(
+  'balenaetcher'
   'brave-browser'
   'charles'
   'docker'

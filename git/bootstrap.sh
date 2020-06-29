@@ -58,6 +58,7 @@ gpg --list-secret-keys --keyid-format LONG
 read -r -p 'Enter ID of gpg key for github: ' github_gpg
 git config --global user.signingkey "${github_gpg}"
 git config --global commit.gpgsign true
+git config --global gpg.program gpg2
 typed_message 'INFO' 'Download gpg tools'
 open 'https://gpgtools.org/'
 
