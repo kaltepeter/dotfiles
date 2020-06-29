@@ -92,6 +92,8 @@ brew install azure-functions-core-tools@3
 
 brew install git-secrets
 
+brew install derailed/k9s/k9s
+
 # theme
 # brew install powerlevel9k
 
