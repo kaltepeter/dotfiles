@@ -87,6 +87,8 @@ fi
 
 echo ''
 
+touch "${HOME}/.bash_profile"
+
 # export for child shells
 export email
 export hostname
@@ -109,6 +111,7 @@ sh -c "${__dir}/git/bootstrap.sh"
 sh -c "${__dir}/jetbrains/bootstrap.sh"
 sh -c "${__dir}/vim/bootstrap.sh"
 sh -c "${__dir}/shell/bootstrap.sh"
+sh -c "${__dir}/node/bootstrap.sh"
 
 typed_message 'CLEANUP' "removing env vars"
 

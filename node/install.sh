@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# node/bootstrap
+# node/install
 
 set -o nounset
 set -o errexit
@@ -14,15 +14,8 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 status "${BASH_SOURCE[0]} | ..."
 
-typed_message 'INSTALL' "node"
-# Doesn't work with bash and zsh. TODO: fix it
-nvm install node
-nvm install 12
-
-typed_message 'CONFIG' "Configure global node."
-# auto merge node lock files
-npx npm-merge-driver install --global
-npm i --global npm-merge-driver
+typed_message 'INSTALL' "nvm"
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 
 echo ""
 exit 0
