@@ -64,7 +64,27 @@ open 'https://gpgtools.org/'
 
 typed_message 'CONFIG' "Configure git globally"
 
+# https://apple.stackexchange.com/a/346038
 # https://codeinthehole.com/guides/resolving-conflicts-during-a-git-rebase/
+# [merge]
+#     tool = p4mergetool
+#     stat = true
+# [mergetool "p4mergetool"]
+#     cmd = /Applications/p4merge.app/Contents/MacOS/p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+#     keepBackup = false
+#     keepTemporaries = false
+#     trustExitCode = false
+#     prompt = false
+# [diff]
+#     tool = p4mergetool
+#     renames = copies
+#     mnemonicprefix = true
+# [difftool "p4mergetool"]
+#     cmd = /Applications/p4merge.app/Contents/MacOS/p4merge "$LOCAL" "$REMOTE"
+#     keepBackup = false
+#     keepTemporaries = false
+#     trustExitCode = false
+#     prompt = false
 git config --global merge.conflictstyle diff3
 
 git config --global diff.tool p4merge
