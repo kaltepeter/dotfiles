@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# google/install.sh
+#
+# ruby/install
+
 set -o nounset
 set -o errexit
 set -o pipefail
@@ -12,16 +14,18 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 status "${BASH_SOURCE[0]} | ..."
 
-if test ! "$(command -v gcloud)"; then
-  typed_message 'INSTALL' "gcloud"
-  curl https://sdk.cloud.google.com | bash
-  # shellcheck disable=SC2093
+# from: https://rvm.io/
+#
+# RVM ruby version manager
+
+if test ! "$(command -v rvm)"; then
+  typed_message 'INSTALL' "rvm"
+  gpg2 --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+  curl -sSL https://get.rvm.io | bash -s stable
   exec -l "$SHELL"
-  gcloud init
 else
-  typed_message 'SKIP' "glcloud already installed. Initializing"
-  typed_message 'INSTALL' "Updating gcloud components."
-  gcloud components update
+  typed_message 'SKIP' "rvm already installed."
+  rvm -v
 fi
 
 echo ''
