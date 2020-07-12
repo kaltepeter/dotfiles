@@ -31,5 +31,7 @@ if which pip3; then
   # source "${__dir}/bootstrap.sh"
 fi
 
+if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+
 echo ''
 exit 0

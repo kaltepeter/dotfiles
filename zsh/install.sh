@@ -55,5 +55,10 @@ sh -c "${__dir}/configure-vars.zsh"
 
 unset log_file
 
+# Oh-My-Zsh
+# typed_message 'CONFIG' "POETRY"
+# mkdir "${ZSH}/plugins/poetry"
+# poetry completions zsh > "${ZSH}/plugins/poetry/_poetry"
+
 echo ''
 exit 0

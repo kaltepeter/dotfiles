@@ -33,6 +33,7 @@ fi
 
 # install python deps
 brew install pyenv
+brew install pyenv-virtualenv
 
 # Install more recent versions of some macOS tools.
 brew install vim
