@@ -112,7 +112,8 @@ done
 
 for item in ${vscode_extensions[*]}; do
     typed_message 'INSTALL' "Installing ${item}"
-    # code --install-extension "${item}" | tee -a "${log_file}"
+    # TODO: this is slow do a diff on list and only install what is needed
+    code --install-extension "${item}" | tee -a "${log_file}"
 done
 
 # sync settings

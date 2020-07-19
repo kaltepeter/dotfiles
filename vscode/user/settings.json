@@ -33,5 +33,10 @@
     "reek": {
       "useBundler": true // enable reek via bundler
     }
+  },
+  "ruby.rubocop.onSave": true,
+  "ruby.rubocop.configFilePath": ".rubocop.yml",
+  "[ruby]": {
+    "editor.defaultFormatter": "misogi.ruby-rubocop"
   }
 }
