@@ -16,17 +16,20 @@ status "${BASH_SOURCE[0]} | ..."
 
 log_file="${log_file:-/dev/null}"
 
-vscode_extensions_installed=( $(code --list-extensions) )
+vscode_extensions_installed=()
+while IFS='' read -r line; do vscode_extensions_installed+=("$line"); done < <(code --list-extensions)
 vscode_extensions=( \
   1tontech.angular-material \
   ahmadawais.shades-of-purple \
   alexkrechik.cucumberautocomplete \
   Angular.ng-template \
+  asciidoctor.asciidoctor-vscode \
   bbenoist.vagrant \
   bengreenier.vscode-node-readme \
   bierner.markdown-preview-github-styles \
   buenon.scratchpads \
   burkeholland.simple-react-snippets \
+  castwide.solargraph \
   ChakrounAnas.turbo-console-log \
   CodeStream.codestream \
   codezombiech.gitignore \
@@ -45,6 +48,7 @@ vscode_extensions=( \
   foxundermoon.shell-format \
   gioboa.jira-plugin \
   GitHub.vscode-pull-request-github \
+  groksrc.ruby \
   HaaLeo.timing \
   hbenl.vscode-jasmine-test-adapter \
   hbenl.vscode-test-explorer \
@@ -62,6 +66,11 @@ vscode_extensions=( \
   ms-azuretools.vscode-docker \
   ms-mssql.mssql \
   ms-python.python \
+  ms-vscode-remote.remote-containers \
+  ms-vscode-remote.remote-ssh \
+  ms-vscode-remote.remote-ssh-edit \
+  ms-vscode-remote.remote-wsl \
+  ms-vscode-remote.vscode-remote-extensionpack \
   ms-vscode.azure-account \
   ms-vscode.cpptools \
   ms-vscode.powershell \
@@ -96,15 +105,21 @@ vscode_extensions=( \
 
 for item in ${vscode_extensions_installed[*]}; do
   # maintain list of installs, uninstall extension if not in new list
-  if [[ ! $(echo "${vscode_extensions[@]}" | grep -o "${item}") ]]; then
+  if ! echo "${vscode_extensions[@]}" | grep -q -o "${item}"; then
     typed_message 'CLEANUP' "Uninstalling ${item}"
-   # code --uninstall-extension "${item}" | tee -a "${log_file}"
   fi
 done
 
 for item in ${vscode_extensions[*]}; do
     typed_message 'INSTALL' "Installing ${item}"
-    code --install-extension "${item}" | tee -a "${log_file}"
+    # code --install-extension "${item}" | tee -a "${log_file}"
+done
+
+# sync settings
+vscode_user_settings="${HOME}/Library/Application Support/Code/User"
+ln -snf "${__dir}/user/settings.json" "${vscode_user_settings}/settings.json"
+for item in "${__dir}"/user/snippets/*; do
+  ln -snf "${item}" "${vscode_user_settings}/snippets/"
 done
 
 echo ''

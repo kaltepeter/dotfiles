@@ -112,6 +112,7 @@ sh -c "${__dir}/jetbrains/bootstrap.sh"
 sh -c "${__dir}/vim/bootstrap.sh"
 sh -c "${__dir}/shell/bootstrap.sh"
 sh -c "${__dir}/node/bootstrap.sh"
+sh -c "${__dir}/ruby/bootstrap.sh"
 
 typed_message 'CLEANUP' "removing env vars"
 
