@@ -101,6 +101,7 @@ vscode_extensions=( \
   william-voyek.vscode-nginx \
   wingrunr21.vscode-ruby \
   xyz.plsql-language \
+  vsciot-vscode.vscode-arduino \
 )
 
 for item in ${vscode_extensions_installed[*]}; do
