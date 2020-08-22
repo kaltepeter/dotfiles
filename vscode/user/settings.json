@@ -7,7 +7,7 @@
   },
   "editor.fontSize": 14,
   "terminal.integrated.fontSize": 14,
-  "window.zoomLevel": 0,
+  "window.zoomLevel": 2,
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -38,5 +38,6 @@
   "ruby.rubocop.configFilePath": ".rubocop.yml",
   "[ruby]": {
     "editor.defaultFormatter": "misogi.ruby-rubocop"
-  }
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always"
 }
