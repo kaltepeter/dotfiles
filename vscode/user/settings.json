@@ -7,7 +7,7 @@
   },
   "editor.fontSize": 14,
   "terminal.integrated.fontSize": 14,
-  "window.zoomLevel": 2,
+  "window.zoomLevel": 0,
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -19,7 +19,7 @@
   },
   "editor.multiCursorModifier": "alt",
   "editor.columnSelection": false,
-  "workbench.colorTheme": "Shades of Purple",
+  "workbench.colorTheme": "Raijū",
   "azureFunctions.pythonVenv": "env",
   "ruby.codeCompletion": "rcodetools",
   "ruby.format": "rubocop",
@@ -39,5 +39,9 @@
   "[ruby]": {
     "editor.defaultFormatter": "misogi.ruby-rubocop"
   },
-  "typescript.updateImportsOnFileMove.enabled": "always"
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
