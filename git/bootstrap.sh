@@ -94,6 +94,7 @@ git config --global merge.tool p4merge
 git config --global mergetool.p4merge.path "$(command -v p4merge)"
 
 git config --global mergetool.keepBackup false
+git config --global pull.ff only
 
 read -r -p "github user full name: " github_user_name
 git config --global user.name "${github_user_name}"
