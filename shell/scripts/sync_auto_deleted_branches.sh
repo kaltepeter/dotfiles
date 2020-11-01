@@ -29,11 +29,12 @@ while read -r line; do
       # SKIP branches that are ahead of tracking branch
       if echo "${branch_status}" | grep -q 'ahead'; then
         echo "Brach is ahead of tracking branch. SKIPPING"
+        # could allow force for rebase/squash
       else
         # safe to delete, not ahead, on fork
         read -r -p "Delete local branch: ${branch_name}(y/n)" should_delete </dev/tty
         if [[ "${should_delete,,}" == "y" ]]; then
-          echo "Should delete: ${branch_name}"
+          git branch -d "${branch_name}"
         fi
       fi
     fi
