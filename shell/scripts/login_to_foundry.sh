@@ -35,9 +35,15 @@ while getopts ":h" opt; do
 done
 
 shift $(( OPTIND -1 ))
-[[ -z "${1:-}" ]] && error 'targetEnv required. use devg or devb' 1
+[[ -z "${1:-}" ]] && error 'targetEnv required. use devg or devb, prodg or prodb' 1
+declare region="${2:-us2}"
+
 declare targetEnv="${1}"
 username="$(whoami)"
 
-cf api "api.sys.us2.${targetEnv}.foundry.mrll.com"
-cf login -u "${username}" -o us2-datasiteone -s "${targetEnv}"
+if [[ "${targetEnv}" =~ "prod" ]]; then
+  username="${username}-a"
+fi
+
+cf api "api.sys.${region}.${targetEnv}.foundry.mrll.com"
+cf login -u "${username}" -o "${region}-datasiteone" -s "${targetEnv}"
