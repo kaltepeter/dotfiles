@@ -7,7 +7,6 @@
   },
   "editor.fontSize": 14,
   "terminal.integrated.fontSize": 14,
-  "window.zoomLevel": 0,
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -18,8 +17,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.multiCursorModifier": "alt",
-  "editor.columnSelection": false,
-  "workbench.colorTheme": "Raijū",
+  "workbench.colorTheme": "Shades of Purple",
   "azureFunctions.pythonVenv": "env",
   "ruby.codeCompletion": "rcodetools",
   "ruby.format": "rubocop",
@@ -34,14 +32,42 @@
       "useBundler": true // enable reek via bundler
     }
   },
-  "ruby.rubocop.onSave": true,
-  "ruby.rubocop.configFilePath": ".rubocop.yml",
-  "[ruby]": {
-    "editor.defaultFormatter": "misogi.ruby-rubocop"
-  },
   "typescript.updateImportsOnFileMove.enabled": "always",
   "javascript.updateImportsOnFileMove.enabled": "always",
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "cSpell.userWords": ["octokit"],
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "prettier.configPath": ".prettierrc",
+  "redhat.telemetry.enabled": false,
+  "[ruby]": {
+    "editor.defaultFormatter": "rebornix.ruby"
+  },
+  "solargraph.bundlerPath": "~/.rvm/gems/ruby-2.7.4@recipes/bin",
+  "ruby.pathToBundler": "~/.rvm/gems/ruby-2.7.4@recipes/bin/bundle",
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "mssql.connections": [
+    {
+      "server": "{{put-server-name-here}}",
+      "database": "{{put-database-name-here}}",
+      "user": "{{put-username-here}}",
+      "password": "{{put-password-here}}"
+    }
+  ],
+  "go.toolsManagement.autoUpdate": true,
+  "cmake.configureOnOpen": true,
+  "window.zoomLevel": 2,
+  "[markdown]": {
+    "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   }
 }
