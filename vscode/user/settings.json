@@ -63,11 +63,11 @@
   ],
   "go.toolsManagement.autoUpdate": true,
   "cmake.configureOnOpen": true,
-  "window.zoomLevel": 2,
   "[markdown]": {
     "editor.defaultFormatter": "DavidAnson.vscode-markdownlint"
   },
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-  }
+  },
+  "window.zoomLevel": 2
 }

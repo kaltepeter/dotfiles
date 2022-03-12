@@ -1,5 +1,8 @@
+#!/usr/bin/env zsh
 # shellcheck disable=SC2148
 # config.zsh
+EMOJI=(🤸 🏂 🏍️ 🥋 🦘 🚴 🧘 🧩 ⌨️ 👩‍🔬)
+local custom_emoji="'$EMOJI[$RANDOM%$#EMOJI+1]'"
 export TERM="xterm-256color"
 POWERLEVEL9K_MODE="nerdfont-complete"
 #POWERLEVEL9K_COLOR_SCHEME="light"
@@ -19,8 +22,9 @@ POWERLEVEL9K_SUDO_ICON=$'\uF09C'
 #POWERLEVEL9K_SHOW_CHANGESET=true
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_emoji context dir vcs custom_wip)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs
-command_execution_time)
-POWERLEVEL9K_CUSTOM_EMOJI="echo '\uf2dc'"
+  command_execution_time)
+POWERLEVEL9K_CUSTOM_EMOJI="echo -n ${custom_emoji}"
+#POWERLEVEL9K_CUSTOM_EMOJI="echo '\uf2dc'"
 POWERLEVEL9K_CUSTOM_EMOJI_BACKGROUND="clear"
 POWERLEVEL9K_CUSTOM_EMOJI_FOREGROUND="blue"
 POWERLEVEL9K_CUSTOM_WIP="work_in_progress | awk '{print $1}'"
