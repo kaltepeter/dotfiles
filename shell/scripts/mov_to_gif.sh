@@ -6,9 +6,9 @@ set -o pipefail
 
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-error () {
-    echo "Error: $1"
-    exit "$2"
+error() {
+  echo "Error: $1"
+  exit "$2"
 } >&2
 
 # https://engineering.giphy.com/how-to-make-gifs-with-ffmpeg/
@@ -20,7 +20,7 @@ default_out_path="${HOME}/Documents/gifs"
 [[ -d "${default_out_path}" ]] || mkdir "${default_out_path}"
 
 [[ -z "${1:-}" ]] && error "Must provide .mov input file as first argument, assumes path is in ${icloud_quicktime_path}." 1
-mov_input="${icloud_quicktime_path}/${1}"
+mov_input="${1}"
 gif_output="${1/%mov/gif}"
 
 fps="${2:-10}"
