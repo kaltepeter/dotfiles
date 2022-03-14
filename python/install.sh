@@ -26,12 +26,12 @@ pyenv version
 if which pip3; then
   typed_message 'INSTALL' "installing global pip packages ..."
   # pip3 install termcolor
-  pip3 install pylint
-  pip3 install pep8
+  # pip3 install pylint
+  # pip3 install pep8
   # source "${__dir}/bootstrap.sh"
 fi
 
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+# if which pyenv-virtualenv-init >/dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
 echo ''
 exit 0
