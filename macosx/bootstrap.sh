@@ -25,7 +25,7 @@ if [[ $(uname -s) == "Darwin" ]]; then
   else
     typed_message 'SKIP' "Already signed in to apple store as $(mas account)."
     typed_message 'INSTALL' "Installing apple store software."
-    mas install 497799835 # Xcode
-    sudo xcodebuild -license accept
+    # mas install 497799835 # Xcode
+    # sudo xcodebuild -license accept
   fi
 fi
