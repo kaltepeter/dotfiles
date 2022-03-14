@@ -7,11 +7,11 @@ set -o nounset
 log_file="${log_file:-/dev/null}"
 
 usage() {
-	cat <<END
+  cat <<END
 Overwrite usage function in shell script to provide help.
 Make sure you put the function after the library load.
 END
-	exit 1
+  exit 1
 }
 
 #######################################
@@ -29,21 +29,21 @@ get_colorized_prefix() {
   declare color_start
   color_end=$'\e[39m'
   case "${1}" in
-    SKIP)
-      color_start=$'\e[93m'
-      ;;
-    FAIL)
-      color_start=$'\e[31m'
-      ;;
-    CLEANUP)
-      color_start=$'\e[94m'
-      ;;
-    CONFIG|INSTALL)
-      color_start=$'\e[92m'
-      ;;
-    *)
-      color_start=$'\e[37m'
-      ;;
+  SKIP)
+    color_start=$'\e[93m'
+    ;;
+  FAIL)
+    color_start=$'\e[31m'
+    ;;
+  CLEANUP)
+    color_start=$'\e[94m'
+    ;;
+  CONFIG | INSTALL)
+    color_start=$'\e[92m'
+    ;;
+  *)
+    color_start=$'\e[37m'
+    ;;
   esac
   echo "${color_start}[${1}]${color_end} ..."
 }
@@ -57,14 +57,13 @@ get_colorized_prefix() {
 # Returns:
 #   None
 #######################################
-error () {
+error() {
   echo -e "\e[31mError: ${1}\e[39m" | tee -a "${log_file}"
   echo '' | tee -a "${log_file}"
   usage
   echo ''
   exit "${2}"
 } >&2
-
 
 #######################################
 # Print status message
@@ -73,11 +72,11 @@ error () {
 # Returns:
 #   None
 #######################################
-status () {
+status() {
   echo -e "\e[36m'${1}'\e[39m" | tee -a "${log_file}"
 } >&1
 
-date_header () {
+date_header() {
   echo '' | tee -a "${log_file}"
   echo $(date) | tee -a "${log_file}"
   echo '' | tee -a "${log_file}"
@@ -93,8 +92,8 @@ date_header () {
 #   Formatted message
 #            [SKIP] ... My message
 #######################################
-typed_message () {
-   printf '%*s %s\n' 26 "$(get_colorized_prefix $1)" "${2}" | tee -a "${log_file}"
+typed_message() {
+  printf '%*s %s\n' 26 "$(get_colorized_prefix $1)" "${2}" | tee -a "${log_file}"
 }
 
 #######################################
@@ -104,19 +103,19 @@ typed_message () {
 # Returns:
 #   None
 #######################################
-update_brew () {
+update_brew() {
   # https://medium.com/@waxzce/keeping-macos-clean-this-is-my-osx-brew-update-cli-command-6c8f12dc1731
   brew update
   brew upgrade
-  (brew cask upgrade >>"${log_file}" 2>&1) || true
+  # (brew cask upgrade >>"${log_file}" 2>&1) || true
   brew cleanup -s
   # brew cask cleanup
   # brew doctor always errors, not great
   typed_message 'VERIFY' "Check 'brew doctor' output in log for issues."
   (brew doctor >>"${log_file}" 2>&1) || true
   brew missing | tee -a "${log_file}"
-  echo "" | tee -a "${log_file}"
-  brew cask doctor 1>> "${log_file}"
+  # echo "" | tee -a "${log_file}"
+  # brew cask doctor 1>>"${log_file}"
   echo "" | tee -a "${log_file}"
 }
 

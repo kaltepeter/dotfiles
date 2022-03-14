@@ -99,7 +99,7 @@ brew install derailed/k9s/k9s
 # brew install powerlevel9k
 
 # mac osc apps
-cask_list_installed=($(brew cask list))
+cask_list_installed=($(brew list --cask))
 cask_list=(
   'balenaetcher'
   'brave-browser'
@@ -139,7 +139,7 @@ for item in ${cask_list[*]}; do
       osascript "${__dir}/../macosx/script/show_security_settings.applescript"
       read -p "If the security window needs approval, wait for the preferences to load and approve. [enter] to contine."
     fi
-    brew cask install "${item}"
+    brew install --cask "${item}"
   fi
 done
 
