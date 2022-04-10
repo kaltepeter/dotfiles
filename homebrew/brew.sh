@@ -17,33 +17,11 @@ status "${BASH_SOURCE[0]} | ..."
 # Save Homebrew’s installed location.
 BREW_PREFIX=$(brew --prefix)
 
-# Install GNU core utilities (those that come with macOS are outdated).
-# Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
-brew install coreutils
-
-# Install Bash 4.
-brew install bash
-brew install bash-completion2
-
 # Switch to using brew-installed bash as default shell
 if ! fgrep -q "${BREW_PREFIX}/bin/bash" /etc/shells; then
   echo "${BREW_PREFIX}/bin/bash" | sudo tee -a /etc/shells
 #  chsh -s "${BREW_PREFIX}/bin/bash";
 fi
-
-# install python deps
-brew install pyenv
-brew install pyenv-virtualenv
-
-# Install more recent versions of some macOS tools.
-brew install vim
-brew install grep
-brew install openssh
-brew install screen
-
-# install zsh
-brew install zsh
-brew install zsh-completions
 
 # Switch to using brew-installed zsh as default shell
 if ! grep -Fq "${BREW_PREFIX}/bin/zsh" /etc/shells; then
@@ -57,27 +35,11 @@ brew tap homebrew/cask-fonts
 brew tap mongodb/brew
 brew tap azure/functions
 
-brew install ffmpeg
-brew install gifsicle
-
-# Install other useful binaries.
-brew install git
-brew install git-lfs
-
-brew install openssl
-
 brew install docker
-
-# http proxy
-brew install mitmproxy
-
-brew install shellcheck
 
 brew install mas
 
 brew install node
-
-brew install hub
 
 brew install mongodb-community
 
@@ -87,13 +49,7 @@ brew install rabbitmq
 
 brew install azure-cli
 
-brew install gnupg2
-
 brew install azure-functions-core-tools@3
-
-brew install git-secrets
-
-brew install derailed/k9s/k9s
 
 # theme
 # brew install powerlevel9k

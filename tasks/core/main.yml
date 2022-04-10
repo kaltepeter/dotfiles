@@ -1,0 +1,26 @@
+---
+- name: Install Core Packages
+  package:
+    name:
+    # Install GNU core utilities (those that come with macOS are outdated).
+    # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
+    - coreutils
+    # Update latest bash
+    - bash
+    - bash-completion@2
+    - vim
+    - grep
+    - openssh
+    - zsh
+    - zsh-completions
+    - ffmpeg
+    - gifsicle
+    - git
+    - git-lfs
+    - openssl
+    - shellcheck
+    - gnupg
+    - k9s
+    - gh
+    - git-secrets
+    state: latest

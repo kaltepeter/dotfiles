@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  connection: local
+
+  tasks:
+  - name: Read machine hostname var
+    ansible.builtin.shell: hostname
+    register: machine_hostname
+  - set_fact: machine_hostname={{ machine_hostname.stdout }}
+  - include: tasks/core/main.yml
+    when: ansible_facts['os_family'] == "Darwin"
+
