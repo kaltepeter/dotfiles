@@ -1,0 +1,34 @@
+---
+- name: Add custom homebrew repos
+  community.general.homebrew_tap:
+    name: [
+      homebrew/cask-fonts
+    ]
+- name: Install core packages via brew casks
+  community.general.homebrew_cask:
+    name: "{{ item }}"
+  ignore_errors: yes
+  with_items:
+  - 1password
+  - balenaetcher
+  - brave-browser
+  - android-sdk
+  - android-studio
+  - dropbox
+  - figma
+  - font-fira-code-nerd-font
+  - font-fira-mono-nerd-font
+  - font-hack-nerd-font
+  - google-chrome
+  - iterm2
+  - jetbrains-toolbox
+  - kindle
+  - ngrok
+  - numi
+  - p4v
+  - postman
+  - slack
+  - visual-studio-code
+  - vmware-fusion
+  - xquartz # dependency for gifsicle, only required for mountain-lion and above
+  - zoom

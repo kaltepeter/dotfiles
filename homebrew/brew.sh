@@ -30,7 +30,6 @@ if ! grep -Fq "${BREW_PREFIX}/bin/zsh" /etc/shells; then
 fi
 
 # taps
-brew tap homebrew/cask-fonts
 # brew tap sambadevi/powerlevel9k
 brew tap mongodb/brew
 brew tap azure/functions
@@ -42,8 +41,6 @@ brew install mas
 brew install node
 
 brew install mongodb-community
-
-brew install cloudfoundry/tap/cf-cli
 
 brew install rabbitmq
 
@@ -57,28 +54,8 @@ brew install azure-functions-core-tools@3
 # mac osc apps
 cask_list_installed=($(brew list --cask))
 cask_list=(
-  'balenaetcher'
-  'brave-browser'
-  'charles'
-  'evernote'
-  'font-fira-code-nerd-font'
-  'font-fira-mono-nerd-font'
-  'font-hack-nerd-font'
-  'google-chrome'
-  'gitkraken'
-  'jetbrains-toolbox'
-  'ngrok'
-  'numi'
-  'p4v'
-  'postman'
-  'slack'
-  'studio-3t'
-  'sublime-text'
   'virtualbox'
   'virtualbox-extension-pack'
-  'visual-studio-code'
-  'wireshark'
-  'xquartz' #dependency for gifsicle, only required for mountain-lion and above
 )
 for item in ${cask_list[*]}; do
   if [[ $(echo "${cask_list_installed[@]}" | grep -o "${item}") ]]; then
