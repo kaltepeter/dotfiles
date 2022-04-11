@@ -8,5 +8,6 @@
     register: machine_hostname
   - set_fact: machine_hostname={{ machine_hostname.stdout }}
   - include: tasks/core/main.yml
+  - include: tasks/homebrew/main.yml
     when: ansible_facts['os_family'] == "Darwin"
 
