@@ -24,3 +24,25 @@
     - gh
     - git-secrets
     state: latest
+
+- name: Get the path to Bash
+  become: false
+  local_action: command which bash
+  register: bash_path
+
+- name: "Ensure homebrew bash is in allowed shells"
+  lineinfile:
+    path: /etc/shells
+    line: "{{ bash_path.stdout }}"
+  become: true
+
+- name: Get the path to ZSH
+  become: false
+  local_action: command which zsh
+  register: zsh_path
+
+- name: "Ensure homebrew zsh is in allowed shells"
+  lineinfile:
+    path: /etc/shells
+    line: "{{ zsh_path.stdout }}"
+  become: true
