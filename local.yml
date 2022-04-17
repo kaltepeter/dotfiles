@@ -1,13 +1,30 @@
 ---
 - hosts: localhost
   connection: local
-
+  vars:
+    downloads: "{{ansible_env.HOME}}/.ansible-downloads"
+    applications_dir: "/Applications"
+    mount_path: /Volumes
   tasks:
   - name: Read machine hostname var
     ansible.builtin.shell: hostname
     register: machine_hostname
   - set_fact: machine_hostname={{ machine_hostname.stdout }}
+  - name: Create Ansible downloads directory
+    file: path={{ downloads }} state=directory
+  - name: Setting installer source to "{{ downloads }}"
+    set_fact:
+      installer_source: "{{downloads}}"
   - include: tasks/core/main.yml
   - include: tasks/homebrew/main.yml
     when: ansible_facts['os_family'] == "Darwin"
+  - include: tasks/adobe/main.yml
+    when: ansible_facts['os_family'] == "Darwin"
+    with_items:
+    # - { name: "Adobe Creative Cloud", id: "LRCC", downloadName: "Lightroom", installerName: "Lightroom Installer", finalAppName: 'Adobe Creative Cloud' }
+    - { name: "Lightroom", id: "LRCC", downloadName: "Lightroom", installerName: "Lightroom Installer", finalAppName: 'Adobe Lightroom CC' }
+    - { name: "Acrobat DC", id: "APRO", downloadName: "Adobe Acrobat DC", installerName: "Acrobat DC Installer", finalAppName: 'Adobe Acrobat DC' }
+    - { name: "Photoshop", id: "PHSP", downloadName: "Photoshop", installerName: "Photoshop Installer", finalAppName: 'Adobe Photoshop 2022' }
+    loop_control:
+      loop_var: item
 

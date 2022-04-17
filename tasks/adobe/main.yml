@@ -1,0 +1,53 @@
+---
+- name: Already Installed
+  stat:
+    path: "{{ applications_dir }}/{{ item.finalAppName }}"
+  register: app_installed
+# https://github.com/tensult/mac-setup-playbooks for examples
+- name: Install Adobe Products
+  get_url:
+    url: https://prod-rel-ffc-ccm.oobesaas.adobe.com/adobe-ffc-external/core/v1/wam/download?sapCode={{ item.id }}&productName={{ item.name | urlencode }}&os=mac
+    dest: "{{ downloads }}/{{ item.downloadName }}.dmg"
+  when: not app_installed.stat.exists
+
+- name: Mount {{ item.name }} image
+  command: hdiutil attach "{{ downloads }}/{{ item.downloadName }}.dmg" chdir={{ downloads }} -mountpoint "{{ mount_path }}/{{ item.downloadName }}"
+  when: not app_installed.stat.exists
+
+- name: Changing installer source to {{ mount_path }}/{{ item.downloadName }}
+  set_fact: installer_source={{ mount_path }}/{{ item.downloadName }}
+  when: not app_installed.stat.exists
+
+- name: Run installers
+  command:
+    cmd: osascript "{{ playbook_dir }}/tasks/adobe/run_installers.applescript" "{{ item.installerName }}.app" "{{ item.downloadName }}"
+    creates: "{{ applications_dir }}/{{ item.finalAppName }}"
+  async: 600
+  poll: 0
+  register: adobe_sleeper
+  when: not app_installed.stat.exists
+
+# - name: Pause until the install is started.
+#   pause:
+#     prompt: Please confirm you want to exterminate mankind! Press return to continue. Press Ctrl+c and then "a" to abort
+
+- name: Check on an async task
+  async_status:
+    jid: "{{ adobe_sleeper.ansible_job_id }}"
+  register: job_result
+  until: job_result.finished
+  retries: 3
+  delay: 10
+  when: not app_installed.stat.exists
+
+- name: Wait until the app is installed
+  wait_for:
+    path: "{{ applications_dir }}/{{ item.finalAppName }}"
+
+
+- name: Unmount {{app_name}} image
+  command: hdiutil detach "{{ mount_path }}/{{ item.downloadName }}"
+  when: not app_installed.stat.exists
+
+- name: Changing installer source to {{ downloads }}
+  set_fact: installer_source={{ downloads }}
