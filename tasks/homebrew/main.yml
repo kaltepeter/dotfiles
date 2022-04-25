@@ -10,24 +10,35 @@
   ignore_errors: yes
   with_items:
   - 1password
-  - balenaetcher
-  - brave-browser
   - android-sdk
   - android-studio
+  - arduino
+  - balenaetcher
+  - brave-browser
+  - calibre
+  - discord
   - dropbox
   - figma
   - font-fira-code-nerd-font
   - font-fira-mono-nerd-font
   - font-hack-nerd-font
   - google-chrome
+  - google-drive
+  - gpg-suite-no-mail
+  - grammarly-desktop
   - iterm2
   - jetbrains-toolbox
   - kindle
+  - mongodb-compass
   - ngrok
   - numi
+  - obsidian
   - p4v
+  - pock
   - postman
+  - sketch
   - slack
+  - steam
   - visual-studio-code
   - vmware-fusion
   - xquartz # dependency for gifsicle, only required for mountain-lion and above
