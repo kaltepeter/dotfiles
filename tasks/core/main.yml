@@ -2,27 +2,33 @@
 - name: Install Core Packages
   package:
     name:
-    # Install GNU core utilities (those that come with macOS are outdated).
-    # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
-    - coreutils
+    - asdf
     # Update latest bash
     - bash
     - bash-completion@2
-    - vim
-    - grep
-    - openssh
-    - zsh
-    - zsh-completions
+    - cmake
+    # Install GNU core utilities (those that come with macOS are outdated).
+    # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
+    - coreutils
     - ffmpeg
+    - gh
     - gifsicle
     - git
     - git-lfs
+    - git-secrets
+    - gnupg
+    - google-cloud-sdk
+    - grep
+    - jq
+    - k9s
+    - mas
+    - openssh
     - openssl
     - shellcheck
-    - gnupg
-    - k9s
-    - gh
-    - git-secrets
+    - vim
+    # update latest zsh
+    - zsh
+    - zsh-completions
     state: latest
 
 - name: Get the path to Bash
