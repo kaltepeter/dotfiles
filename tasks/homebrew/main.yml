@@ -1,10 +1,7 @@
 ---
 - name: Add custom homebrew repos
   community.general.homebrew_tap:
-    name: [
-      homebrew/cask-fonts
-      mongodb/brew
-    ]
+    name: homebrew/cask-fonts,mongodb/brew
 - name: Install brew packages
   community.general.homebrew:
     update_homebrew: yes
@@ -24,6 +21,7 @@
   - balenaetcher
   - brave-browser
   - calibre
+  - colima
   - discord
   - dropbox
   - figma
