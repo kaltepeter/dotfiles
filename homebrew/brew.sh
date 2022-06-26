@@ -31,7 +31,6 @@ fi
 
 # taps
 # brew tap sambadevi/powerlevel9k
-brew tap mongodb/brew
 brew tap azure/functions
 
 brew install docker
@@ -39,8 +38,6 @@ brew install docker
 brew install mas
 
 brew install node
-
-brew install mongodb-community
 
 brew install rabbitmq
 
