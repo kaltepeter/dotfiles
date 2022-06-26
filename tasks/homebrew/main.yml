@@ -3,7 +3,15 @@
   community.general.homebrew_tap:
     name: [
       homebrew/cask-fonts
+      mongodb/brew
     ]
+- name: Install brew packages
+  community.general.homebrew:
+    update_homebrew: yes
+    upgrade_all: yes
+    name: "{{ item }}"
+  with_items:
+  - mongodb-community
 - name: Install core packages via brew casks
   community.general.homebrew_cask:
     name: "{{ item }}"
