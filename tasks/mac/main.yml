@@ -1,0 +1,20 @@
+---
+# Sign in manually, prompted in beginning
+# - name: Sign in to Apple Store
+#   ansible.builtin.script:
+#     cmd: ./files/signin_to_appstore.applescript "{{ apple_store_email }}" "{{ apple_store_password }}"
+- name: Install From App Store
+  community.general.mas:
+    id:
+      - 411643860 # Daisy Disk
+      - 1423210932 # Flow
+      - 408981434 # imovie
+      - 441258766 # Magnet
+      - 409203825 # numbers
+      - 409201541 # pages
+      - 1303222628 # Paprika
+      - 431748264 # pluralsight
+      - 904280696 # things 3
+      - 497799835 # xcode # temp, out of disk space
+    state: present
+    upgrade_all: yes

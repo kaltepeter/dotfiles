@@ -29,9 +29,9 @@
     - zsh
     - zsh-completions
     state: latest
+  register: updated_packages
 
 - name: Get the path to Bash
-  become: false
   local_action: command which bash
   register: bash_path
 
@@ -39,10 +39,9 @@
   lineinfile:
     path: /etc/shells
     line: "{{ bash_path.stdout }}"
-  become: true
+  become: yes
 
 - name: Get the path to ZSH
-  become: false
   local_action: command which zsh
   register: zsh_path
 
@@ -50,4 +49,4 @@
   lineinfile:
     path: /etc/shells
     line: "{{ zsh_path.stdout }}"
-  become: true
+  become: yes
