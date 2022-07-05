@@ -1,27 +1,29 @@
 ---
 - name: Add custom homebrew repos
   community.general.homebrew_tap:
-    name: homebrew/cask-fonts,mongodb/brew
+    name: homebrew/cask-fonts,mongodb/brew,homebrew/cask-drivers
 - name: Install brew packages
   community.general.homebrew:
     update_homebrew: yes
     upgrade_all: yes
-    name: "{{ item }}"
-  with_items:
-  - mongodb-community
+    name:
+    - mongodb-community
 - name: Install core packages via brew casks
   community.general.homebrew_cask:
     name: "{{ item }}"
   ignore_errors: yes
   with_items:
   - 1password
+  - 1password/tap/1password-cli
   - android-sdk
   - android-studio
   - arduino
   - balenaetcher
+  - blue-sherpa
   - brave-browser
   - calibre
   - colima
+  - cardo-update
   - discord
   - dropbox
   - figma
