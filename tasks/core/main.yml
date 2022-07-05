@@ -17,7 +17,6 @@
     - git-lfs
     - git-secrets
     - gnupg
-    - google-cloud-sdk
     - grep
     - jq
     - k9s
