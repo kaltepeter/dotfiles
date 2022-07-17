@@ -6,7 +6,13 @@
     downloads: "{{ansible_env.HOME}}/.ansible-downloads"
     applications_dir: "/Applications"
     mount_path: /Volumes
-  # pre_tasks:
+    data_dir: "{{ lookup('env', 'HOME') }}/data"
+  pre_tasks:
+  - name: Create a directory if it does not exist
+    ansible.builtin.file:
+      path: "{{ data_dir }}"
+      state: directory
+      mode: '0755'
   # - name: Login to app store warning.
   #   pause:
   #     prompt: "Make sure you login to the apple app store before continuing."
