@@ -18,6 +18,6 @@
       - 497799835 # xcode # temp, out of disk space
     state: present
     upgrade_all: yes
-    tags:
-    - apple
-    - install
+  tags:
+  - apple
+  - install
