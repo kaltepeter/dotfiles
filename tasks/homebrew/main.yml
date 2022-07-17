@@ -2,12 +2,18 @@
 - name: Add custom homebrew repos
   community.general.homebrew_tap:
     name: homebrew/cask-fonts,mongodb/brew,homebrew/cask-drivers
+  tags:
+  - brew
+  - install
 - name: Install brew packages
   community.general.homebrew:
     update_homebrew: yes
     upgrade_all: yes
     name:
     - mongodb-community
+  tags:
+  - brew
+  - install
 - name: Install core packages via brew casks
   community.general.homebrew_cask:
     name: "{{ item }}"
@@ -52,3 +58,6 @@
   - vmware-fusion
   - xquartz # dependency for gifsicle, only required for mountain-lion and above
   - zoom
+  tags:
+  - brew
+  - install

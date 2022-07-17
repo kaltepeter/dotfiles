@@ -3,20 +3,32 @@
   stat:
     path: "{{ applications_dir }}/{{ item.finalAppName }}"
   register: app_installed
+  tags:
+  - adobe
+  - install
 # https://github.com/tensult/mac-setup-playbooks for examples
 - name: Install Adobe Products
   get_url:
     url: https://prod-rel-ffc-ccm.oobesaas.adobe.com/adobe-ffc-external/core/v1/wam/download?sapCode={{ item.id }}&productName={{ item.name | urlencode }}&os=mac
     dest: "{{ downloads }}/{{ item.downloadName }}.dmg"
   when: not app_installed.stat.exists
+  tags:
+  - adobe
+  - install
 
 - name: Mount {{ item.name }} image
   command: hdiutil attach "{{ downloads }}/{{ item.downloadName }}.dmg" chdir={{ downloads }} -mountpoint "{{ mount_path }}/{{ item.downloadName }}"
   when: not app_installed.stat.exists
+  tags:
+  - adobe
+  - install
 
 - name: Changing installer source to {{ mount_path }}/{{ item.downloadName }}
   set_fact: installer_source={{ mount_path }}/{{ item.downloadName }}
   when: not app_installed.stat.exists
+  tags:
+  - adobe
+  - install
 
 - name: Run installers
   command:
@@ -26,6 +38,9 @@
   poll: 0
   register: adobe_sleeper
   when: not app_installed.stat.exists
+  tags:
+  - adobe
+  - install
 
 # - name: Pause until the install is started.
 #   pause:
@@ -39,15 +54,26 @@
   retries: 3
   delay: 10
   when: not app_installed.stat.exists
+  tags:
+  - adobe
+  - install
 
 - name: Wait until the app is installed
   wait_for:
     path: "{{ applications_dir }}/{{ item.finalAppName }}"
-
+  tags:
+  - adobe
+  - install
 
 - name: Unmount {{app_name}} image
   command: hdiutil detach "{{ mount_path }}/{{ item.downloadName }}"
   when: not app_installed.stat.exists
+  tags:
+  - adobe
+  - install
 
 - name: Changing installer source to {{ downloads }}
   set_fact: installer_source={{ downloads }}
+  tags:
+  - adobe
+  - install
