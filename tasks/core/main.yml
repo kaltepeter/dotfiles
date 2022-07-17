@@ -30,23 +30,41 @@
     - zsh-completions
     state: latest
   register: updated_packages
-
+  tags:
+  - core
+  - install
 - name: Get the path to Bash
   local_action: command which bash
   register: bash_path
+  tags:
+  - core
+  - install
+  - productivity
 
 - name: "Ensure homebrew bash is in allowed shells"
   lineinfile:
     path: /etc/shells
     line: "{{ bash_path.stdout }}"
   become: yes
+  tags:
+  - core
+  - install
+  - productivity
 
 - name: Get the path to ZSH
   local_action: command which zsh
   register: zsh_path
+  tags:
+  - core
+  - install
+  - productivity
 
 - name: "Ensure homebrew zsh is in allowed shells"
   lineinfile:
     path: /etc/shells
     line: "{{ zsh_path.stdout }}"
   become: yes
+  tags:
+  - core
+  - install
+  - productivity

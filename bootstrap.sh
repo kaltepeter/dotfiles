@@ -20,7 +20,7 @@ log_file="${__dir}/bootstrap.log"
 date_header
 
 usage() {
-    cat <<END
+  cat <<END
 usage: [DEBUG=true] bootstrap.sh
 
 Setup machine with my defaults. Env vars come from .env
@@ -52,18 +52,18 @@ else
 fi
 
 while getopts "h" opt; do
-    case $opt in
-        h)
-            usage
-            exit 0
-            ;;
-        \?)
-            exit 1
-            ;;
-    esac
+  case $opt in
+  h)
+    usage
+    exit 0
+    ;;
+  \?)
+    exit 1
+    ;;
+  esac
 done
 
-shift $(( OPTIND -1 ))
+shift $((OPTIND - 1))
 
 [[ -z "${email:-}" ]] && error "email is empty" 1
 
@@ -81,7 +81,7 @@ declare data_dir="${HOME}/data"
 if [[ -d "${data_dir}" ]]; then
   typed_message 'SKIP' "${data_dir} exists."
 else
-  typed_message 'CREATE' "${data_dir}...";
+  typed_message 'CREATE' "${data_dir}..."
   mkdir "${data_dir}"
 fi
 
@@ -103,9 +103,8 @@ export apple_store_pw
 [[ $(command -v osascript) ]] && osascript "${__dir}/macosx/script/show_security_settings.applescript"
 
 # find the installers and run them iteratively
-find . -name install.sh | sort | while read -r installer ; do sh -c "${installer}" ; done
+find . -name install.sh | sort | while read -r installer; do sh -c "${installer}"; done
 
-sh -c "${__dir}/macosx/bootstrap.sh"
 sh -c "${__dir}/system/bootstrap.sh"
 sh -c "${__dir}/git/bootstrap.sh"
 sh -c "${__dir}/jetbrains/bootstrap.sh"
@@ -128,6 +127,6 @@ unset log_file
 unset apple_store_user
 unset apple_store_pw
 
-killall "Terminal" &> /dev/null || true
+killall "Terminal" &>/dev/null || true
 
 exit 0
