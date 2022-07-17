@@ -1,0 +1,12 @@
+---
+- name: Update Google Cloud Components
+  command: gcloud components update
+  tags:
+  - install
+  - gcp
+# # https://cloud.google.com/sdk/docs/initializing?authuser=1
+# - name: Login to Google Cloud
+#   command: gcloud init or gcloud auth login
+#   tags:
+#   - init
+#   - gcp
