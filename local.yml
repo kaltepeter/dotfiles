@@ -3,10 +3,18 @@
   connection: local
   name: Configure local machine
   vars:
-    downloads: "{{ansible_env.HOME}}/.ansible-downloads"
+    downloads: "{{ ansible_env.HOME }}/.ansible-downloads"
     applications_dir: "/Applications"
     mount_path: /Volumes
     data_dir: "{{ lookup('env', 'HOME') }}/data"
+  vars_prompt:
+  - name: my_email
+    prompt: What is your primary email? (git, etc.)
+    private: no
+  - name: my_ssh_passphrase
+    prompt: What is your ssh passphrase? (git, etc)
+    private: yes
+    confirm: no
   pre_tasks:
   - name: Create a directory if it does not exist
     ansible.builtin.file:
@@ -40,5 +48,6 @@
       loop_var: item
   - include: tasks/mac/main.yml
     when: ansible_facts['os_family'] == "Darwin"
+  - include: tasks/core/ssh.yml
 
 
