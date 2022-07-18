@@ -105,7 +105,6 @@ export apple_store_pw
 # find the installers and run them iteratively
 find . -name install.sh | sort | while read -r installer; do sh -c "${installer}"; done
 
-sh -c "${__dir}/system/bootstrap.sh"
 sh -c "${__dir}/git/bootstrap.sh"
 sh -c "${__dir}/jetbrains/bootstrap.sh"
 sh -c "${__dir}/vim/bootstrap.sh"
