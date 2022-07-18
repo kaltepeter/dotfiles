@@ -1,0 +1,16 @@
+---
+- name: Authorize key with GitHub
+  local_action:
+    module: github_key
+    name: "{{ machine_hostname }} access key"
+    token: '{{ github_access_token }}'
+    pubkey: "{{ lookup('file', \"{{ ansible_env.HOME }}/.ssh/id_ed25519.pub\") }}"
+  tags:
+  - ssh
+  - github
+- name: Validate GitHub Access
+  ansible.builtin.shell:
+    cmd: ssh -T -o StrictHostKeyChecking=accept-new git@github.com
+  tags:
+  - ssh
+  - github

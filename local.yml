@@ -15,6 +15,10 @@
     prompt: What is your ssh passphrase? (git, etc)
     private: yes
     confirm: no
+  - name: github_access_token
+    prompt: Github Access Token for updating keys
+    private: yes
+    confirm: no
   pre_tasks:
   - name: Create a directory if it does not exist
     ansible.builtin.file:
@@ -28,7 +32,11 @@
   - name: Read machine hostname var
     ansible.builtin.shell: hostname
     register: machine_hostname
+    tags:
+    - always
   - set_fact: machine_hostname={{ machine_hostname.stdout }}
+    tags:
+    - always
   - name: Create Ansible downloads directory
     file: path={{ downloads }} state=directory
   - name: Setting installer source to "{{ downloads }}"
@@ -49,5 +57,6 @@
   - include: tasks/mac/main.yml
     when: ansible_facts['os_family'] == "Darwin"
   - include: tasks/core/ssh.yml
+  - include: tasks/git/main.yml
 
 
