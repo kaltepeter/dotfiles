@@ -5,6 +5,7 @@
   tags:
   - brew
   - install
+  - essential
 - name: Install brew packages
   community.general.homebrew:
     update_homebrew: yes
@@ -14,6 +15,7 @@
   tags:
   - brew
   - install
+  - essential
 - name: Install core packages via brew casks
   community.general.homebrew_cask:
     name: "{{ item }}"
@@ -21,17 +23,9 @@
   with_items:
   - 1password
   - 1password/tap/1password-cli
-  - android-sdk
-  - android-studio
-  - arduino
-  - balenaetcher
   - blue-sherpa
   - brave-browser
-  - calibre
   - colima
-  - cardo-update
-  - discord
-  - dropbox
   - figma
   - font-fira-code-nerd-font
   - font-fira-mono-nerd-font
@@ -40,24 +34,41 @@
   - google-drive
   - gpg-suite-no-mail
   - grammarly-desktop
-  - google-cloud-sdk
   - iterm2
   - jetbrains-toolbox
   - kindle
   - mongodb-compass
   - ngrok
-  - numi
   - obsidian
   - p4v
-  - pock
   - postman
-  - sketch
   - slack
-  - steam
   - visual-studio-code
-  - vmware-fusion
   - xquartz # dependency for gifsicle, only required for mountain-lion and above
   - zoom
+  tags:
+  - brew
+  - install
+  - essential
+- name: Install core packages via brew casks
+  community.general.homebrew_cask:
+    name: "{{ item }}"
+  ignore_errors: yes
+  with_items:
+  - android-sdk
+  - android-studio
+  - arduino
+  - balenaetcher
+  - calibre
+  - cardo-update
+  - discord
+  - dropbox
+  - google-cloud-sdk
+  - numi
+  - pock
+  - sketch
+  - steam
+  - vmware-fusion
   tags:
   - brew
   - install

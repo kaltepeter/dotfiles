@@ -6,16 +6,25 @@
 - name: Install From App Store
   community.general.mas:
     id:
-      - 411643860 # Daisy Disk
       - 1423210932 # Flow
       - 408981434 # imovie
-      - 441258766 # Magnet
       - 409203825 # numbers
       - 409201541 # pages
+    state: present
+    upgrade_all: yes
+  tags:
+  - apple
+  - install
+  - essential
+- name: Install From App Store
+  community.general.mas:
+    id:
+      - 411643860 # Daisy Disk
+      - 441258766 # Magnet
       - 1303222628 # Paprika
-      - 431748264 # pluralsight
-      - 904280696 # things 3
       - 497799835 # xcode # temp, out of disk space
+      - 904280696 # things 3
+      - 431748264 # pluralsight
     state: present
     upgrade_all: yes
   tags:
