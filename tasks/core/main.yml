@@ -33,6 +33,7 @@
   tags:
   - core
   - install
+  - essential
 - name: Get the path to Bash
   local_action: command which bash
   register: bash_path
@@ -40,6 +41,7 @@
   - core
   - install
   - productivity
+  - essential
 
 - name: "Ensure homebrew bash is in allowed shells"
   lineinfile:
@@ -50,6 +52,7 @@
   - core
   - install
   - productivity
+  - essential
 
 - name: Get the path to ZSH
   local_action: command which zsh
@@ -58,6 +61,7 @@
   - core
   - install
   - productivity
+  - essential
 
 - name: "Ensure homebrew zsh is in allowed shells"
   lineinfile:
@@ -68,3 +72,4 @@
   - core
   - install
   - productivity
+  - essential
