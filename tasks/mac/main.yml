@@ -30,3 +30,24 @@
   tags:
   - apple
   - install
+- name: Configure terminal themes
+  ansible.builtin.shell: |
+    cp -f "{{ ansible_facts['env']['PWD'] }}/terminal/{{ item }}" "{{ ansible_facts['env']['PWD'] }}/terminal/modified_themes/"
+    terminal_defaults="${HOME}/Library/Preferences/com.apple.Terminal.plist"
+    theme="{{ ansible_facts['env']['PWD'] }}/terminal/modified_themes/{{ item }}"
+    name=$(plutil -extract "name" xml1 -o - ${theme} | plutil -p -)
+    font_data='YnBsaXN0MDDUAQIDBAUGGBlYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoKQHCBESVSRudWxs1AkKCwwNDg8QVk5TU2l6ZVhOU2ZGbGFnc1ZOU05hbWVWJGNsYXNzI0AqAAAAAAAAEBCAAoADXxAcSGFja05lcmRGb250Q29tcGxldGUtUmVndWxhctITFBUWWiRjbGFzc25hbWVYJGNsYXNzZXNWTlNGb250ohUXWE5TT2JqZWN0XxAPTlNLZXllZEFyY2hpdmVy0RobVHJvb3SAAQgRGiMtMjc8QktSW2JpcnR2eJecp7C3usPV2N0AAAAAAAABAQAAAAAAAAAcAAAAAAAAAAAAAAAAAAAA3w=='
+    plutil -replace "Font" -data "${font_data}" "${theme}"
+    plutil -replace "Window Settings"."${name//\"}" -xml """$(cat "${theme}")""" "${terminal_defaults}"
+    defaults write com.apple.Terminal "Startup Window Settings" "Material Shell - Dark"
+    defaults write com.apple.Terminal "Default Window Settings" "Material Shell - Dark"
+    exit 0
+  loop:
+  - materialshell-dark.terminal
+  - materialshell-oceanic.terminal
+  register: terminal_themes
+  failed_when: terminal_themes.rc != 0
+  tags:
+  - essential
+  - zsh
+  - configure

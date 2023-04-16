@@ -17,7 +17,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.multiCursorModifier": "alt",
-  "workbench.colorTheme": "Shades of Purple",
+  "workbench.colorTheme": "Night Owl",
   "azureFunctions.pythonVenv": "env",
   "ruby.codeCompletion": "rcodetools",
   "ruby.format": "rubocop",
@@ -69,5 +69,9 @@
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
-  "window.zoomLevel": 2
+  "editor.inlineSuggest.enabled": true,
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "window.zoomLevel": 3
 }

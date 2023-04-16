@@ -1,0 +1,42 @@
+---
+- name: Install Oh My Zsh
+  ansible.builtin.shell:
+    cmd: sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    creates: "${HOME}/.oh-my-zsh"
+  register: ohmyzsh_installed
+  tags:
+    - zsh
+    - install
+    - essential
+- name: Get ZSH custom folder
+  ansible.builtin.shell:
+    cmd: echo "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+    executable: /bin/zsh
+  register: zsh_custom_folder
+  changed_when: zsh_custom_folder.rc != 0
+  tags:
+    - zsh
+    - install
+    - essential
+- name: Install Powerlevel10k
+  ansible.builtin.git:
+    repo: https://github.com/romkatv/powerlevel10k.git
+    dest: "{{ zsh_custom_folder.stdout }}/themes/powerlevel10k"
+    single_branch: true
+    update: true
+    version: master
+  tags:
+    - zsh
+    - install
+    - essential
+- name: Symlink ZSH configs
+  ansible.builtin.file:
+    src: "{{ ansible_facts['env']['PWD'] }}/zsh/{{ item }}"
+    dest: "{{ zsh_custom_folder.stdout }}/{{ item }}"
+    state: link
+  loop:
+    - powerlevel9k.zsh
+  tags:
+    - zsh
+    - install
+    - essential
