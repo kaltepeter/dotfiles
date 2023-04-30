@@ -1,7 +1,7 @@
 ---
 - name: Generate SSH Key
   ansible.builtin.shell:
-    cmd: ssh-keygen -t ed25519 -C {{ my_email }} -f "{{ ansible_env.HOME }}/.ssh/id_ed25519" -q -P "{{ my_ssh_passphrase }}" && eval "$(ssh-agent -s)"
+    cmd: ssh-keygen -t ed25519 -C "{{ my_email }}" -f "{{ ansible_env.HOME }}/.ssh/id_ed25519" -q -P "{{ my_ssh_passphrase }}" && eval "$(ssh-agent -s)"
     creates: "{{ ansible_env.HOME }}/.ssh/id_ed25519"
   tags:
   - install
