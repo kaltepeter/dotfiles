@@ -23,6 +23,7 @@
     - mas
     - openssh
     - openssl
+    - postgresql
     - shellcheck
     - vim
     # update latest zsh
