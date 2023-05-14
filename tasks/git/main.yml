@@ -9,8 +9,12 @@
   - ssh
   - github
 - name: Validate GitHub Access
-  ansible.builtin.shell:
-    cmd: ssh -T -o StrictHostKeyChecking=accept-new git@github.com
+  ansible.builtin.shell: |
+    ssh -T -o StrictHostKeyChecking=accept-new git@github.com
+  register: test_github_ssh
+  failed_when:
+  - test_github_ssh.rc != 1
+  - ("You've successfully authenticated, but GitHub does not provide shell access." not in result.stdout)
   tags:
   - ssh
   - github
