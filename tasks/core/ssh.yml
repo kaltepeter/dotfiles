@@ -7,10 +7,12 @@
   - install
   - ssh
 - name: Copy SSH Config
-  ansible.builtin.file:
-    src: "./files/.ssh/config"
-    dest: "{{ ansible_env.HOME }}/.ssh/config"
-    state: hard
+  ansible.builtin.blockinfile:
+    block: "{{ lookup('ansible.builtin.file', './files/.ssh/config') }}"
+    path: "{{ ansible_env.HOME }}/.ssh/config"
+    state: present
+    create: true
+    backup: true
   tags:
   - install
   - ssh
