@@ -36,7 +36,6 @@
     state: link
   loop:
     - powerlevel9k.zsh
-    - 0-vars.zsh
     - alias.zsh
     - config.zsh
   tags:
