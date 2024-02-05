@@ -29,9 +29,8 @@
   with_items:
   - 1password
   - 1password/tap/1password-cli
-  - blue-sherpa
+  # - blue-sherpa
   - brave-browser
-  - colima
   - figma
   - font-fira-code-nerd-font
   - font-fira-mono-nerd-font
@@ -69,6 +68,7 @@
   - balenaetcher
   - calibre
   - cardo-update
+  - colima
   - discord
   - dropbox
   - google-cloud-sdk
