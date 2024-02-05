@@ -16,7 +16,6 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.multiCursorModifier": "alt",
   "workbench.colorTheme": "Night Owl",
   "azureFunctions.pythonVenv": "env",
   "ruby.codeCompletion": "rcodetools",
@@ -73,5 +72,10 @@
   "[python]": {
     "editor.formatOnType": true
   },
-  "window.zoomLevel": 3
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.inlineSuggest.suppressSuggestions": true,
+  "nxConsole.showNodeVersionOnStartup": false,
+  "editor.largeFileOptimizations": false
 }
