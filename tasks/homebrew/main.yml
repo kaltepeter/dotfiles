@@ -7,7 +7,7 @@
   - update
 - name: Add custom homebrew repos
   community.general.homebrew_tap:
-    name: homebrew/cask-fonts,mongodb/brew,homebrew/cask-drivers
+    name: homebrew/cask-fonts,mongodb/brew
   tags:
   - brew
   - install
