@@ -47,10 +47,10 @@
   - name: Setting installer source to "{{ downloads }}"
     set_fact:
       installer_source: "{{downloads}}"
-  - include: tasks/core/main.yml
-  - include: tasks/homebrew/main.yml
+  - include_tasks: tasks/core/main.yml
+  - include_tasks: tasks/homebrew/main.yml
     when: ansible_facts['os_family'] == "Darwin"
-  - include: tasks/adobe/main.yml
+  - include_tasks: tasks/adobe/main.yml
     when: ansible_facts['os_family'] == "Darwin"
     with_items:
     # - { name: "Adobe Creative Cloud", id: "LRCC", downloadName: "Lightroom", installerName: "Lightroom Installer", finalAppName: 'Adobe Creative Cloud' }
@@ -59,10 +59,10 @@
     - { name: "Photoshop", id: "PHSP", downloadName: "Photoshop", installerName: "Photoshop Installer", finalAppName: 'Adobe Photoshop 2022' }
     loop_control:
       loop_var: item
-  - include: tasks/mac/main.yml
+  - include_tasks: tasks/mac/main.yml
     when: ansible_facts['os_family'] == "Darwin"
-  - include: tasks/core/ssh.yml
-  - include: tasks/git/main.yml
-  - include: tasks/shell/main.yml
+  - include_tasks: tasks/core/ssh.yml
+  - include_tasks: tasks/git/main.yml
+  - include_tasks: tasks/shell/main.yml
 
 
