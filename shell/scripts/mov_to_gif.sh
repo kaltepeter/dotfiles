@@ -25,7 +25,7 @@ gif_output="${1/%mov/gif}"
 
 fps="${2:-10}"
 echo "Using fps: ${fps}"
-scale="width=720:height=-2"
+scale="width=1920:height=-2"
 filter="[0:v] fps=${fps},scale=${scale},split [a][b];[a] palettegen [p];[b][p] paletteuse"
 
 # ffmpeg -i "${mov_input}" -filter_complex "[0:v] palettegen" palette.png
