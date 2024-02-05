@@ -18,6 +18,10 @@ typed_message 'CONFIG' "configure vars"
 declare -a vars_list=('CONVENTIONAL_GITHUB_RELEASER_TOKEN' 'HUE_API_TOKEN' 'HUE_IP')
 declare vars_file="${__dir}/0-vars.zsh"
 
+if [[ ! -f "${vars_file}" ]]; then
+	touch "${vars_file}"
+fi
+
 for var_name in "${vars_list[@]}"; do
 	if grep -q "${var_name}=" "${vars_file}"; then
 		typed_message 'SKIP' "${var_name} already exists."
