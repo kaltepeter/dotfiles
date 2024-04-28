@@ -5,6 +5,7 @@
     name: "{{ machine_hostname }} access key"
     token: '{{ github_access_token }}'
     pubkey: "{{ lookup('file', \"{{ ansible_env.HOME }}/.ssh/id_ed25519.pub\") }}"
+  register: github_key_result
   tags:
   - ssh
   - github
@@ -18,3 +19,124 @@
   tags:
   - ssh
   - github
+- name: Print Out GPG Keys
+  ansible.builtin.command: "gpg --list-secret-keys {{ my_email }}"
+  register: gpg_key_check
+  changed_when: false
+  failed_when:
+  - gpg_key_check.rc not in [0,2]
+- name: Create gpg tmpfile
+  ansible.builtin.tempfile:
+    state: file
+    suffix: temp
+  register: gpg_tmpfile
+  when: gpg_key_check.rc != 0
+- name: Generate OpenPGP key
+  ansible.builtin.shell: |
+    cat >{{ gpg_tmpfile.path }} <<EOF
+    %echo Generating a basic OpenPGP key
+    Key-Type: RSA
+    Key-Length: 4096
+    Subkey-Type: RSA
+    Subkey-Length: 4096
+    Name-Real: {{ my_name }}
+    Name-Comment: {{ machine_hostname }}
+    Name-Email: {{ my_email }}
+    Expire-Date: 0
+    Passphrase: '{{ my_gpg_passphrase }}'
+    # Do a commit here, so that we can later print "done" :-)
+    %commit
+    %echo done
+    EOF
+
+    gpg --batch --full-generate-key {{ gpg_tmpfile.path }}
+  when: gpg_key_check.rc != 0
+- name: Cleanup gpg tmpfile
+  ansible.builtin.file:
+    path: "{{ gpg_tmpfile.path }}"
+    state: absent
+  when: gpg_tmpfile.path is defined
+- name: Get the ID of the GPG Key
+  ansible.builtin.shell: "gpg --list-secret-keys kayla@kaylaaltepeter.com | grep '^sec' -A 1 | awk '/^ /{print $1}'"
+  changed_when: false
+  register: github_gpg_key_id
+- name: Check if GitHub GPG key exists
+  uri:
+    url: "https://api.github.com/user/gpg_keys/{{ github_gpg_key_id }}"
+    method: GET
+    headers:
+      Authorization: "token {{ github_access_token }}"
+      Content-Type: "application/json"
+  register: github_gpg_key_check
+  ignore_errors: yes  # Ignore errors if key not found
+- name: Configure Git signingkey
+  ansible.builtin.git_config:
+    scope: global
+    name: user.signingkey
+    value: "{{ github_gpg_key_id }}"
+  when: github_gpg_key_check.status == 200
+- name: Configure Git commit.gpgsign
+  ansible.builtin.git_config:
+    scope: global
+    name: commit.gpgsign
+    value: true
+  when: github_gpg_key_check.status == 200
+- name: Configure Git gpg.program
+  ansible.builtin.git_config:
+    scope: global
+    name: gpg.program
+    value: gpg2
+  when: github_gpg_key_check.status == 200
+- name: Get p4merge path
+  ansible.builtin.command: "command -v p4merge"
+  register: p4merge_path
+- name: Set Git Email
+  community.general.git_config:
+    name: user.email
+    scope: global
+    value: '{{ my_email }}'
+- name: Set Git Username
+  community.general.git_config:
+    name: user.name
+    scope: global
+    value: "{{ github_username }}"
+- name: Set Git Diff Tool
+  community.general.git_config:
+    name: diff.tool
+    scope: global
+    value: p4merge
+- name: Set Git Diff Tool Path
+  community.general.git_config:
+    name: difftool.p4merge.path
+    scope: global
+    value: "{{ p4merge_path.stdout }}"
+- name: Set Git Merge Tool
+  community.general.git_config:
+    name: merge.tool
+    scope: global
+    value: p4merge
+- name: Set Git Merge Tool Path
+  community.general.git_config:
+    name: mergetool.p4merge.path
+    scope: global
+    value: "{{ p4merge_path.stdout }}"
+- name: Set Git Merge Tool Backup
+  community.general.git_config:
+    name: mergetool.keepBackup
+    scope: global
+    value: false
+- name: Set Git Merge Conflict Style
+  community.general.git_config:
+    name: merge.conflictstyle
+    scope: global
+    value: diff3
+- name: Set Git Pull FF Only
+  community.general.git_config:
+    name: pull.ff
+    scope: global
+    value: only
+- name: Set Git Pager Branch
+  community.general.git_config:
+    name: pager.branch
+    scope: global
+    value: false

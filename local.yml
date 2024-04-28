@@ -8,23 +8,43 @@
     mount_path: /Volumes
     data_dir: "{{ lookup('env', 'HOME') }}/data"
   vars_prompt:
-  - name: my_email
-    prompt: What is your primary email? (git, etc.)
-    private: no
   - name: my_ssh_passphrase
     prompt: What is your ssh passphrase? (git, etc)
-    private: yes
-    confirm: no
+    private: true
+    confirm: false
+  - name: my_gpg_passphrase
+    prompt: What is your gpg passphrase? (git, etc)
+    private: true
+    confirm: false
   - name: github_access_token
     prompt: Github Access Token for updating keys
-    private: yes
-    confirm: no
+    private: true
+    confirm: false
+  - name: my_email
+    prompt: What is your primary email? (git, etc.)
+    private: false
+    confirm: false
+  - name: my_name
+    prompt: What is your full name? (git, etc.)
+    private: false
+    confirm: false
+  - name: github_username
+    prompt: What is your GitHub username?
+    private: false
+    confirm: false
   pre_tasks:
   - name: Create a directory if it does not exist
     ansible.builtin.file:
       path: "{{ data_dir }}"
       state: directory
       mode: '0755'
+  - name: Validate Email Format
+    fail:
+      msg: "Invalid email format. Please enter a valid email address."
+    when: my_email is not regex('.+@.+\..+')
+  - name: Print Email
+    debug:
+      msg: "Your email is {{ my_email }}"
   # - name: Login to app store warning.
   #   pause:
   #     prompt: "Make sure you login to the apple app store before continuing."

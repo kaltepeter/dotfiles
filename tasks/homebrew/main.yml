@@ -57,7 +57,7 @@
   - brew
   - install
   - essential
-- name: Install core packages via brew casks
+- name: Install additional packages via brew casks
   community.general.homebrew_cask:
     name: "{{ item }}"
   ignore_errors: true
