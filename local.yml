@@ -56,7 +56,7 @@
     # - { name: "Adobe Creative Cloud", id: "LRCC", downloadName: "Lightroom", installerName: "Lightroom Installer", finalAppName: 'Adobe Creative Cloud' }
     - { name: "Lightroom", id: "LRCC", downloadName: "Lightroom", installerName: "Lightroom Installer", finalAppName: 'Adobe Lightroom CC' }
     - { name: "Acrobat DC", id: "APRO", downloadName: "Adobe Acrobat DC", installerName: "Acrobat DC Installer", finalAppName: 'Adobe Acrobat DC' }
-    - { name: "Photoshop", id: "PHSP", downloadName: "Photoshop", installerName: "Photoshop Installer", finalAppName: 'Adobe Photoshop 2022' }
+    - { name: "Photoshop", id: "PHSP", downloadName: "Photoshop", installerName: "Photoshop Installer", finalAppName: 'Adobe Photoshop 2024' }
     loop_control:
       loop_var: item
   - include_tasks: tasks/mac/main.yml
