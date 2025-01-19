@@ -1,16 +1,15 @@
+#!/usr/bin/env bash
 set -o errexit
 set -o pipefail
 set -o nounset
-[[ ${DEBUG:-} == true ]] && set -o xtrace
 
 usage() {
     cat <<END
-get_latest_jfrog_artifact.sh scope name additional_tags
+get_latest_jfrog_artifact.sh repo (scope/name|name) additional_tags
 
 Get last created jfrog artifact by artifact name and scope.
 repo: jfrog repo e.g. my-npm
-scope: jfrog/npm scope to search e.g. @mrll, @my-org
-name: artifact name e.g. my-app
+name: artifact scope/name or name e.g. my-app or @my-org/my-app
 additionaltags: ; separated jfrog props to add to the search
 
 -h: show this help message
@@ -39,11 +38,20 @@ done
 
 shift $(( OPTIND -1 ))
 [[ -z "${1:-}" ]] && error 'repo is required to be the first argument' 1
-[[ -z "${2:-}" ]] && error 'scope is required to be the second argument' 1
-[[ -z "${3:-}" ]] && error 'name is required to be the third argument' 1
+[[ -z "${2:-}" ]] && error '(scope/name | name) is required to be the second argument' 1
+
 declare repo="${1}"
-declare scope="${2}"
-declare name="${3}"
+declare name="${2}"
+declare -i limit=${3:-1}
 declare additional_tags="${4:-;}"
 
-jfrog rt search "${repo}/${scope}/*/*-*.tgz" "--props=${additional_tags}npm.name=${scope}/${name}" --sort-by=created --sort-order=desc --limit=1
+if [[ "${DEBUG:-}" == true ]]; then
+    # set -o xtrace
+    echo "repo: ${repo}"
+    echo "name: ${name}"
+    echo "limit: ${limit}"
+    echo "additional_tags: ${additional_tags}"
+    export JFROG_CLI_LOG_LEVEL=DEBUG
+fi
+
+jfrog rt search "${repo}/${name}/*" "--props=${additional_tags}" --sort-by=created --sort-order=desc --limit="${limit}"
