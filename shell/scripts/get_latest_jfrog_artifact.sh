@@ -46,4 +46,4 @@ declare scope="${2}"
 declare name="${3}"
 declare additional_tags="${4:-;}"
 
-jfrog rt search "${repo}/${scope}/*/*-*.tgz" "--props=${additional_tags}artifact.type=app;npm.name=${scope}/${name}" --sort-by=created --sort-order=desc --limit=1
+jfrog rt search "${repo}/${scope}/*/*-*.tgz" "--props=${additional_tags}npm.name=${scope}/${name}" --sort-by=created --sort-order=desc --limit=1
