@@ -15,3 +15,5 @@ terminal/modified_themes/*
 .DS_Store
 
 0-vars.zsh
+logs/*
+!logs/.gitkeep

@@ -4,7 +4,18 @@ my dotfiles :)
 
 ## Pre-requisite
 
-modify .env.example and save as .env or run self installer: `curl -fsSL https://raw.githubusercontent.com/kaltepeter/dotfiles/master/install.sh | bash` 
+- Run through the mac wizard until the machine boots up.
+- Sign in to iCloud
+- Grant the Terminal permissions to manage apps.
+    - Open System Preferences > Privacy & Security
+    - Click App Management
+    - Click the + button and add Terminal (localed in /Applications/Utilities)
+    - Enable Terminal
+    - Follow prompts to complete, you will have to quit and re-open Terminal
+
+## Install
+
+`curl -fsSL https://raw.githubusercontent.com/kaltepeter/dotfiles/master/install.sh | bash` 
 
 run `./bootstrap.sh -h` for info
 
@@ -13,7 +24,7 @@ run `./bootstrap.sh -h` for info
 
 ```bash
 ./bootstrap.sh
-# DEBUG=true ./bootstrap.sh
+# DEBUG=1 ./bootstrap.sh
 ```
 
 ## Thanks to...
@@ -26,3 +37,10 @@ run `./bootstrap.sh -h` for info
 
 * https://github.com/webpro/awesome-dotfiles
 * https://dotfiles.github.io/
+
+
+## Structure
+
+Heavily influened by Holman's dotfiles repo.
+- <https://github.com/holman/dotfiles/blob/master/script/install>
+- <https://github.com/mathiasbynens/dotfiles/blob/master/bootstrap.sh>

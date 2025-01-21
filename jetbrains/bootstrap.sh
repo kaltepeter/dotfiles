@@ -16,7 +16,7 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # [[ -z "${jetbrains_login}" ]] && error "first argument is empty, must be jetbrains_login" 1
 
 if [[ $(uname -s) == "Darwin" ]]; then
-  typed_message 'INSTALL' "installing jetbrains on MacOSX ..."
+  typed_message 'INSTALL' "installing jetbrains on macos ..."
   jetbrains_home="${HOME}/Library/Application Support/JetBrains/Toolbox"
   settings_file="${__dir}/.settings.json"
   cp "${settings_file}.template" "${settings_file}"

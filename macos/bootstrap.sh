@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# macosx/bootstrap.sh
+# macos/bootstrap.sh
 
 set -o nounset
 set -o errexit

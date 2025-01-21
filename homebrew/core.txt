@@ -1,0 +1,27 @@
+- asdf
+# Update latest bash
+- bash
+- bash-completion@2
+# - cmake # TODO: figure out how to ignore warning
+- colima
+- coreutils
+- ffmpeg
+- gh
+- gifsicle
+- git
+- git-lfs
+- git-secrets
+- gnupg
+- grep
+- jq
+#- k9s
+- mas
+- mongodb-community
+- openssh
+- openssl
+- postgresql@17
+- shellcheck
+- vim
+# update latest zsh
+- zsh
+- zsh-completions

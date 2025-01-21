@@ -1,0 +1,37 @@
+- 1password
+- 1password-cli
+- brave-browser
+#- blue-sherpa
+- calibre
+- cardo-update
+- discord
+- dropbox
+- figma
+- font-fira-code-nerd-font
+- font-fira-mono-nerd-font
+- font-hack-nerd-font
+- font-meslo-lg-nerd-font
+- google-chrome
+- google-cloud-sdk
+- google-drive
+- gpg-suite-no-mail
+- grammarly-desktop
+- iterm2
+- jetbrains-toolbox
+#- kindle # TODO: move to app store
+- mitmproxy
+- mongodb-compass
+- ngrok
+- numi
+- obsidian
+- p4v
+- pgadmin4
+- postman
+- raspberry-pi-imager
+- sketch
+- slack
+- steam
+#- utm # uncomment later
+- visual-studio-code
+#- xquartz # dependency for gifsicle, only required for mountain-lion and above
+- zoom
