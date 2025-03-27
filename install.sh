@@ -3,38 +3,23 @@ set -o errexit
 set -o pipefail
 set -o nounset
 [[ ${DEBUG:-} == true ]] && set -o xtrace
-__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-script_name="$(basename "${BASH_SOURCE[0]}")"
-log_file="${__dir}/logs/${script_name/%.*/.log}"
+CI=${CI:-false}
 
-usage() {
-  cat <<END
-usage: [DEBUG=true] install.sh
+data_dir="${HOME}/data"
 
-Automatically write to .env file and run bootstrap.
+if [[ ${CI} == false ]]; then
+  # shellcheck disable=SC2317  # Don't warn about unreachable commands in this function
+  end () { [[ $? = 0 ]] && return; echo "[FAILED] Script failed, check the output."; exit 1; }
+  trap end EXIT 
+fi
 
-    -h: show this help message
-END
+prompt_for_directory () {
+  read -r -p "Directory to install to, should be in your user HOME to avoid permission issues. Default [${data_dir}]: " input_dir
+  data_dir="${input_dir:-${data_dir}}"
+  echo "[INFO] dotfiles will create ${data_dir} if it does not exist and download the repo to that directory."
 }
 
-while getopts "h" opt; do
-  case $opt in
-  h)
-    usage
-    exit 0
-    ;;
-  \?)
-    exit 1
-    ;;
-  esac
-done
-
-shift $((OPTIND - 1))
-
-end () { [[ $? = 0 ]] && return; echo "[FAILED] Script failed, check the output."; exit 1; }
-trap end EXIT 
-
-configure_mac () {
+update_mac () {
   echo "[INFO] Running dotfiles setup on MacOS"
   update_output=$(softwareupdate --list 2>&1 | tee /dev/tty)
 
@@ -46,13 +31,14 @@ configure_mac () {
       echo
       if [[ $REPLY =~ ^[Yy]$ ]]; then
           echo "[INFO] Installing updates..."
-          softwareupdate --install --all --agree-to-license --no-scan
+          sudo softwareupdate --install --all --agree-to-license --no-scan --restart
       else
         echo "[INFO] Skipping updates"
       fi
   fi
+}
 
-  # brew 
+install_brew () {
   if test ! "$(command -v brew)"; then
     echo "[INSTALL] Homebrew"
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" </dev/tty
@@ -71,9 +57,32 @@ configure_mac () {
   fi
 }
 
-case "$OSTYPE" in
+setup_repo () {
+  if [[ -d "${data_dir}" ]]; then
+    echo "[SKIP] ${data_dir} exists."
+  else
+    echo "[CREATE] ${data_dir}..."
+    mkdir "${data_dir}"
+  fi
+
+  if [[ -d "${data_dir}/dotfiles" ]]; then
+    echo "[SKIP] ${data_dir}/dotfiles exists."
+  else
+    echo "[CREATE] cloning kaltepeter/dotfiles to ${data_dir}/dotfiles..."
+    # clone http to avoid perm issues
+    git clone https://github.com/kaltepeter/dotfiles "${data_dir}/dotfiles"
+  fi
+
+  echo "[INSTRUCTION] Run the following commands in a new terminal to continue."
+  printf "\n\tcd %s/dotfiles" "${data_dir}"
+  printf "\n\t./bootstrap.sh\n"
+}
+
+configure_os () {
+  case "$OSTYPE" in
     "darwin"*)
-        configure_mac
+        update_mac
+        install_brew
     ;;
     # "linux"*)
     #     # configure_linux
@@ -82,27 +91,14 @@ case "$OSTYPE" in
         printf '%s\n' "[ERROR] Unsupported OS detected, aborting..." >&2
         exit 1
     ;;
-esac
+  esac
+}
 
-declare data_dir="${HOME}/data"
-if [[ -d "${data_dir}" ]]; then
-  echo "[SKIP] ${data_dir} exists."
-else
-  echo "[CREATE] ${data_dir}..."
-  mkdir "${data_dir}"
+if [[ ${CI} == false ]]; then
+  prompt_for_directory 
+  configure_os
+  setup_repo
+
+  echo ''
+  exit 0
 fi
-
-if [[ -d "${HOME}/data/dotfiles" ]]; then
-  echo "[SKIP] ${HOME}/data/dotfiles exists."
-else
-  echo "[CREATE] cloning kaltepeter/dotfiles to ${HOME}/data/dotfiles..."
-  # clone http to avoid perm issues
-  git clone https://github.com/kaltepeter/dotfiles.git "${HOME}/data/dotfiles"
-fi
-
-echo "[INSTRUCTION] Run the following commands in a new terminal to continue."
-printf "\n\tcd ${HOME}/data/dotfiles"
-printf "\n\t./bootstrap.sh\n"
-
-echo ''
-exit 0

@@ -1,3 +1,5 @@
 {
-    "jira-plugin.workingProject": ""
+    "files.associations": {
+        "*.bats": "shellscript"
+    }
 }
