@@ -1,37 +1,39 @@
+# brew casks essential to all setups
 - 1password
 - 1password-cli
 - brave-browser
 #- blue-sherpa
-- calibre
-- cardo-update
+#- calibre
+#- cardo-update
 - discord
 - dropbox
-- figma
+#- figma
 - font-fira-code-nerd-font
 - font-fira-mono-nerd-font
 - font-hack-nerd-font
 - font-meslo-lg-nerd-font
+- ghostty
 - google-chrome
-- google-cloud-sdk
+#- google-cloud-sdk
 - google-drive
 - gpg-suite-no-mail
 - grammarly-desktop
 - iterm2
 - jetbrains-toolbox
 #- kindle # TODO: move to app store
-- mitmproxy
-- mongodb-compass
+#- mitmproxy
+#- mongodb-compass
 - ngrok
 - numi
 - obsidian
 - p4v
-- pgadmin4
+#- pgadmin4
 - postman
-- raspberry-pi-imager
-- sketch
+#- raspberry-pi-imager
+#- sketch
 - slack
 - steam
-#- utm # uncomment later
+- utm 
 - visual-studio-code
 #- xquartz # dependency for gifsicle, only required for mountain-lion and above
 - zoom

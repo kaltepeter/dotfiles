@@ -1,5 +1,6 @@
+# tools essential to all setups
 - asdf
-# Update latest bash
+# Update latest bash and add completions
 - bash
 - bash-completion@2
 # - cmake # TODO: figure out how to ignore warning
@@ -16,12 +17,12 @@
 - jq
 #- k9s
 - mas
-- mongodb-community
+#- mongodb-community
 - openssh
 - openssl
-- postgresql@17
+#- postgresql@17
 - shellcheck
 - vim
-# update latest zsh
+# update latest zsh and add completions
 - zsh
 - zsh-completions

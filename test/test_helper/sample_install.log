@@ -1,0 +1,55 @@
+Mon Feb 24 09:11:37 CST 2025
+[CONFIG] Configuring macOS
+[RUN] filter=essential
+[UPDATE] Updating homebrew.
+==> Updating Homebrew...
+Already up-to-date.
+Would you like to upgrade homebrew packages? [y/n]
+
+[INSTALL] Installing homebrew packages.
+bash 5.2.37
+==> Downloading https://ghcr.io/v2/homebrew/core/bash-completion/2/manifests/2.16.0
+Already downloaded: /Users/Kayla.Altepeter/Library/Caches/Homebrew/downloads/a7983bb4717a764e9a1630966e3308b926a48193546d14322376198ba2c1a83f--bash-completion@2-2.16.0.bottle_manifest.json
+==> Fetching bash-completion@2
+==> Downloading https://ghcr.io/v2/homebrew/core/bash-completion/2/blobs/sha256:7696534939d76665695a0bc12c1bab0a9cd0729264b16585bc5bc44a0bae5cfe
+Already downloaded: /Users/Kayla.Altepeter/Library/Caches/Homebrew/downloads/b66392bae3d5bda35c5fa8373e69f8cf90a680c8b5a36d4bd01b8aafe9b2c9b6--bash-completion@2--2.16.0.arm64_sonoma.bottle.tar.gz
+==> Pouring bash-completion@2--2.16.0.arm64_sonoma.bottle.tar.gz
+==> Caveats
+Add the following line to your ~/.bash_profile:
+  [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+==> Summary
+🍺  /opt/homebrew/Cellar/bash-completion@2/2.16.0: 1,058 files, 1.4MB
+==> Running `brew cleanup bash-completion@2`...
+Disable this behaviour by setting HOMEBREW_NO_INSTALL_CLEANUP.
+Hide these hints with HOMEBREW_NO_ENV_HINTS (see `man brew`).
+git 2.48.1
+jq 1.7.1
+zsh 5.9
+zsh-completions 0.35.0
+
+[INSTALL] Installing homebrew casks.
+1password 8.9.10
+1password-cli 2.30.3
+==> Downloading https://dl.google.com/chrome/mac/universal/stable/GGRO/googlechrome.dmg
+Already downloaded: /Users/Kayla.Altepeter/Library/Caches/Homebrew/downloads/88881e66883c4776fff9b3019b48a26795020439a33ddbedd3bd4620283aecd2--googlechrome.dmg
+Warning: Cannot verify integrity of '88881e66883c4776fff9b3019b48a26795020439a33ddbedd3bd4620283aecd2--googlechrome.dmg'.
+No checksum was provided.
+For your reference, the checksum is:
+  sha256 "c70c7b2a30c11e4819c459c4f2fd5be98b97dd456f4a5783c70486115d8a223e"
+==> Installing Cask google-chrome
+Error: It seems there is already an App at '/Applications/Google Chrome.app'.
+==> Purging files for version 133.0.6943.127 of Cask google-chrome
+slack 4.36.136
+
+	[SKIP] The following list of applications are already installed outside of brew. Remove the application and re-run to install with brew.
+
+	• google-chrome
+
+[SUCCESS] essential packages installed.
+
+
+[INSTRUCTION] To run additional filters, run the script again with --filter <package>. Use -h for a list of available packages to filter on.
+[INSTRUCTION] Check the output above or in /Users/Kayla.Altepeter/data/ds-labs-local-setup/logs/brew_caveats.log for any additional steps you can complete. The full log is at /Users/Kayla.Altepeter/data/ds-labs-local-setup/logs/install.log
+
+-----
+

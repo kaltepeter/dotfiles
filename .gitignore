@@ -10,6 +10,7 @@ __pycache__/
 
 jetbrains/.settings.json
 *.log
+!test/test_helper/sample_install.log
 terminal/modified_themes/*
 .idea
 .DS_Store

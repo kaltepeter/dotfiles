@@ -3,7 +3,6 @@ set -o errexit
 set -o pipefail
 set -o nounset
 [[ ${DEBUG:-} == true ]] && set -o xtrace
-__dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 log_file="${log_file:-/dev/null}"
 script_name="${script_name:-}"
@@ -18,6 +17,10 @@ end () {
     echo -e "\n\033[31m[FATAL] ${script_name} failed, check the output.\033[39m"
     exit $exit_code
   fi
+}
+
+inner_end () {
+  status "\t/${script_name} | ..."
 }
 
 usage() {
@@ -101,6 +104,11 @@ date_header() {
   echo
 }
 
+inner_header() {
+  echo -e "\n"
+  status "\t ${script_name} | ..."
+}
+
 # TODO: remove this function
 get_dirs_for_filters() {
   [[ ${1:-} ]] || { echo "The first argument to apply_filters must be a directory"; exit 1; }
@@ -124,7 +132,7 @@ get_dirs_for_filters() {
 #            [SKIP] ... My message
 #######################################
 typed_message() {
-  printf '%*s %s\n' 28 "$(get_colorized_prefix $1)" "${2}"
+  printf '%*s %s\n' 28 "$(get_colorized_prefix "${1}")" "${2}"
 }
 
 # TODO: remove this function
@@ -156,11 +164,13 @@ k_custom_lib_loaded() {
 }
 
 export -f end
+export -f inner_end
 export -f error
 export -f usage
 export -f status
 export -f get_colorized_prefix
 export -f date_header
+export -f inner_header
 export -f typed_message
 export -f update_brew
 export -f k_custom_lib_loaded

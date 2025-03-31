@@ -4,12 +4,14 @@ set -o pipefail
 set -o nounset
 [[ ${DEBUG:-} == true ]] && set -o xtrace
 __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+__root="$(cd "$(dirname "${__dir}")" && pwd)/.."
 CI=${CI:-false}
 
+# shellcheck disable=SC1091
+[[ $(command -v k_custom_lib_loaded) ]] || source "${__root}/shell/lib.sh"
+
 if [[ ${CI} == false ]]; then
-  # shellcheck disable=SC2317  # Don't warn about unreachable commands in this function
-  end () { [[ $? = 0 ]] && return; echo "[FAILED] Script failed, check the output."; exit 1; }
-  trap end EXIT 
+  trap inner_end EXIT 
 fi
 
 ##### replace with your own code when creating a new script #####
@@ -24,6 +26,7 @@ say_hello() {
 ##### replace with your own code when creating a new script #####
 
 if [[ ${CI} == false ]]; then
+  inner_header
   ##### replace with your own code when creating a new script #####
   say_hello
   ##### replace with your own code when creating a new script #####

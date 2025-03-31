@@ -33,6 +33,14 @@ teardown() {
 }
 
 # bats test_tags=local,ci
+@test "inner_end should print message" {
+  run bash -c "source ${PROJECT_ROOT}/shell/lib.sh; script_name=\"test_shell_lib.sh\"; trap inner_end EXIT; exit 0"
+  
+  assert_success
+  assert_output --partial "$(status "\t/test_shell_lib.sh | ...")"
+}
+
+# bats test_tags=local,ci
 @test "usage should show usage" {
   run usage
 
@@ -146,6 +154,16 @@ teardown() {
     assert_success
     assert_output --partial "$(date +"%b %d")"
     assert_output --partial $'\033[36m[RUN] \033[39m'
+}
+
+# bats test_tags=local,ci
+@test "inner_header should print message and script name" {
+    # shellcheck disable=SC2034
+    script_name="my_script.sh"
+    run inner_header
+
+    assert_success
+    assert_output --partial "$(status "\t ${script_name} | ...")"
 }
 
 # bats test_tags=local,ci
