@@ -1,9 +1,6 @@
 [submodule "materialshell"]
 	path = materialshell
 	url = https://github.com/carloscuesta/materialshell.git
-[submodule "powerlevel9k"]
-	path = powerlevel9k
-	url = https://github.com/bhilburn/powerlevel9k.git
 [submodule "test/test_helper/bats-support"]
 	path = test/test_helper/bats-support
 	url = https://github.com/bats-core/bats-support.git
@@ -13,3 +10,6 @@
 [submodule "test/test_helper/bats-file"]
 	path = test/test_helper/bats-file
 	url = https://github.com/bats-core/bats-file.git
+[submodule "powerlevel10k"]
+	path = powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k.git

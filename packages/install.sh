@@ -30,8 +30,12 @@ update_brew() {
 }
 
 install_brew_packages() {
+  if [[ ! -f "${__dir}/${filter}/brew.txt" ]]; then 
+    return 0
+  fi
+
   typed_message 'INSTALL' 'Installing Homebrew packages.'
-  
+
   declare -a formulas=()
   # bash 3 compatibility, bash 4 has mapfile
   # mapfile -t formulas < <(grep '^- ' "${__dir}/${filter}/brew.txt" | sed 's/^- //;s/[[:space:]]*$//')
@@ -48,6 +52,10 @@ install_brew_packages() {
 }
 
 install_brew_casks() {
+  if [[ ! -f "${__dir}/${filter}/brew-casks.txt" ]]; then 
+    return 0
+  fi
+
   declare -a skipped_casks=()
   typed_message 'INSTALL' 'Installing Homebrew casks.'
 

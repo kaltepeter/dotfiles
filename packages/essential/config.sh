@@ -55,24 +55,36 @@ configure_zshrc() {
   zsh_profile="${1:-}"
   completion_string() { 
     cat << EOF
-  if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh-completions:\$FPATH
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:\$FPATH
 
-    autoload -Uz compinit
-    compinit
-  fi
+  autoload -Uz compinit
+  compinit
+fi
+EOF
+  }
 
-  if command -v ngrok &>/dev/null; then
-    eval "\$(ngrok completion)"
-  fi
+  ngrok_string() {
+    cat << EOF
+if command -v ngrok &>/dev/null; then
+  eval "\$(ngrok completion)"
+fi
 EOF
   }
 
   touch "${zsh_profile}"
-  if ! grep --fixed-strings --quiet completion_string "${zsh_profile}"; then
+  if ! grep --quiet "PATH=${HOMEBREW_PREFIX}/share/zsh-completions:" "${zsh_profile}"; then
     typed_message 'CONFIG' "Adding shell completions to ${zsh_profile}."
     completion_string >> "${zsh_profile}"
   fi
+
+  if ! grep --quiet 'ngrok completion' "${zsh_profile}"; then
+    typed_message 'CONFIG' "Adding ngrok completions to ${zsh_profile}."
+    ngrok_string >> "${zsh_profile}"
+  fi
+
+  chmod go-w "${HOMEBREW_PREFIX}/share"
+  chmod -R go-w "${HOMEBREW_PREFIX}/share/zsh"
 }
 
 configure_gitlfs() {
@@ -86,6 +98,10 @@ install_rosetta() {
   softwareupdate --install-rosetta --agree-to-license
 }
 
+install_oh_my_zsh() {
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || typed_message 'SKIP' 'oh-my-zsh already installed.'
+}
+
 # typed_message 'INFO' "Adding taps."
 # brew tap mongodb/brew
 
@@ -93,7 +109,9 @@ if [[ ${CI} == false ]]; then
   inner_header
   update_shells
   configure_bashrc "${HOME}/.bashrc"
+  # TODO: convert zsh completions to oh my zsh
   configure_zshrc "${HOME}/.zshrc"
+  install_oh_my_zsh
   configure_gitlfs
   install_rosetta
 
