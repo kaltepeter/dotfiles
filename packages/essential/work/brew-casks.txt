@@ -1,0 +1,22 @@
+# brew casks essential to all setups
+- 1password
+- 1password-cli
+- brave-browser
+- discord
+#- figma
+- font-fira-code-nerd-font
+- font-fira-mono-nerd-font
+- font-hack-nerd-font
+- font-meslo-lg-nerd-font
+- ghostty
+- google-chrome
+- grammarly-desktop
+- jetbrains-toolbox
+- ngrok
+- obsidian
+- p4v
+- postman
+- slack
+- utm 
+- visual-studio-code
+- zoom

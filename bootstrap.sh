@@ -97,9 +97,15 @@ filter_opts() {
 
 run_essential() {
   typed_message 'RUN' "filter=essential"
-  bash "${__dir}/packages/install.sh"
-  find "${__dir}/packages/essential" -type file -name "config.sh" -exec bash {} \;
-  check_1password
+  if [[ ${machine_type} == 'home' ]]; then
+    bash "${__dir}/packages/install.sh"
+    find "${__dir}/packages/essential" -type file -name "config.sh" -exec bash {} \;
+    check_1password
+  else
+    bash "${__dir}/packages/install.sh" "essential/work"
+    find "${__dir}/packages/essential/work" -type file -name "config.sh" -exec bash {} \;
+    check_1password
+  fi
 }
 
 check_1password() {

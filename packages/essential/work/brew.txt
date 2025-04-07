@@ -1,0 +1,24 @@
+# tools essential to all setups
+- asdf
+# Update latest bash and add completions
+- bash
+- bash-completion@2
+- colima
+- coreutils
+- ffmpeg
+- gh
+- gifsicle
+- git
+- git-lfs
+- git-secrets
+- gnupg
+- grep
+- jq
+- mas
+- openssh
+- openssl
+- shellcheck
+- vim
+# update latest zsh and add completions
+- zsh
+- zsh-completions
