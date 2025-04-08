@@ -103,7 +103,7 @@ run_essential() {
     check_1password
   else
     bash "${__dir}/packages/install.sh" "essential/work"
-    find "${__dir}/packages/essential/work" -type file -name "config.sh" -exec bash {} \;
+    find "${__dir}/packages/essential" -type file -name "config.sh" -exec bash {} work \;
     check_1password
   fi
 }
@@ -163,9 +163,13 @@ main() {
 
     for filter in "${filters[@]}"; do
       typed_message 'RUN' "filter=${filter}"
-      bash "${__dir}/packages/install.sh" "${filter}"
+      if [[ "${machine_type}" == 'home' ]]; then
+        bash "${__dir}/packages/install.sh" "${filter}"
+      else
+        bash "${__dir}/packages/install.sh" "${filter}/work"
+      fi
       # run configs if they exist
-      find "${__dir}/packages/${filter}" -type file -name "config.sh" -exec bash {} \;
+      find "${__dir}/packages/${filter}" -type file -name "config.sh" -exec bash {} machine_type \;
     done 
   else
     run_essential

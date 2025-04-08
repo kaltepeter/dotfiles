@@ -7,6 +7,7 @@ __dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 __root="$(cd "$(dirname "${__dir}")" && pwd)/.."
 CI=${CI:-false}
 BREW_PREFIX=$(brew --prefix)
+declare machine_type=${1:-home}
 
 # shellcheck disable=SC1091
 [[ $(command -v k_custom_lib_loaded) ]] || source "${__root}/shell/lib.sh"
@@ -102,6 +103,12 @@ install_oh_my_zsh() {
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended || typed_message 'SKIP' 'oh-my-zsh already installed.'
 }
 
+set_brave_as_default_browser() {
+  killall "Brave Browser"
+  open --wait-apps -a "Brave Browser" --args --make-default-browser 
+  osascript "${__root}/script/approve_default_change.applescript"
+}
+
 # typed_message 'INFO' "Adding taps."
 # brew tap mongodb/brew
 
@@ -113,8 +120,15 @@ if [[ ${CI} == false ]]; then
   configure_zshrc "${HOME}/.zshrc"
   install_oh_my_zsh
   configure_gitlfs
-  install_rosetta
+  
+  if [[ ${machine_type} == 'home' ]]; then
+    install_rosetta
+  fi
+
+  set_brave_as_default_browser
 
   echo ''
   exit 0
 fi
+
+# TODO: should li move into a functions file and call separate configs for work and home
